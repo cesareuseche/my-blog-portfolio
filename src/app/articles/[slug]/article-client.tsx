@@ -8,6 +8,7 @@ import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type Props = {
   title: string;
+  description: string;
   date: string;
   content: string;
 };

@@ -25,5 +25,6 @@ export function getArticle(slug: string) {
     title: data.title || slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
     date: data.date || "Unknown Date",
     content,
+    description: data.description || "",
   };
 }
