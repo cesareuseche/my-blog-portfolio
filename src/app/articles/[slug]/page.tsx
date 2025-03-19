@@ -1,31 +1,23 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import { getArticle } from "@/lib/articles";
 import ArticleClient from "./article-client";
 
-type Props = { params: { slug: string } };
+type Props =
+{ params: { slug: string }};
 
-// ✅ Server-Side function to fetch article content
-function getArticle(slug: string) {
-  const filePath = path.join(process.cwd(), "src/app/articles", slug, "content.md");
+// ✅ Server Component (Fetches the Markdown Article)
+export default async function ArticlePage({ params }: Props) {
+  const { slug } = await params;
 
-  if (!fs.existsSync(filePath)) return null;
-
-  const fileContents = fs.readFileSync(filePath, "utf8");
-  const { data, content } = matter(fileContents);
-
-  return {
-    title: data.title || slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
-    date: data.date || "Unknown Date",
-    content,
-  };
-}
-
-// ✅ Server Component (Loads Markdown File)
-export default function ArticlePage({ params }: Props) {
-  const article = getArticle(params.slug);
-
+  const article = getArticle(slug);
   if (!article) return <h1>404 - Article Not Found</h1>;
 
   return <ArticleClient title={article.title} date={article.date} content={article.content} />;
+}
+
+// ✅ Generate Static Paths (SSG for each article)
+export async function generateStaticParams() {
+  const { getAllArticles } = await import("@/lib/articles");
+  const articles = getAllArticles();
+
+  return articles.map((article) => ({ slug: article.slug }));
 }
