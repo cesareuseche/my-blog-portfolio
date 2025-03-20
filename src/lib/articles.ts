@@ -28,5 +28,6 @@ export function getArticle(slug: string) {
     description: data.description || "",
     image: data.image || "",
     tag: data.tag || "Uncategorized",
+    id: data.id || "",
   };
 }

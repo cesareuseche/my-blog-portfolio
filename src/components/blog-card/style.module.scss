@@ -38,7 +38,7 @@
     }
   }
 
-  .category {
+  .tag {
     display: flex;
     align-items: center;
     border: 1px solid sg.color(black);
@@ -48,6 +48,7 @@
     font-weight: bold;
     width: fit-content;
     height: u.rem-calc(32);
+    text-transform: capitalize;
   }
 
   .imageContainer {
@@ -56,8 +57,9 @@
 
     img {
       width: 100%;
-      height: auto;
+      height: u.rem-calc(228);
       display: block;
+      object-fit: cover;
     }
   }
 

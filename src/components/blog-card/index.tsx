@@ -9,15 +9,20 @@ type Props = {
   date: string;
   tag: string;
   slug: string;
+  id: number;
 };
 
 const BlogCard = ({ image, title, description, date, tag, slug }: Props) => {
   return (
     <article className={styles.card}>
+
       <Link href={`/articles/${slug}`}></Link>
+
       <div className={styles.details}>
-        <p className={styles.date}>{date}</p>
-        <span className={styles.category}>
+        <p className={styles.date}>
+          {date}
+        </p>
+        <span className={styles.tag}>
           {tag}
         </span>
       </div>
@@ -44,6 +49,7 @@ const BlogCard = ({ image, title, description, date, tag, slug }: Props) => {
           <span className={styles.duration}><strong>Duration</strong> 1 Min</span>
         </div>
       </div>
+
     </article>
   );
 };

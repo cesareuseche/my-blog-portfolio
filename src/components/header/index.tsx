@@ -3,7 +3,7 @@ import styles from "./style.module.scss";
 import IconGithub from "../icon-github";
 import IconLinkedIn from "../icon-linkedin";
 
-const Header = () => {
+export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -33,5 +33,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

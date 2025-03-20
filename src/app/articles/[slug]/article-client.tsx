@@ -54,6 +54,9 @@ export default function ArticleClient({ image, title, date, content, tag }: Prop
               <SyntaxHighlighter
                 style={materialDark}
                 language={match[1]}
+                wrapLongLines={true}
+                showLineNumbers={true}
+                customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
                 PreTag="div"
                 {...props}
               >

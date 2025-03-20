@@ -11,9 +11,13 @@
   }
 
   h1 {
-    @include typo.large;
+    @include typo.medium;
     color: sg.color(black);
     font-weight: 700;
     margin: 0;
+
+    @include mq.min(tabletLandscape) {
+      @include typo.large;
+    }
   }
 }
