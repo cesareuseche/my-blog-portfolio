@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import gsap from "gsap";
+import Header from "@/components/header";
 import "../styles/global.scss";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -19,6 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <Header />
         <main className="main-container">{children}</main>
       </body>
     </html>

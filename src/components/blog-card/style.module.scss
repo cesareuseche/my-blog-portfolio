@@ -4,15 +4,22 @@
 @use '../../styles/styleguide/typography' as typo;
 
 .card {
-  border: 1px solid sg.color(black);
+  position: relative;
   background: sg.color(white);
   padding: sg.$small;
-  max-width: u.rem-calc(400);
   text-align: left;
-  font-family: Arial, sans-serif;
 
   @include mq.min(tabletLandscape) {
     padding: sg.$regular;
+    max-height: u.rem-calc(579);
+  }
+
+  a {
+    z-index: 8;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
   }
 
   .details {

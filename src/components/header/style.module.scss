@@ -1,0 +1,65 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.header {
+  padding: sg.$xsmall;
+
+  @include mq.min(tabletLandscape) {
+    padding: sg.$regular sg.$large 0 sg.$large;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    @include typo.medium;
+    font-weight: bold;
+  }
+
+  .menu {
+    display: flex;
+  }
+
+  .nav {
+    display: flex;
+    gap: 15px;
+
+    a {
+      @include typo.small;
+      color: sg.color(black);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: u.rem-calc(10);
+
+    svg {
+      width: u.rem-calc(20);
+      height: u.rem-calc(20);
+      cursor: pointer;
+    }
+  }
+
+  .separator {
+    margin: 0 u.rem-calc(10);
+    font-size: u.rem-calc(14);
+  }
+
+  .divider {
+    margin-top: 5px;
+    border: none;
+    border-top: 1px solid sg.color(black);
+  }
+}

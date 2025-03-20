@@ -6,6 +6,6 @@
   padding: sg.$small sg.$xsmall;
 
   @include mq.min(tabletLandscape) {
-    padding: sg.$xlarge sg.$large;
+    padding: sg.$regular sg.$large sg.$xlarge sg.$large;
   }
 }

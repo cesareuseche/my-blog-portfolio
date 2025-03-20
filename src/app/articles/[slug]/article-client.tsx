@@ -13,10 +13,10 @@ type Props = {
   description: string;
   date: string;
   content: string;
-  category: string;
+  tag: string;
 };
 
-export default function ArticleClient({ image, title, date, content, category }: Props) {
+export default function ArticleClient({ image, title, date, content, tag }: Props) {
   const articleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function ArticleClient({ image, title, date, content, category }:
         {date}
       </p>
       <p className="text-gray-500">
-        {category}
+        {tag}
       </p>
 
       <ReactMarkdown

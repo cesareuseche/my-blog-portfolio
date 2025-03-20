@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './style.module.scss';
 
 type Props = {
@@ -6,14 +7,19 @@ type Props = {
   title: string;
   description: string;
   date: string;
+  tag: string;
+  slug: string;
 };
 
-const BlogCard = ({ image, title, description, date }: Props) => {
+const BlogCard = ({ image, title, description, date, tag, slug }: Props) => {
   return (
-    <div className={styles.card}>
+    <article className={styles.card}>
+      <Link href={`/articles/${slug}`}></Link>
       <div className={styles.details}>
         <p className={styles.date}>{date}</p>
-        <span className={styles.category}>ART</span>
+        <span className={styles.category}>
+          {tag}
+        </span>
       </div>
 
       <div className={styles.imageContainer}>
@@ -38,7 +44,7 @@ const BlogCard = ({ image, title, description, date }: Props) => {
           <span className={styles.duration}><strong>Duration</strong> 1 Min</span>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

@@ -1,0 +1,19 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.header {
+  padding: sg.$regular 0;
+
+  @include mq.min(tabletLandscape) {
+    padding: sg.$medium 0;
+  }
+
+  h1 {
+    @include typo.large;
+    color: sg.color(black);
+    font-weight: 700;
+    margin: 0;
+  }
+}
