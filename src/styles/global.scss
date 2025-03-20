@@ -1,0 +1,30 @@
+/* Box sizing resets */
+:root {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* smooth scrolling */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove margin from body */
+
+body {
+  margin: 0;
+}
+
+/* Shared styles */
+
+body {
+  &.no-scroll {
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,89 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.card {
+  border: 1px solid sg.color(black);
+  background: sg.color(white);
+  padding: sg.$small;
+  max-width: u.rem-calc(400);
+  text-align: left;
+  font-family: Arial, sans-serif;
+
+  @include mq.min(tabletLandscape) {
+    padding: sg.$regular;
+  }
+
+  .details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .date {
+    @include typo.xsmall;
+    color: sg.color(black);
+    font-weight: 400;
+
+    @include mq.min(tabletLandscape) {
+      @include typo.small;
+    }
+  }
+
+  .category {
+    display: flex;
+    align-items: center;
+    border: 1px solid sg.color(black);
+    padding: u.rem-calc(8) u.rem-calc(12);
+    border-radius: u.rem-calc(20);
+    @include typo.small;
+    font-weight: bold;
+    width: fit-content;
+    height: u.rem-calc(32);
+  }
+
+  .imageContainer {
+    margin: u.rem-calc(15) 0;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  .content {
+    position: relative;
+  }
+
+  .title {
+    @include typo.medium;
+    font-weight: bold;
+    margin: u.rem-calc(10) 0;
+  }
+
+  .description {
+    @include typo.regular;
+    color: sg.color(black);
+    font-weight: 300;
+    line-height: u.rem-calc(28);
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    @include typo.xsmall;
+    color: #666;
+    margin-top: 10px;
+
+    @include mq.min(tabletLandscape) {
+      @include typo.small;
+    }
+
+    strong {
+      color: #000;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@use 'sass:math';
+@use '../../stdlib/map' as map;
+
+@function -px-as-em($value) {
+  @return math.div($value, 16) * 1em;
+}
+
+@function -px-as-rem($value) {
+  @return math.div($value, 16) * 1rem;
+}
+
+// Important! This is file is used in `devops/src/core/styles/preamble.scss`
+// Update the reference in `devops/src/core/styles/preamble.scss` if you change the path
+
+// This variable should remain public for the premable to work
+// Define breakpoints in ascending order to ensure the mqpacker plugin renders them correctly.
+// Prefer `em` units for media query breakpoints
+$breakpoints: (
+  mobile: -px-as-rem(375),
+  medium: -px-as-em(640),
+  tabletPortrait: -px-as-rem(768),
+  large: -px-as-em(1024),
+  tabletLandscape: -px-as-rem(1024),
+  largex: -px-as-em(1200),
+  laptopSmall: -px-as-rem(1280),
+  largexx: -px-as-em(1440),
+  laptop: -px-as-rem(1520),
+  desktop: -px-as-rem(2048),
+  maxWidthFromDesignTeam: -px-as-rem(1920)
+) !default;
+
+/// Retrieve the breakpoint value associated with the provided key.
+/// @param {"mobile" | "medium" | "tabletPortrait" | "large" | "tabletLandscape" | "largex" | "laptopSmall" | "largexx" | "laptop" | "desktop" | "maxWidthFromDesignTeam"} $name - pre-defined breakpoint name.
+/// @return {Number} The width value in rem units.
+@function get($name) {
+  @return map.get-strict($breakpoints, $name);
+}
+
+/// Apply a min-width media query for the provided breakpoint name.
+/// @param {"mobile" | "medium" | "tabletPortrait" | "large" | "tabletLandscape" | "largex" | "laptopSmall" | "largexx" | "laptop" | "desktop" | "maxWidthFromDesignTeam"} $name - pre-defined breakpoint name.
+@mixin min($name) {
+  $width: map.get-strict($breakpoints, $name);
+
+  @media print, screen and (width >= #{$width}) {
+    @content;
+  }
+}
+
+/// Apply a max-width media query for the provided breakpoint name.
+/// @param {"mobile" | "medium" | "tabletPortrait" | "large" | "tabletLandscape" | "largex" | "laptopSmall" | "largexx" | "laptop" | "desktop" | "maxWidthFromDesignTeam"} $name - pre-defined breakpoint name.
+@mixin max($name) {
+  $width: map.get-strict($breakpoints, $name);
+
+  @media print, screen and (width <= #{$width}) {
+    @content;
+  }
+}

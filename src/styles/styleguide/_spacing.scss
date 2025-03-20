@@ -1,0 +1,10 @@
+@use './unit' as u;
+
+$xlarge: u.rem-calc(96px);
+$large: u.rem-calc(80px);
+$medium: u.rem-calc(64px);
+$regular: u.rem-calc(48px);
+$small: u.rem-calc(32px);
+$xsmall: u.rem-calc(24px);
+$xxsmall: u.rem-calc(16px);
+$xxxsmall: u.rem-calc(8px);

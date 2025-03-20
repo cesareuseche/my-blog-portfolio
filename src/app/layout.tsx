@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import gsap from "gsap";
+import "../styles/global.scss";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -18,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <main className="p-6 max-w-2xl mx-auto">{children}</main>
+        <main className="main-container">{children}</main>
       </body>
     </html>
   );

@@ -1,0 +1,37 @@
+@use '../../stdlib/map' as map;
+@use 'sass:color';
+
+// always name colors with
+// https://chir.ag/projects/name-that-color
+$_config: (
+  background: #FFFFFF,
+  black: #000000,
+  black10: rgba(35, 31, 32, 0.1),
+  black20: rgba(35, 31, 32, 0.2),
+  black50: rgba(35, 31, 32, 0.5),
+  border: #C0B9BB,
+  gray: #e5e1e0,
+  darkGray: #5C5C5C,
+  dove: #716c6e,
+  swan: #c0b9bb,
+  vista: #F0EFEB,
+  white: #fff,
+  cararra: #F0EFEB,
+  white20: rgba(255, 255, 255, 0.2),
+  white50: rgba(255, 255, 255, 0.5),
+  white70: rgba(255, 255, 255, 0.7),
+  error: #c31414,
+  error20: rgba(195,20,20, 0.2),
+  success: #4a934a,
+  current: currentColor,
+  shadow: rgba(0, 0, 0, 0.15),
+  offcanvasBackground: rgba(0, 0, 0, 0.25),
+  transparent: transparent
+);
+
+/// Retrieves a color value from the configuration map.
+/// @param {"black" | "black10" | "black20" | darkGray | "dove" | "swan" | "vista" | "cararra" | "white" | "white20" | "white50" | "white70" | "error" | "error20" | "success" | "current" | "shadow"} $key
+/// @returns {Color} The corresponding color value from the configuration map.
+@function color($key) {
+  @return map.get-strict($_config, $key);
+}

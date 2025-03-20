@@ -1,0 +1,6 @@
+@forward '_color' hide $_config;
+@forward 'media' hide $_config;
+@forward '_spacing' hide $_config, $_base;
+@forward '_typography' hide $_config, $_base;
+@forward '_unit' hide $_config;
+@forward '_mixins' hide $_config, $_radius, $_container,$_header_breakpoint_change, vspacing;

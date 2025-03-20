@@ -1,0 +1,52 @@
+// Typography
+// ===============================================
+
+@use './unit' as u;
+@import '../styleguide/font-faces';
+
+$system-font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+
+$main-font: 'DMSans', $system-font-stack;
+
+@mixin xlarge {
+  line-height: 120%;
+  font-size: u.rem-calc(64);
+  font-style: normal;
+  font-family: $main-font;
+}
+
+@mixin large {
+  font-size: u.rem-calc(40);
+  font-style: normal;
+  line-height: 120%;
+  font-family: $main-font;
+}
+
+@mixin medium {
+  font-family: $main-font;
+  font-size: u.rem-calc(24);
+  font-style: normal;
+  line-height: 140%;
+}
+
+@mixin regular {
+  font-family: $main-font;
+  font-size: u.rem-calc(16);
+  font-style: normal;
+  line-height: 140%;
+}
+
+@mixin small {
+  font-family: $main-font;
+  font-size: u.rem-calc(14);
+  font-style: normal;
+  line-height: 140%;
+}
+
+@mixin xsmall {
+  font-family: $main-font;
+  font-size: u.rem-calc(12);
+  font-style: normal;
+  line-height: 120%;
+}

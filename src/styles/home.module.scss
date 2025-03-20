@@ -1,0 +1,11 @@
+@use '../styles/styleguide/unit' as u;
+@use '../styles/styleguide/' as sg;
+@use '../styles/styleguide/media' as mq;
+
+.container {
+  padding: sg.$small sg.$xsmall;
+
+  @include mq.min(tabletLandscape) {
+    padding: sg.$xlarge sg.$large;
+  }
+}
