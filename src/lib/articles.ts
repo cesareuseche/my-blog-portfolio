@@ -26,5 +26,7 @@ export function getArticle(slug: string) {
     date: data.date || "Unknown Date",
     content,
     description: data.description || "",
+    image: data.image || "",
+    category: data.category || "Uncategorized",
   };
 }

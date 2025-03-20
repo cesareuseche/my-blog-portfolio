@@ -39,7 +39,16 @@ export default async function ArticlePage({ params }: Props) {
   const article = getArticle(slug);
   if (!article) return <h1>404 - Article Not Found</h1>;
 
-  return <ArticleClient title={article.title} description={article.description} date={article.date} content={article.content} />;
+  return (
+    <ArticleClient
+      image={article.image}
+      title={article.title}
+      description={article.description}
+      date={article.date}
+      content={article.content}
+      category={article.category}
+    />
+  )
 }
 
 export async function generateStaticParams() {

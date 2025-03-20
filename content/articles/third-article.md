@@ -1,8 +1,8 @@
 ---
-title: "My First Article"
+title: "My Third Article"
 date: "16. March 2022"
 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-image: "/assets/images/test-img.jpeg",
+image: "/assets/images/test-img.jpeg"
 category: "python"
 ---
 
