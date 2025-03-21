@@ -10,9 +10,11 @@ type Props = {
   tag: string;
   slug: string;
   id: number;
+  duration: string;
+  author: string;
 };
 
-const BlogCard = ({ image, title, description, date, tag, slug }: Props) => {
+const BlogCard = ({ image, title, description, date, tag, slug, author, duration }: Props) => {
   return (
     <article className={styles.card}>
 
@@ -46,8 +48,12 @@ const BlogCard = ({ image, title, description, date, tag, slug }: Props) => {
           {description}
         </p>
         <div className={styles.meta}>
-          <span className={styles.text}><strong>Text</strong> Jakob Gronberg</span>
-          <span className={styles.duration}><strong>Duration</strong> 1 Min</span>
+          <span className={styles.text}><strong>Text</strong>
+            {author}
+          </span>
+          <span className={styles.duration}><strong>Duration</strong>
+            {duration}
+          </span>
         </div>
       </div>
 

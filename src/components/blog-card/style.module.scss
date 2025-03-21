@@ -18,6 +18,14 @@
     max-height: 100%;
   }
 
+  &:hover {
+    .tag {
+      background: sg.color(black);
+      color: sg.color(white);
+      border: 1px solid sg.color(white);
+    }
+  }
+
   a {
     z-index: 8;
     width: 100%;
@@ -53,6 +61,7 @@
     width: fit-content;
     height: u.rem-calc(32);
     text-transform: capitalize;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
   }
 
   .imageContainer {

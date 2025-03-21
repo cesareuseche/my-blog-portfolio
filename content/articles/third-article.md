@@ -5,6 +5,8 @@ description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ei
 image: "/assets/images/third-article.png"
 tag: "python"
 id: 3
+author: "Cesar Useche"
+duration: "1 min"
 ---
 
 This is my first blog post written in Markdown.

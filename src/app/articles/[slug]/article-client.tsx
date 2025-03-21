@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import ArticleDetails from "@/components/article-details";
+import styles from "./style.module.scss";
 
 type Props = {
   image: string;
@@ -14,9 +15,11 @@ type Props = {
   date: string;
   content: string;
   tag: string;
+  author: string;
+  duration: string;
 };
 
-export default function ArticleClient({ image, title, date, content, tag }: Props) {
+export default function ArticleClient({ image, title, date, content, tag, author, duration }: Props) {
   const articleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,50 +31,56 @@ export default function ArticleClient({ image, title, date, content, tag }: Prop
   }, []);
 
   return (
-    <main ref={articleRef} className="p-6 max-w-2xl mx-auto">
-      <Image
-        src={image}
-        alt={title}
-        width={614}
-        height={409}
-      />
+    <div className={styles.article}>
+      <div className={styles.container}>
+        <div className={styles.grid}>
+          <aside className="article-sidebar">
+            <div className="sticky-sidebar">
+              <ArticleDetails image={image} date={date} author={author} duration={duration} />
+            </div>
+          </aside>
 
-      <h1 className="text-3xl font-bold">
-        {title}
-      </h1>
-      <p className="text-gray-500">
-        {date}
-      </p>
-      <p className="text-gray-500">
-        {tag}
-      </p>
+          <main ref={articleRef} className="p-6 max-w-2xl mx-auto">
 
-      <ReactMarkdown
-        components={{
-          code({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) {
-            const match = /language-(\w+)/.exec(className || "");
-            return !inline && match ? (
-              <SyntaxHighlighter
-                style={materialDark}
-                language={match[1]}
-                wrapLongLines={true}
-                showLineNumbers={true}
-                customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
-                PreTag="div"
-                {...props}
-              >
-                {String(children).replace(/\n$/, "")}
-              </SyntaxHighlighter>
-            ) : (
-              <code className="bg-gray-200 px-1 py-0.5 rounded" {...props}>
-                {children}
-              </code>
-            );
-          },
-        }}
-      >
-        {content}
-      </ReactMarkdown>
-    </main>
+            <h1 className="text-3xl font-bold">
+              {title}
+            </h1>
+            <p className="text-gray-500">
+              {date}
+            </p>
+            <p className="text-gray-500">
+              {tag}
+            </p>
+
+            <ReactMarkdown
+              components={{
+                code({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) {
+                  const match = /language-(\w+)/.exec(className || "");
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      style={materialDark}
+                      language={match[1]}
+                      wrapLongLines={true}
+                      showLineNumbers={true}
+                      customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+                      PreTag="div"
+                      {...props}
+                    >
+                      {String(children).replace(/\n$/, "")}
+                    </SyntaxHighlighter>
+                  ) : (
+                    <code className="bg-gray-200 px-1 py-0.5 rounded" {...props}>
+                      {children}
+                    </code>
+                  );
+                },
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          </main>
+        </div>
+      </div>
+    </div>
   );
 }

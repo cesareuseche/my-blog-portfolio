@@ -5,6 +5,8 @@ description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ei
 image: "/assets/images/test-img.jpeg"
 tag: "python"
 id: 1
+author: "Cesar Useche"
+duration: "1 min"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus arcu felis bibendum ut. Porttitor leo a diam.

@@ -47,6 +47,8 @@ export default async function ArticlePage({ params }: Props) {
       date={article.date}
       content={article.content}
       tag={article.tag}
+      author={article.author}
+      duration={article.duration}
     />
   )
 }

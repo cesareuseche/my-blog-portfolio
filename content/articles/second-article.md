@@ -5,6 +5,8 @@ description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ei
 image: "/assets/images/second-article.jpeg"
 tag: "react"
 id: 2
+author: "Cesar Useche"
+duration: "1 min"
 ---
 
 This is my first blog post written in Markdown.

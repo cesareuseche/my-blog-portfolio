@@ -18,6 +18,8 @@ export default function BlogCardGrid() {
             tag={article.tag}
             slug={article.slug}
             id={article.id}
+            author={article.author}
+            duration={article.duration}
           />
         </div>
       ))}

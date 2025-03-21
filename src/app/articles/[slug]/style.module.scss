@@ -1,0 +1,33 @@
+@use '../../../styles/styleguide/unit' as u;
+@use '../../../styles/styleguide' as sg;
+@use '../../../styles/styleguide/media' as mq;
+@use '../../../styles/styleguide/typography' as typo;
+
+.article {
+  position: relative;
+  padding: sg.$xsmall;
+
+  @include mq.min(tabletLandscape) {
+    padding: sg.$regular sg.$large 0 sg.$large;
+  }
+
+  .container {
+    max-width: 100%;
+
+    @include mq.min(tabletLandscape) {
+      max-width: u.rem-calc(1200);
+      margin: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: u.rem-calc(24);
+
+      @include mq.min(tabletLandscape) {
+        grid-template-columns: minmax(0, .3fr) minmax(0, .7fr);
+        gap: u.rem-calc(96);
+      }
+    }
+  }
+}
