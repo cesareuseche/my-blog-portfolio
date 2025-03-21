@@ -2,10 +2,14 @@ import { getArticle } from "@/lib/articles";
 import ArticleClient from "./article-client";
 import { Metadata } from "next";
 
-type Props = { params: { slug: string }};
+// Define the correct type where params is an async function
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+// Ensure correct typing for params in generateMetadata
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params; // ✅ Correct since params is a Promise
   const article = getArticle(slug);
 
   if (!article) {
@@ -33,8 +37,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ArticlePage({ params }: Props) {
-  const { slug } = await params;
+// Ensure correct typing for params in ArticlePage
+export default async function ArticlePage({ params }: PageProps) {
+  const { slug } = await params; // ✅ Correct since params is a Promise
 
   const article = getArticle(slug);
   if (!article) return <h1>404 - Article Not Found</h1>;
@@ -50,10 +55,11 @@ export default async function ArticlePage({ params }: Props) {
       author={article.author}
       duration={article.duration}
     />
-  )
+  );
 }
 
-export async function generateStaticParams() {
+// Ensure correct return type for generateStaticParams
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const { getAllArticles } = await import("@/lib/articles");
   const articles = getAllArticles();
 

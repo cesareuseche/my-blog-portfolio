@@ -2,7 +2,7 @@
 // ===============================================
 
 @use './unit' as u;
-@import '../styleguide/font-faces';
+@use '../styleguide/font-faces';
 
 $system-font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
   Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
