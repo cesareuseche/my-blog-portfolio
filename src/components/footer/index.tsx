@@ -2,6 +2,8 @@ import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import IconGithub from "../icon-github";
+import IconLinkedIn from "../icon-linkedin";
 import styles from "./style.module.scss";
 
 const Footer = () => {
@@ -11,8 +13,8 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.wrapper}>
         <Swiper
-          slidesPerView={12}
-          spaceBetween={24}
+          slidesPerView={3}
+          spaceBetween={8}
           loop={true}
           speed={1000}
           autoplay={{
@@ -20,6 +22,24 @@ const Footer = () => {
             disableOnInteraction: false,
           }}
           modules={[Autoplay]}
+          breakpoints={{
+            640: {
+              slidesPerView: 4.5,
+              spaceBetween: 8,
+            },
+            768: {
+              slidesPerView: 6,
+              spaceBetween: 16,
+            },
+            1024: {
+              slidesPerView: 9,
+              spaceBetween: 24,
+            },
+            1440: {
+              slidesPerView: 12,
+              spaceBetween: 24,
+            }
+          }}
         >
           <div className={styles.marquee}>
             {Array.from({ length: 10 }, (_, i) =>
@@ -35,38 +55,36 @@ const Footer = () => {
 
       <div className={styles.container}>
         <div className={styles.newsletter}>
-          <h2>DESIGN NEWS TO YOUR INBOX</h2>
+          <h2>
+            STAY UPDATED WITH TRENDS
+          </h2>
           <div className={styles.subscribe}>
             <input type="email" placeholder="Email" />
             <button>SIGN UP</button>
           </div>
         </div>
 
-        <div className={styles.footerContent}>
-          <div className={styles.brand}>FYRRE MAGAZINE</div>
+        <div className={styles.content}>
+          <p className={styles.brand}>
+            CESAR BLOG
+          </p>
           <div className={styles.links}>
             <ul>
-              <li>Art</li>
-              <li>Design</li>
-              <li>Architecture</li>
-            </ul>
-            <ul>
-              <li>Magazine</li>
-              <li>Podcast</li>
-              <li>Authors</li>
-            </ul>
-            <ul>
-              <li>Styleguide</li>
-              <li>Licensing</li>
-              <li>Changelog</li>
+              <li>About</li>
+              <li>Blog</li>
             </ul>
           </div>
         </div>
 
-        <div className={styles.footerBottom}>
-          <p>© Made by Pawel Gola - Powered by Webflow</p>
-          <div className={styles.socialIcons}>
-
+        <div className={styles.social}>
+          <p>@ Copywright</p>
+          <div className={styles.icons}>
+            <a href="https://github.com/cesareuseche" target="_blank" rel="noopener noreferrer">
+              <IconGithub />
+            </a>
+            <a href="https://www.linkedin.com/in/cesar-useche-profile/" target="_blank" rel="noopener noreferrer">
+              <IconLinkedIn />
+            </a>
           </div>
         </div>
       </div>

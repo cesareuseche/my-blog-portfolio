@@ -4,8 +4,8 @@
 @use '../../styles/styleguide/typography' as typo;
 
 .footer {
-  background: black;
-  color: white;
+  background: sg.color(black);
+  color: sg.color(white);
 
   .wrapper {
     @include typo.medium;
@@ -22,67 +22,83 @@
   }
 
   .container {
-    max-width: 1200px;
+    max-width: u.rem-calc(1400);
     margin: auto;
-    padding: 2rem;
+    padding: 0 sg.$small sg.$medium sg.$small;
 
     .newsletter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
       text-align: left;
 
+      @include mq.min(tabletLandscape) {
+        flex-direction: row;
+      }
+
       h2 {
-        font-size: 2rem;
-        font-weight: 700;
+        @include typo.large;
+
+        @include mq.min(laptopSmall) {
+          @include typo.xxlarge;
+          width: 50%;
+        }
       }
 
       .subscribe {
-        display: flex;
-        margin-top: 1rem;
 
         input {
           flex: 1;
-          padding: 0.8rem;
-          font-size: 1rem;
+          padding: u.rem-calc(12);
+          @include typo.regular;
           border: none;
           outline: none;
+          margin-right: u.rem-calc(10);
         }
 
         button {
-          padding: 0.8rem 1rem;
-          font-size: 1rem;
+          padding: u.rem-calc(12) u.rem-calc(20);
+          @include typo.regular;
           font-weight: bold;
-          background: white;
-          color: black;
+          background: sg.color(white);
+          color: sg.color(black);
           border: none;
           cursor: pointer;
           transition: 0.3s;
 
           &:hover {
-            background: gray;
+            background: sg.color(black);
+            color: sg.color(white);
           }
         }
       }
     }
 
-    .footerContent {
+    .content {
       display: flex;
       justify-content: space-between;
       margin-top: 2rem;
       flex-wrap: wrap;
 
       .brand {
+        @include typo.regular;
         font-weight: bold;
+        margin: 0;
       }
 
       .links {
-        display: flex;
-        gap: 3rem;
 
         ul {
+          display: flex;
+          gap: sg.$xxsmall;
           list-style: none;
           padding: 0;
+          margin: 0;
 
           li {
-            margin-bottom: 0.5rem;
+            @include typo.small;
+            margin-bottom: 0;
             cursor: pointer;
 
             &:hover {
@@ -93,26 +109,46 @@
       }
     }
 
-    .footerBottom {
-      margin-top: 2rem;
+    .social {
+      @include typo.small;
+      margin-top: sg.$regular;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.9rem;
 
-      .socialIcons {
+      p {
+        margin: 0;
+      }
+
+      .icons {
         display: flex;
-        gap: 1rem;
-        font-size: 1.5rem;
+        gap: sg.$xxsmall;
 
         svg {
+          fill: sg.color(white);
           cursor: pointer;
+          transition: transform 0.2s ease-in-out;
 
           &:hover {
-            color: gray;
+            animation: bounce 0.6s ease-out forwards;
           }
         }
       }
     }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  70% {
+    transform: translateY(-2.5px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
