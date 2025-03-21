@@ -34,6 +34,7 @@ const BlogCard = ({ image, title, description, date, tag, slug }: Props) => {
           width={614}
           height={409}
           className={styles.image}
+          loading='lazy'
         />
       </div>
 

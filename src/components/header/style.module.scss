@@ -18,6 +18,8 @@
 
   .logo {
     @include typo.medium;
+    color: sg.color(black);
+    text-decoration: none;
     font-weight: bold;
   }
 

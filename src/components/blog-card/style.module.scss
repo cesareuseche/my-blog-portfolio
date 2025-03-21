@@ -14,6 +14,10 @@
     max-height: u.rem-calc(579);
   }
 
+  @include mq.min(laptop) {
+    max-height: 100%;
+  }
+
   a {
     z-index: 8;
     width: 100%;
@@ -60,6 +64,10 @@
       height: u.rem-calc(228);
       display: block;
       object-fit: cover;
+
+      @include mq.min(laptop) {
+        height: u.rem-calc(441);
+      }
     }
   }
 
@@ -71,6 +79,10 @@
     @include typo.medium;
     font-weight: bold;
     margin: u.rem-calc(10) 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   .description {

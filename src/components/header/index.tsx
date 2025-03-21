@@ -7,9 +7,9 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <div className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           CESAR BLOG
-        </div>
+        </Link>
 
         <div className={styles.menu}>
           <nav className={styles.nav}>
