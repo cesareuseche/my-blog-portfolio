@@ -79,10 +79,13 @@
     @include typo.medium;
     font-weight: bold;
     margin: u.rem-calc(10) 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+
+    @include mq.min(tabletLandscape) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      white-space: nowrap;
+    }
   }
 
   .description {
