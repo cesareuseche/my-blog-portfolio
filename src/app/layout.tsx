@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import Header from "@/components/header";
 import "../styles/global.scss";
+import Footer from "@/components/footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -22,6 +23,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <Header />
         <main className="main-container">{children}</main>
+        <Footer />
       </body>
     </html>
   );
