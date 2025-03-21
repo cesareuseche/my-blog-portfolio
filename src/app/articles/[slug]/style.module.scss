@@ -30,4 +30,55 @@
       }
     }
   }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__number {
+    @include typo.regular;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__tag {
+    display: flex;
+    align-items: center;
+    border: 1px solid sg.color(black);
+    padding: u.rem-calc(8) u.rem-calc(12);
+    border-radius: u.rem-calc(20);
+    @include typo.small;
+    font-weight: bold;
+    width: fit-content;
+    height: u.rem-calc(32);
+    text-transform: capitalize;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
+  }
+
+  &__content {
+    h1 {
+      @include typo.xlarge;
+      margin-top: 0;
+      margin-bottom: sg.$small;
+
+      @include mq.min(tabletLandscape) {
+        @include typo.xxlarge;
+      }
+
+      @include mq.min(laptopSmall) {
+        @include typo.xxxlarge;
+      }
+    }
+
+    p, ul, li, ol, a {
+      @include typo.small;
+      font-weight: 400;
+
+      @include mq.min(tabletLandscape) {
+        @include typo.regular;
+      }
+    }
+  }
 }

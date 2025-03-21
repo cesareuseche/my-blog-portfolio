@@ -11,19 +11,20 @@ type Props = {
 export default function ArticleDetails({ image, date, author, duration }: Props) {
   return (
     <div className={styles.article__details}>
-      <div className={styles.article__details__image}>
+      <div className={styles.article__details__wrapper}>
         <Image src={image} alt="Article Thumbnail" width={300} height={200} />
+
+        <p className={styles.article__details__author}>
+          By {author}
+        </p>
       </div>
 
       <div className={styles.article__details__info}>
         <p className={styles.article__details__date}>
-          {date}
-        </p>
-        <p className={styles.article__details__author}>
-          By {author}
+          Date: <span>{date}</span>
         </p>
         <p className={styles.article__details__duration}>
-          {duration}
+          Duration: <span>{duration}</span>
         </p>
       </div>
     </div>

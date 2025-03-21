@@ -40,17 +40,20 @@ export default function ArticleClient({ image, title, date, content, tag, author
             </div>
           </aside>
 
-          <main ref={articleRef} className="p-6 max-w-2xl mx-auto">
+          <main ref={articleRef} className={styles.article__content}>
+            <div className={styles.article__header}>
+              <div className={styles.article__number}>
+                <span>Article</span>
+              </div>
 
-            <h1 className="text-3xl font-bold">
+              <div className={styles.article__tag}>
+                <p>{tag}</p>
+              </div>
+            </div>
+
+            <h1>
               {title}
             </h1>
-            <p className="text-gray-500">
-              {date}
-            </p>
-            <p className="text-gray-500">
-              {tag}
-            </p>
 
             <ReactMarkdown
               components={{
