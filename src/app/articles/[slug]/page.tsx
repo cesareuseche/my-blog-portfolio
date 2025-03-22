@@ -28,11 +28,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "article",
       publishedTime: article.date,
       url: `/articles/${slug}`,
+      images: [{ url: article.image, alt: article.title, width: 800, height: 600 }],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.description,
+      images: [{ url: article.image, alt: article.title,  width: 800, height: 600  }],
+
     },
   };
 }
