@@ -1,6 +1,6 @@
 ---
-title: "Save the world from ourselves!"
-date: "16 March 2022"
+title: "How to Build an API Using FastAPI"
+date: "March 20th 2025"
 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 image: "/assets/images/test-img.jpeg"
 tag: "python"
@@ -10,14 +10,96 @@ duration: "1 min"
 category: "TECH+++"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus arcu felis bibendum ut. Porttitor leo a diam.
+As a Computer Science master's student currently studying Python, and with 5 years of experience as a software engineer, I have spent most of my career working as a front-end developer, building innovative and amazing UIs. However, I have a deep passion for AI and languages like Python, which has led me to explore backend development and API design. FastAPI is a modern, fast (high-performance) web framework for building APIs with Python 3.7+ based on standard Python type hints. It provides automatic OpenAPI documentation and high performance thanks to Starlette and Pydantic.
 
-Porttitor rhoncus dolor purus non enim praesent elementum. Eget dolor morbi non arcu risus quis varius. Posuere ac ut consequat semper viverra nam libero. In ornare quam viverra orci sagittis eu. Tristique risus nec feugiat in fermentum posuere urna nec. Tempus quam pellentesque nec nam aliquam sem et. Convallis a cras semper auctor neque vitae tempus quam pellentesque. Sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque. Sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Sit amet porttitor eget dolor morbi non arcu risus. Justo eget magna fermentum iaculis eu non diam phasellus. Sit amet luctus venenatis lectus magna fringilla. Neque vitae tempus quam pellentesque nec nam.
+In this guide, we'll walk through building a simple API using FastAPI, focusing on best practices and real-world applications.
 
-Tellus orci ac auctor augue mauris augue neque gravida. Tempus imperdiet nulla malesuada pellentesque elit eget gravida cum sociis. Id eu nisl nunc mi ipsum faucibus vitae aliquet. Duis convallis convallis tellus id interdum velit laoreet id. Vulputate mi sit amet mauris commodo quis. Semper viverra nam libero justo laoreet sit amet. Eget nullam non nisi est sit. Nibh cras pulvinar mattis nunc sed blandit libero. Ac felis donec et odio pellentesque diam volutpat. Quis varius quam quisque id diam vel quam elementum. Felis bibendum ut tristique et egestas quis ipsum suspendisse ultrices. Id diam vel quam elementum pulvinar etiam non. Non consectetur a erat nam at lectus urna duis convallis.
+## Prerequisites
+Before starting, ensure you have the following:
+- Python 3.7+
+- pip (Python package manager)
+- A code editor (VS Code, PyCharm, etc.)
+- Basic understanding of Python and RESTful APIs
 
-This is my first blog post written in Markdown.
+## Step 1: Install FastAPI and Uvicorn
+First, install FastAPI and Uvicorn (a high-performance ASGI server) using pip:
 
-```ts
-const hello = "world";
-console.log(hello);
+```sh
+pip install fastapi uvicorn
+```
+
+## Step 2: Create the API Application
+Create a new Python file, e.g., `main.py`, and start by importing FastAPI:
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to FastAPI!"}
+```
+
+Here, we create an instance of `FastAPI` and define a simple route (`/`) that returns a JSON response.
+
+## Step 3: Run the API
+To start the API server, use Uvicorn:
+
+```sh
+uvicorn main:app --reload
+```
+
+This will start the server at `http://127.0.0.1:8000/`. The `--reload` flag enables auto-reloading when code changes, making development more efficient.
+
+## Step 4: Add More Routes with Data Validation
+FastAPI uses Pydantic for data validation and serialization. Let’s define a model and add routes for CRUD operations:
+
+```python
+from typing import Optional
+from pydantic import BaseModel
+
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+
+@app.post("/items/")
+def create_item(item: Item):
+    return {"item": item}
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Optional[str] = None):
+    return {"item_id": item_id, "query": q}
+```
+
+Here, `Item` is a Pydantic model that ensures data integrity by enforcing types.
+
+## Step 5: Explore Automatic Documentation
+FastAPI automatically generates API documentation, saving development time. Visit:
+- Swagger UI: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- ReDoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+
+## Step 6: Deploy the API
+As a Computer Science student, you might want to deploy your API for testing or portfolio purposes. Here are some options:
+- **Docker:** Package your API in a container for easy deployment.
+- **AWS Lambda:** Deploy as a serverless function for scalability.
+- **Heroku:** Quick and easy cloud deployment.
+
+Example Dockerfile:
+
+```dockerfile
+FROM python:3.9
+WORKDIR /app
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+## Conclusion
+FastAPI simplifies API development with automatic validation, serialization, and documentation. This guide covered setting up FastAPI, creating routes, running the server, and deploying the API. As you advance in your studies, consider integrating FastAPI with databases like PostgreSQL or MongoDB for full-stack applications.
+
+Happy coding! 🚀
+

@@ -86,5 +86,38 @@
       font-weight: 400;
       line-height: 180%;
     }
+
+    a {
+      color: sg.color(darkGray);
+      text-decoration: u.rem-calc(2) underline;
+      text-underline-offset: u.rem-calc(4);
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        text-decoration: none;
+        color: sg.color(coolBlue);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: u.rem-calc(-2);
+        width: 100%;
+        height: u.rem-calc(2);
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      &:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+
   }
 }
