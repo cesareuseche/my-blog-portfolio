@@ -1,12 +1,12 @@
 ---
 title: "How to Build an API Using FastAPI"
 date: "March 20th 2025"
-description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+description: "Learn to build a fast and efficient API using FastAPI, covering setup, routing, data validation, and deployment."
 image: "/assets/images/python-api.jpg"
 tag: "python"
 id: 1
 author: "Cesar Useche"
-duration: "1 min"
+duration: "~3 min"
 category: "TECH+++"
 ---
 
