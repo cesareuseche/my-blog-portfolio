@@ -7,6 +7,7 @@ tag: "react"
 id: 2
 author: "Cesar Useche"
 duration: "1 min"
+category: "TECH+++"
 ---
 
 This is my first blog post written in Markdown.

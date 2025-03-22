@@ -11,7 +11,7 @@ $main-font: 'DMSans', $system-font-stack;
 
 @mixin xxxlarge {
   line-height: 120%;
-  font-size: u.rem-calc(100);
+  font-size: u.rem-calc(90);
   font-style: normal;
   font-family: $main-font;
 }

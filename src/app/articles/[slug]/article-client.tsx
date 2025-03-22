@@ -5,6 +5,7 @@ import gsap from "gsap";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import ArticleAction from "@/components/article-action";
 import ArticleDetails from "@/components/article-details";
 import styles from "./style.module.scss";
 
@@ -17,9 +18,10 @@ type Props = {
   tag: string;
   author: string;
   duration: string;
+  category: string;
 };
 
-export default function ArticleClient({ image, title, date, content, tag, author, duration }: Props) {
+export default function ArticleClient({ image, title, date, content, tag, author, duration, category }: Props) {
   const articleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,10 +34,13 @@ export default function ArticleClient({ image, title, date, content, tag, author
 
   return (
     <div className={styles.article}>
+
+      <ArticleAction category={category} />
+
       <div className={styles.container}>
         <div className={styles.grid}>
-          <aside className="article-sidebar">
-            <div className="sticky-sidebar">
+          <aside className={styles.article__aside}>
+            <div className={styles.article__sidebar}>
               <ArticleDetails image={image} date={date} author={author} duration={duration} />
             </div>
           </aside>

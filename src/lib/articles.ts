@@ -31,5 +31,6 @@ export function getArticle(slug: string) {
     id: data.id || "",
     author: data.author || "",
     duration: data.duration || "",
+    category: data.category || "",
   };
 }

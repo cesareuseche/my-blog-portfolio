@@ -54,6 +54,7 @@ export default async function ArticlePage({ params }: PageProps) {
       tag={article.tag}
       author={article.author}
       duration={article.duration}
+      category={article.category}
     />
   );
 }

@@ -7,6 +7,7 @@ tag: "python"
 id: 1
 author: "Cesar Useche"
 duration: "1 min"
+category: "TECH+++"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus arcu felis bibendum ut. Porttitor leo a diam.

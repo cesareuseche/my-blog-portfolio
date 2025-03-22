@@ -5,17 +5,17 @@
 
 .article {
   position: relative;
-  padding: sg.$xsmall;
+  padding: 0 sg.$xsmall sg.$small sg.$xsmall;
 
   @include mq.min(tabletLandscape) {
-    padding: sg.$regular sg.$large 0 sg.$large;
+    padding: u.rem-calc(42) sg.$large sg.$xlarge sg.$large;
   }
 
   .container {
     max-width: 100%;
 
     @include mq.min(tabletLandscape) {
-      max-width: u.rem-calc(1200);
+      max-width: u.rem-calc(1050);
       margin: auto;
     }
 
@@ -28,6 +28,15 @@
         grid-template-columns: minmax(0, .3fr) minmax(0, .7fr);
         gap: u.rem-calc(96);
       }
+    }
+  }
+
+  &__sidebar {
+    position: static;
+
+    @include mq.min(tabletLandscape) {
+      position: sticky;
+      top: sg.$small;
     }
   }
 
@@ -73,12 +82,9 @@
     }
 
     p, ul, li, ol, a {
-      @include typo.small;
+      @include typo.regular;
       font-weight: 400;
-
-      @include mq.min(tabletLandscape) {
-        @include typo.regular;
-      }
+      line-height: 180%;
     }
   }
 }

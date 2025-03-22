@@ -1,0 +1,65 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: sg.$small;
+
+  @include mq.min(tabletLandscape) {
+    padding-bottom: sg.$regular;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: u.rem-calc(8);
+    @include typo.regular;
+    font-weight: 700;
+    color: sg.color(black);
+    text-transform: uppercase;
+    text-decoration: none;
+    margin: 0;
+    transition: color 0.3s ease-in-out;
+
+    svg {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: u.rem-calc(4);
+      text-decoration-thickness: u.rem-calc(2);
+
+      svg {
+        animation: arrow-wiggle 0.4s ease-in-out alternate;
+      }
+    }
+  }
+
+  p {
+    @include typo.large;
+    font-size: u.rem-calc(24);
+    font-weight: 700;
+    margin: 0;
+
+    @include mq.min(tabletLandscape) {
+      font-size: u.rem-calc(32);
+    }
+  }
+}
+
+// Keyframes for back-and-forth movement
+@keyframes arrow-wiggle {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-5px); // Move left
+  }
+  100% {
+    transform: translateX(0); // Move right
+  }
+}

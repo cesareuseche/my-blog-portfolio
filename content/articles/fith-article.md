@@ -7,6 +7,7 @@ tag: "python"
 id: 5
 author: "Cesar Useche"
 duration: "1 min"
+category: "TECH+++"
 ---
 
 This is my first blog post written in Markdown.
