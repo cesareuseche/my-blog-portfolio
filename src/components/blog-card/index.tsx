@@ -48,10 +48,12 @@ const BlogCard = ({ image, title, description, date, tag, slug, author, duration
           {description}
         </p>
         <div className={styles.meta}>
-          <span className={styles.text}><strong>Text</strong>
+          <span className={styles.text}>
+            <strong>Author</strong>
             {author}
           </span>
-          <span className={styles.duration}><strong>Duration</strong>
+          <span className={styles.duration}>
+            <strong>Duration</strong>
             {duration}
           </span>
         </div>

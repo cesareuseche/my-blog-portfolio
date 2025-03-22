@@ -107,16 +107,17 @@
   .meta {
     display: flex;
     justify-content: space-between;
-    @include typo.xsmall;
-    color: #666;
-    margin-top: 10px;
 
-    @include mq.min(tabletLandscape) {
+    .text, .duration {
+      display: flex;
+      gap: u.rem-calc(4);
       @include typo.small;
-    }
+      color: sg.color(black);
+      font-weight: 400;
 
-    strong {
-      color: #000;
+      strong {
+        font-weight: 700;
+      }
     }
   }
 }
