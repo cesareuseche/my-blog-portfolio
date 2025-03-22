@@ -2,7 +2,7 @@
 title: "How to Build an API Using FastAPI"
 date: "March 20th 2025"
 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-image: "/assets/images/test-img.jpeg"
+image: "/assets/images/python-api.jpg"
 tag: "python"
 id: 1
 author: "Cesar Useche"

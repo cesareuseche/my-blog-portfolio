@@ -16,6 +16,12 @@
     img {
       height: 100%;
       width: 100%;
+      object-fit: cover;
+      object-position: center;
+
+      @include mq.min(tabletLandscape) {
+        height: u.rem-calc(380);
+      }
     }
   }
 
