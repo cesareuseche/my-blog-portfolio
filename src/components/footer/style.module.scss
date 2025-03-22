@@ -47,25 +47,35 @@
       }
 
       .subscribe {
-
+        display: flex;
         input {
           flex: 1;
           padding: u.rem-calc(12);
-          @include typo.regular;
+          @include typo.small;
           border: none;
           outline: none;
           margin-right: u.rem-calc(10);
+          height: u.rem-calc(46);
+
+          @include mq.min(tabletLandscape) {
+            @include typo.regular;
+          }
         }
 
         button {
           padding: u.rem-calc(12) u.rem-calc(20);
-          @include typo.regular;
+          @include typo.small;
           font-weight: bold;
           background: sg.color(white);
           color: sg.color(black);
           border: none;
           cursor: pointer;
           transition: 0.3s;
+          height: u.rem-calc(46);
+
+          @include mq.min(tabletLandscape) {
+            @include typo.regular;
+          }
 
           &:hover {
             background: sg.color(black);
