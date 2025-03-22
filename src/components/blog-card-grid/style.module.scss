@@ -27,7 +27,7 @@
     @include mq.min(tabletLandscape) {
 
       &:hover {
-        transform: translateY(-10);
+        transform: translateY(-10px);
         box-shadow: 0 u.rem-calc(20) u.rem-calc(40) rgba(0, 0, 0, 0.1);
       }
     }

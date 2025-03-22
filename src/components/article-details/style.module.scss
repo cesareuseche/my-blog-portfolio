@@ -55,6 +55,7 @@
   &__date {
     display: flex;
     justify-content: space-between;
+    gap: u.rem-calc(4);
     align-items: center;
     @include typo.small;
     font-weight: 700;
@@ -74,6 +75,7 @@
   &__duration {
     display: flex;
     justify-content: space-between;
+    gap: u.rem-calc(4);
     align-items: center;
     @include typo.small;
     font-weight: 700;
