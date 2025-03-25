@@ -2,11 +2,11 @@
 title: "The Importance of Web Accessibility"
 date: "16 March 2022"
 description: "Making websites accessible improves usability, SEO, and ensures inclusivity for all users, including those with disabilities."
-image: "/assets/images/web-accessibility-article.jpg"
+image: "/assets/images/web-accessibility.jpg"
 tag: "Frond End"
 id: 2
 author: "Cesar Useche"
-duration: "1 min"
+duration: "~5 min"
 category: "TECH+++"
 ---
 ## Why Accessibility Matters
@@ -25,6 +25,7 @@ As a **software engineer for high-level e-commerce stores and apps**, I’ve see
 
 ## **Crash Course: Learn Web Accessibility**
 If you're new to web accessibility or want a structured introduction, I highly recommend this:
+
 [![Web Accessibility Crash Course](https://img.youtube.com/vi/e2nkq3h1P68/0.jpg)](https://www.youtube.com/watch?v=e2nkq3h1P68)
 
 This video is a great starting point, covering the **fundamentals of web accessibility** in an easy-to-understand way.
@@ -79,6 +80,6 @@ Regularly test your website for accessibility.
 - **User Testing**: Get feedback from individuals with disabilities.
 
 ## **Conclusion**
-Web accessibility is not just a legal requirement—it’s a commitment to inclusivity, usability, and better user experience. As someone who builds high-end e-commerce apps, I know how crucial accessibility is in creating a front-end experience that is smooth, efficient, and inclusive.
+Web accessibility is not just a legal requirement—it’s a commitment to inclusivity, usability, and better user experience. As someone who currently works as a software engineer, I know how crucial accessibility is in creating a front-end experience that is smooth, efficient, and inclusive.
 
 By implementing these accessibility principles, you ensure that your website is usable for all customers, while also benefiting from improved SEO, broader audience reach, and compliance with industry standards. Prioritizing accessibility makes the web a better place for all users, ensuring equal access to information and services.

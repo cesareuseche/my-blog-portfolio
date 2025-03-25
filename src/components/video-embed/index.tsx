@@ -1,4 +1,5 @@
 "use client";
+import styles from "./style.module.scss";
 
 type VideoEmbedProps = {
   url: string;
@@ -15,23 +16,14 @@ export default function VideoEmbed({ url }: VideoEmbedProps) {
     if (videoId) embedUrl = `https://player.vimeo.com/video/${videoId}`;
   }
 
-  if (!embedUrl) return null; // Don't render if URL is invalid
+  if (!embedUrl) return null;
 
   return (
-    <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden" }}>
+    <div className={styles.video__embed}>
       <iframe
         src={embedUrl}
         title="Embedded Video"
         allowFullScreen
-        frameBorder="0"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          borderRadius: "8px",
-        }}
       />
     </div>
   );

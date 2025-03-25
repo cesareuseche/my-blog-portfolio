@@ -82,7 +82,7 @@ FastAPI automatically generates API documentation, saving development time. Visi
 - ReDoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
 ## Step 6: Deploy the API
-As a Computer Science student, you might want to deploy your API for testing or portfolio purposes. Here are some options:
+If you want to deploy your API. Here are some options:
 - **Docker:** Package your API in a container for easy deployment.
 - **AWS Lambda:** Deploy as a serverless function for scalability.
 - **Heroku:** Quick and easy cloud deployment.
@@ -99,7 +99,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 ## Conclusion
-FastAPI simplifies API development with automatic validation, serialization, and documentation. This guide covered setting up FastAPI, creating routes, running the server, and deploying the API. As you advance in your studies, consider integrating FastAPI with databases like PostgreSQL or MongoDB for full-stack applications.
+FastAPI simplifies API development with automatic validation, serialization, and documentation. This guide covered setting up FastAPI, creating routes, running the server, and deploying the API. As you advance, consider integrating FastAPI with databases like PostgreSQL or MongoDB for full-stack applications.
 
 Happy coding! 🚀
 
