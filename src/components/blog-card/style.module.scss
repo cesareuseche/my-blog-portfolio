@@ -64,19 +64,44 @@
     transition: background 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
   }
 
-  .imageContainer {
+  .image__container {
+    position: relative;
     margin: u.rem-calc(15) 0;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
 
-    img {
+    .shimmer {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite linear;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    .image {
       width: 100%;
       height: u.rem-calc(228);
       display: block;
       object-fit: cover;
+      transition: opacity 0.5s ease-in-out;
 
       @include mq.min(laptop) {
         height: u.rem-calc(441);
       }
+    }
+
+    .hidden {
+      opacity: 0;
     }
   }
 

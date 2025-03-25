@@ -1,3 +1,5 @@
+'use client'
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './style.module.scss';
@@ -15,38 +17,34 @@ type Props = {
 };
 
 const BlogCard = ({ image, title, description, date, tag, slug, author, duration }: Props) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <article className={styles.card}>
-
       <Link href={`/articles/${slug}`}></Link>
 
       <div className={styles.details}>
-        <p className={styles.date}>
-          {date}
-        </p>
-        <span className={styles.tag}>
-          {tag}
-        </span>
+        <p className={styles.date}>{date}</p>
+        <span className={styles.tag}>{tag}</span>
       </div>
 
-      <div className={styles.imageContainer}>
+      <div className={styles.image__container}>
+        {isLoading && <div className={styles.shimmer}></div>}
+
         <Image
           src={image}
           alt={title}
           width={614}
           height={409}
-          className={styles.image}
-          loading='lazy'
+          className={`${styles.image} ${isLoading ? styles.hidden : ''}`}
+          loading="lazy"
+          onLoad={() => setIsLoading(false)}
         />
       </div>
 
       <div className={styles.content}>
-        <h2 className={styles.title}>
-          {title}
-        </h2>
-        <p className={styles.description}>
-          {description}
-        </p>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.description}>{description}</p>
         <div className={styles.meta}>
           <span className={styles.text}>
             <strong>Author</strong>
@@ -58,7 +56,6 @@ const BlogCard = ({ image, title, description, date, tag, slug, author, duration
           </span>
         </div>
       </div>
-
     </article>
   );
 };
