@@ -12,7 +12,7 @@ category: "TECH+++"
 ## Why Accessibility Matters
 Web accessibility ensures that people with disabilities can perceive, understand, navigate, and interact with your website. An accessible website benefits not only users with disabilities but also improves overall usability, SEO, and compliance with legal standards like the Americans with Disabilities Act (ADA) and Web Content Accessibility Guidelines (WCAG).
 
-As a **software engineer for high-level e-commerce stores and apps**, I’ve seen firsthand how accessibility plays a crucial role in delivering a seamless user experience. In e-commerce, accessibility is not just a legal requirement but a key factor in increasing conversion rates, customer retention, and brand trust. A well-built, accessible front end ensures that all users—regardless of ability—can engage with a website effectively.
+As a software engineer working in front end, I’ve seen firsthand how accessibility plays a crucial role in delivering a seamless user experience. In apps, accessibility is not just a best practice but a key factor in improving user engagement, retention, and overall usability. A well-built, accessible front end ensures that all users—regardless of ability—can interact with an app effectively.
 
 ### **Key Reasons to Prioritize Accessibility:**
 - **Inclusivity**: Everyone deserves equal access to information and services online.
@@ -83,3 +83,5 @@ Regularly test your website for accessibility.
 Web accessibility is not just a legal requirement—it’s a commitment to inclusivity, usability, and better user experience. As someone who currently works as a software engineer, I know how crucial accessibility is in creating a front-end experience that is smooth, efficient, and inclusive.
 
 By implementing these accessibility principles, you ensure that your website is usable for all customers, while also benefiting from improved SEO, broader audience reach, and compliance with industry standards. Prioritizing accessibility makes the web a better place for all users, ensuring equal access to information and services.
+
+Happy coding! 🚀

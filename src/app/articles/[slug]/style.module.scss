@@ -92,7 +92,7 @@
     }
 
     a {
-      color: sg.color(darkGray);
+      color: sg.color(gold);
       text-decoration: u.rem-calc(2) underline;
       text-underline-offset: u.rem-calc(4);
       font-weight: 500;
@@ -101,7 +101,7 @@
 
       &:hover {
         text-decoration: none;
-        color: sg.color(coolBlue);
+        color: sg.color(darkBlue);
       }
 
       &::after {
