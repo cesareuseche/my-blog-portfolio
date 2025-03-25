@@ -145,7 +145,9 @@ Now, you can use:
 
 ## Additional Resources
 
-For beginners looking for a complete introduction to Docker, check out this video: [Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w)
+For beginners looking for a complete introduction to Docker, check out this video:
+
+[Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w)
 
 ## Conclusion
 
