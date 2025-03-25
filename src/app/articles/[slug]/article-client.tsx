@@ -7,6 +7,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import ArticleAction from "@/components/article-action";
 import ArticleDetails from "@/components/article-details";
+import VideoEmbed from "@/components/video-embed";
 import styles from "./style.module.scss";
 
 type Props = {
@@ -81,6 +82,12 @@ export default function ArticleClient({ image, title, date, content, tag, author
                       {children}
                     </code>
                   );
+                },
+                a({ href, children }) {
+                  if (href && (href.includes("youtube.com") || href.includes("youtu.be") || href.includes("vimeo.com"))) {
+                    return <VideoEmbed url={href} />;
+                  }
+                  return <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{children}</a>;
                 },
               }}
             >
