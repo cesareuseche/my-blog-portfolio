@@ -75,10 +75,6 @@
       @include mq.min(tabletLandscape) {
         @include typo.xxlarge;
       }
-
-      @include mq.min(laptopSmall) {
-        @include typo.xxxlarge;
-      }
     }
 
     p, ul, li, ol, a {
