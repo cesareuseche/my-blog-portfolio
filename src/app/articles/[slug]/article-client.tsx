@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -9,6 +9,7 @@ import ArticleAction from "@/components/article-action";
 import ArticleDetails from "@/components/article-details";
 import VideoEmbed from "@/components/video-embed";
 import styles from "./style.module.scss";
+import IconCopy from "@/components/icon-copy";
 
 type Props = {
   image: string;
@@ -24,6 +25,7 @@ type Props = {
 
 export default function ArticleClient({ image, title, date, content, tag, author, duration, category }: Props) {
   const articleRef = useRef<HTMLDivElement>(null);
+  const [copiedBlocks, setCopiedBlocks] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
     gsap.fromTo(
@@ -33,9 +35,19 @@ export default function ArticleClient({ image, title, date, content, tag, author
     );
   }, []);
 
+  const handleCopy = (text: string, index: number) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedBlocks((prev) => ({ ...prev, [index]: true }));
+      setTimeout(() => {
+        setCopiedBlocks((prev) => ({ ...prev, [index]: false }));
+      }, 2000);
+    });
+  };
+
+  let codeBlockCounter = 0;
+
   return (
     <div className={styles.article}>
-
       <ArticleAction category={category} />
 
       <div className={styles.container}>
@@ -57,28 +69,40 @@ export default function ArticleClient({ image, title, date, content, tag, author
               </div>
             </div>
 
-            <h1>
-              {title}
-            </h1>
+            <h1>{title}</h1>
 
             <ReactMarkdown
               components={{
                 code({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) {
                   const match = /language-(\w+)/.exec(className || "");
+                  const codeText = String(children).replace(/\n$/, "");
+                  const index = codeBlockCounter++;
+
                   return !inline && match ? (
-                    <SyntaxHighlighter
-                      style={materialDark}
-                      language={match[1]}
-                      wrapLongLines={true}
-                      showLineNumbers={true}
-                      customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
-                      PreTag="div"
-                      {...props}
-                    >
-                      {String(children).replace(/\n$/, "")}
-                    </SyntaxHighlighter>
+                    <div className={styles.code}>
+                      <div className={styles.copy}>
+                        <button
+                          className={styles.copy__button}
+                          onClick={() => handleCopy(codeText, index)}
+                          type="button"
+                        >
+                          {copiedBlocks[index] ? "Copied" : (<><IconCopy /> Copy</>)}
+                        </button>
+                      </div>
+                      <SyntaxHighlighter
+                        style={materialDark}
+                        language={match[1]}
+                        wrapLongLines={true}
+                        showLineNumbers={true}
+                        customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+                        PreTag="div"
+                        {...props}
+                      >
+                        {codeText}
+                      </SyntaxHighlighter>
+                    </div>
                   ) : (
-                    <code className="bg-gray-200 px-1 py-0.5 rounded" {...props}>
+                    <code {...props}>
                       {children}
                     </code>
                   );

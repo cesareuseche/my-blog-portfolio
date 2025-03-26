@@ -126,4 +126,40 @@
     }
 
   }
+
+  .code {
+    position: relative;
+  }
+
+  .copy{
+    background: sg.color(lightBlack);
+    position: absolute;
+    height: u.rem-calc(30);
+    width: 100%;
+    z-index: 2;
+
+    &__button {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 1%;
+      font-size: u.rem-calc(12);
+      background: transparent;
+      color: sg.color(white);
+      border: none;
+      height: u.rem-calc(30);
+      cursor: pointer;
+
+      &:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+      }
+
+      &:hover {
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
+  }
 }
