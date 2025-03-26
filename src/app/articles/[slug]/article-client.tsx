@@ -9,6 +9,7 @@ import ArticleAction from "@/components/article-action";
 import ArticleDetails from "@/components/article-details";
 import VideoEmbed from "@/components/video-embed";
 import styles from "./style.module.scss";
+import IconCopy from "@/components/icon-copy";
 
 type Props = {
   image: string;
@@ -24,7 +25,7 @@ type Props = {
 
 export default function ArticleClient({ image, title, date, content, tag, author, duration, category }: Props) {
   const articleRef = useRef<HTMLDivElement>(null);
-  const [copied, setCopied] = useState(false);
+  const [copiedBlocks, setCopiedBlocks] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
     gsap.fromTo(
@@ -34,12 +35,16 @@ export default function ArticleClient({ image, title, date, content, tag, author
     );
   }, []);
 
-  const handleCopy = (text: string) => {
+  const handleCopy = (text: string, index: number) => {
     navigator.clipboard.writeText(text).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setCopiedBlocks((prev) => ({ ...prev, [index]: true }));
+      setTimeout(() => {
+        setCopiedBlocks((prev) => ({ ...prev, [index]: false }));
+      }, 2000);
     });
   };
+
+  let codeBlockCounter = 0;
 
   return (
     <div className={styles.article}>
@@ -70,8 +75,20 @@ export default function ArticleClient({ image, title, date, content, tag, author
               components={{
                 code({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) {
                   const match = /language-(\w+)/.exec(className || "");
+                  const codeText = String(children).replace(/\n$/, "");
+                  const index = codeBlockCounter++;
+
                   return !inline && match ? (
-                    <div className={styles.codeBlockContainer}>
+                    <div className={styles.code}>
+                      <div className={styles.copy}>
+                        <button
+                          className={styles.copy__button}
+                          onClick={() => handleCopy(codeText, index)}
+                          type="button"
+                        >
+                          {copiedBlocks[index] ? "Copied" : (<><IconCopy /> Copy</>)}
+                        </button>
+                      </div>
                       <SyntaxHighlighter
                         style={materialDark}
                         language={match[1]}
@@ -81,14 +98,8 @@ export default function ArticleClient({ image, title, date, content, tag, author
                         PreTag="div"
                         {...props}
                       >
-                        {String(children).replace(/\n$/, "")}
+                        {codeText}
                       </SyntaxHighlighter>
-                      <button
-                        className={styles.copyButton}
-                        onClick={() => handleCopy(String(children))}
-                      >
-                        {copied ? "Copied!" : "Copy"}
-                      </button>
                     </div>
                   ) : (
                     <code {...props}>
@@ -100,7 +111,7 @@ export default function ArticleClient({ image, title, date, content, tag, author
                   if (href && (href.includes("youtube.com") || href.includes("youtu.be") || href.includes("vimeo.com"))) {
                     return <VideoEmbed url={href} />;
                   }
-                  return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
+                  return <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{children}</a>;
                 },
               }}
             >

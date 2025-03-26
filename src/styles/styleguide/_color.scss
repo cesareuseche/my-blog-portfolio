@@ -1,3 +1,4 @@
+
 @use '../../stdlib/map' as map;
 @use 'sass:color';
 
@@ -6,6 +7,7 @@
 $_config: (
   white: #FFFFFF,
   black: #000000,
+  lightBlack: #252525,
   coolBlue: #4A90E2,
   darkBlue: #1E3A5F,
   darkGray: #888888,
