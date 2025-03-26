@@ -16,8 +16,13 @@
     img {
       height: 100%;
       width: 100%;
+      max-height: u.rem-calc(360);
       object-fit: cover;
       object-position: center;
+
+      @include mq.min(tabletPortrait) {
+        max-height: u.rem-calc(500);
+      }
 
       @include mq.min(tabletLandscape) {
         height: u.rem-calc(286);

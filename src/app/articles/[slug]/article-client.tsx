@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -24,6 +24,7 @@ type Props = {
 
 export default function ArticleClient({ image, title, date, content, tag, author, duration, category }: Props) {
   const articleRef = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     gsap.fromTo(
@@ -33,9 +34,15 @@ export default function ArticleClient({ image, title, date, content, tag, author
     );
   }, []);
 
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   return (
     <div className={styles.article}>
-
       <ArticleAction category={category} />
 
       <div className={styles.container}>
@@ -57,28 +64,34 @@ export default function ArticleClient({ image, title, date, content, tag, author
               </div>
             </div>
 
-            <h1>
-              {title}
-            </h1>
+            <h1>{title}</h1>
 
             <ReactMarkdown
               components={{
                 code({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) {
                   const match = /language-(\w+)/.exec(className || "");
                   return !inline && match ? (
-                    <SyntaxHighlighter
-                      style={materialDark}
-                      language={match[1]}
-                      wrapLongLines={true}
-                      showLineNumbers={true}
-                      customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
-                      PreTag="div"
-                      {...props}
-                    >
-                      {String(children).replace(/\n$/, "")}
-                    </SyntaxHighlighter>
+                    <div className={styles.codeBlockContainer}>
+                      <SyntaxHighlighter
+                        style={materialDark}
+                        language={match[1]}
+                        wrapLongLines={true}
+                        showLineNumbers={true}
+                        customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+                        PreTag="div"
+                        {...props}
+                      >
+                        {String(children).replace(/\n$/, "")}
+                      </SyntaxHighlighter>
+                      <button
+                        className={styles.copyButton}
+                        onClick={() => handleCopy(String(children))}
+                      >
+                        {copied ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
                   ) : (
-                    <code className="bg-gray-200 px-1 py-0.5 rounded" {...props}>
+                    <code {...props}>
                       {children}
                     </code>
                   );
@@ -87,7 +100,7 @@ export default function ArticleClient({ image, title, date, content, tag, author
                   if (href && (href.includes("youtube.com") || href.includes("youtu.be") || href.includes("vimeo.com"))) {
                     return <VideoEmbed url={href} />;
                   }
-                  return <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{children}</a>;
+                  return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
                 },
               }}
             >
