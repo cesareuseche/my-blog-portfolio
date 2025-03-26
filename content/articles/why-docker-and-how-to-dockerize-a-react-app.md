@@ -2,7 +2,7 @@
 title: "Why Docker & How to Dockerize a NextJS App"
 date: "March 28th 2025"
 description: "Learn why Docker is essential for modern development and how to containerize a NextJS app with a step-by-step guide."
-image: "/assets/images/docker-how-to-react.jpg"
+image: "/assets/images/docker-nextjs.jpg"
 tag: "Docker"
 id: 3
 author: "Cesar Useche"

@@ -1,3 +1,5 @@
+'use client';
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
 import IconGithub from "../icon-github";
@@ -11,21 +13,30 @@ type Props = {
 };
 
 export default function ArticleDetails({ image, date, author, duration }: Props) {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <div className={styles.article__details}>
       <div className={styles.article__details__wrapper}>
-        <Image src={image} alt="Article Thumbnail" width={300} height={200} />
-
+        <div className={styles.image__container}>
+          {isLoading && <div className={styles.shimmer}></div>}
+          <Image
+            src={image}
+            alt="Article Thumbnail"
+            width={300}
+            height={200}
+            className={`${styles.image} ${isLoading ? styles.hidden : ''}`}
+            onLoad={() => setIsLoading(false)}
+          />
+        </div>
         <div className={styles.article__details__author}>
           <Image
             src="/assets/images/profile-pic.png"
-            alt=""
+            alt="Cesar Useche Author"
             width={100}
             height={100}
           />
-          <p>
-            {author}
-          </p>
+          <p>{author}</p>
         </div>
       </div>
 
@@ -37,9 +48,7 @@ export default function ArticleDetails({ image, date, author, duration }: Props)
           Duration <span>{duration}</span>
         </p>
         <div className={styles.article__details__social}>
-          <p>
-            Connect
-          </p>
+          <p>Connect</p>
           <div>
             <a href="https://github.com/cesareuseche" target="_blank" rel="noopener noreferrer">
               <IconGithub />

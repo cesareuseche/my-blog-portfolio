@@ -2,7 +2,7 @@
 title: "How to Build an API Using FastAPI"
 date: "March 20th 2025"
 description: "Learn to build a fast and efficient API using FastAPI, covering setup, routing, data validation, and deployment."
-image: "/assets/images/python-api.jpg"
+image: "/assets/images/python-api-fast.jpg"
 tag: "python"
 id: 1
 author: "Cesar Useche"
@@ -101,5 +101,5 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ## Conclusion
 FastAPI simplifies API development with automatic validation, serialization, and documentation. This guide covered setting up FastAPI, creating routes, running the server, and deploying the API. As you advance, consider integrating FastAPI with databases like PostgreSQL or MongoDB for full-stack applications.
 
-Happy coding! 🚀
+Happy coding! 🐍
 
