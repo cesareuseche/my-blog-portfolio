@@ -1,0 +1,55 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.container {
+  border-top: 1px solid sg.color(black);
+
+  h2 {
+    @include typo.large;
+    padding: sg.$regular 0 sg.$large 0;
+    margin: 0;
+
+    @include mq.min(tabletLandscape) {
+      @include typo.xlarge;
+      padding: sg.$regular 0 sg.$xlarge 0;
+    }
+  }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: u.rem-calc(8);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @include mq.min(medium) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include mq.min(largex) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .article {
+    position: relative;
+    border: 1px solid sg.color(black);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    @include mq.min(tabletLandscape) {
+
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 u.rem-calc(20) u.rem-calc(40) rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    h2 {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+}

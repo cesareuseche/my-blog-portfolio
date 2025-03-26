@@ -1,5 +1,6 @@
 @use './unit' as u;
 
+$xxlarge: u.rem-calc(112px);
 $xlarge: u.rem-calc(96px);
 $large: u.rem-calc(80px);
 $medium: u.rem-calc(64px);
