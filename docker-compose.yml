@@ -1,0 +1,30 @@
+services:
+  next-app:
+    container_name: blog-portfolio
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app:cached
+      - /app/node_modules
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    networks:
+      - react-network
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - NEXTJS_IGNORE_ESLINT=1
+    command: ["pnpm", "dev", "--turbo"]
+    develop:
+      watch:
+        - path: .
+          action: sync
+          target: /app
+
+networks:
+  react-network:
+    driver: bridge
