@@ -151,11 +151,6 @@
       height: u.rem-calc(30);
       cursor: pointer;
 
-      &:disabled {
-        background-color: #6c757d;
-        cursor: not-allowed;
-      }
-
       &:hover {
         cursor: pointer;
         font-weight: bold;
