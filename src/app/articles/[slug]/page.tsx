@@ -1,5 +1,5 @@
 import { getArticle } from "@/lib/articles";
-import ArticleClient from "./article-client";
+import Article from "../article";
 import { Metadata } from "next";
 
 // Define the correct type where params is an async function
@@ -48,7 +48,7 @@ export default async function ArticlePage({ params }: PageProps) {
   if (!article) return <h1>404 - Article Not Found</h1>;
 
   return (
-    <ArticleClient
+    <Article
       image={article.image}
       title={article.title}
       description={article.description}

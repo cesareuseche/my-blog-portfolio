@@ -23,10 +23,12 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       gap: u.rem-calc(24);
+      padding-bottom: sg.$xlarge;
 
       @include mq.min(tabletLandscape) {
         grid-template-columns: minmax(0, .3fr) minmax(0, .7fr);
         gap: u.rem-calc(96);
+        padding-bottom: sg.$xxlarge;
       }
     }
   }

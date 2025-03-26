@@ -132,6 +132,12 @@
   .meta {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    gap: u.rem-calc(8);
+
+    @include mq.min(tabletLandscape) {
+      flex-direction: row;
+    }
 
     .text, .duration {
       display: flex;
