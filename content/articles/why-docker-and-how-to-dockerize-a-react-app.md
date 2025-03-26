@@ -3,7 +3,7 @@ title: "Why Docker & How to Dockerize a NextJS App"
 date: "March 28th 2025"
 description: "Learn why Docker is essential for modern development and how to containerize a NextJS app with a step-by-step guide."
 image: "/assets/images/docker-nextjs.jpg"
-tag: "Docker"
+tag: "Docker 🐋"
 id: 3
 author: "Cesar Useche"
 duration: "~8 min"
@@ -37,6 +37,7 @@ cd my-next-app
 In the root directory of your Next project, create a file named `Dockerfile` with the following content:
 
 ```Dockerfile
+
 # Base image with Node.js and Alpine Linux for lightweight performance
 FROM node:18-alpine AS builder
 

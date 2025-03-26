@@ -1,6 +1,6 @@
 ---
 title: "My Fourth Article"
-date: "16 March 2022"
+date: "8 February 2022"
 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 image: "/assets/images/fourth-article.jpeg"
 tag: "python"
