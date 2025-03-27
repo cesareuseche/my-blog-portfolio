@@ -5,8 +5,14 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: "standalone",
   images: {
-    unoptimized: true,
-    domains: [], // Add any necessary image domains here
+    disableStaticImages: true,
+    domains: ['www.datocms-assets.com', 'image.mux.com'],
+    imageSizes: [
+      360, 480, 560, 640, 768, 860, 940, 1024, 1280, 1366, 1440, 1600, 1920,
+      2560, 3840
+    ],
+    minimumCacheTTL: 60,
+    formats: ['image/webp', 'image/avif']
   },
   trailingSlash: true,
   sassOptions: {

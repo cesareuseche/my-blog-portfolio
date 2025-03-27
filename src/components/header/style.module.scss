@@ -65,7 +65,7 @@
   }
 
   .divider {
-    margin-top: 5px;
+    margin: u.rem-calc(5) 0 0 0;
     border: none;
     border-top: 1px solid sg.color(black);
   }

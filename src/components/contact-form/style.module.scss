@@ -1,0 +1,139 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.container {
+  position: relative;
+  padding: 0 sg.$xsmall;
+
+  @include mq.min(tabletLandscape) {
+    padding: sg.$regular sg.$large 0 sg.$large;
+  }
+
+  @include mq.min(laptopSmall) {
+    padding: sg.$regular;
+  }
+
+  @include mq.min(laptop) {
+    padding: sg.$regular sg.$large;
+  }
+
+  .wrapper {
+    max-width: 100%;
+
+    @include mq.min(laptopSmall) {
+      max-width: u.rem-calc(1280);
+      margin: auto;
+    }
+
+    @include mq.min(largexx) {
+      max-width: u.rem-calc(1338);
+    }
+
+    @include mq.min(laptop) {
+      max-width: 100%;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+
+    @include mq.min(laptopSmall) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      height: 100vh;
+      overflow: hidden;
+    }
+  }
+
+  .image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    overflow: hidden;
+    padding: sg.$xsmall;
+
+    @include mq.min(tabletLandscape) {
+      justify-content: center;
+      padding-left: sg.$large;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+
+    .row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .input {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    input,
+    textarea {
+      border: none;
+      border-bottom: 2px solid #999;
+      padding: 8px;
+      font-size: 16px;
+      color: #333;
+      background: transparent;
+      outline: none;
+    }
+
+    textarea {
+      height: 80px;
+      resize: none;
+    }
+
+    .submit {
+      background: linear-gradient(to right, #8e44ad, #e84393);
+      color: white;
+      font-size: 18px;
+      padding: 10px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .submitButton:hover {
+      opacity: 0.8;
+    }
+  }
+
+}
