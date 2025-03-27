@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: dev
     ports:
       - "3000:3000"
     volumes:
@@ -19,11 +20,6 @@ services:
       - WATCHPACK_POLLING=true
       - NEXTJS_IGNORE_ESLINT=1
     command: ["pnpm", "dev", "--turbo"]
-    develop:
-      watch:
-        - path: .
-          action: sync
-          target: /app
 
 networks:
   react-network:

@@ -1,0 +1,132 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.container {
+  position: relative;
+  padding: 0 sg.$xsmall;
+
+  @include mq.min(tabletLandscape) {
+    padding: sg.$regular sg.$large 0 sg.$large;
+  }
+
+  @include mq.min(laptopSmall) {
+    padding: sg.$regular;
+  }
+
+  @include mq.min(laptop) {
+    padding: sg.$regular sg.$large;
+  }
+
+  .wrapper {
+    max-width: 100%;
+
+    @include mq.min(laptopSmall) {
+      max-width: u.rem-calc(1280);
+      margin: auto;
+    }
+
+    @include mq.min(largexx) {
+      max-width: u.rem-calc(1338);
+    }
+
+    @include mq.min(laptop) {
+      max-width: 100%;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+
+    @include mq.min(laptopSmall) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      height: 100vh;
+      overflow: hidden;
+    }
+  }
+
+  .image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    overflow: hidden;
+    padding: sg.$xsmall;
+
+    @include mq.min(tabletLandscape) {
+      padding: sg.$regular 0;
+    }
+
+    @include mq.min(laptopSmall) {
+      justify-content: center;
+      padding-left: sg.$large;
+      height: 100vh;
+    }
+
+    h1 {
+      @include typo.large;
+      margin: 0;
+
+      @include mq.min(tabletLandscape) {
+        @include typo.xlarge;
+      }
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: sg.$xsmall;
+    padding-top: sg.$regular;
+
+    .row {
+      display: flex;
+      gap: sg.$xxsmall;
+    }
+
+    .input {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      @include typo.small;
+      color: sg.color(darkGray);
+      margin-bottom: sg.$xxxsmall;
+    }
+
+    input,
+    textarea {
+      border: none;
+      border-bottom: 2px solid sg.color(lightGray);
+      @include typo.xsmall;
+      padding: u.rem-calc(12) 0;
+      color: sg.color(black);
+      background: transparent;
+      outline: none;
+    }
+
+    textarea {
+      height: sg.$xlarge;
+      resize: none;
+    }
+  }
+
+}

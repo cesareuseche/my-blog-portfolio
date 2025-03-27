@@ -61,27 +61,6 @@
             @include typo.regular;
           }
         }
-
-        button {
-          padding: u.rem-calc(12) u.rem-calc(20);
-          @include typo.small;
-          font-weight: bold;
-          background: sg.color(white);
-          color: sg.color(black);
-          border: none;
-          cursor: pointer;
-          transition: 0.3s;
-          height: u.rem-calc(46);
-
-          @include mq.min(tabletLandscape) {
-            @include typo.regular;
-          }
-
-          &:hover {
-            background: sg.color(black);
-            color: sg.color(white);
-          }
-        }
       }
     }
 
@@ -107,12 +86,15 @@
           margin: 0;
 
           li {
-            @include typo.small;
-            margin-bottom: 0;
-            cursor: pointer;
+            a {
+              @include typo.small;
+              margin-bottom: 0;
+              color: sg.color(white);
+              cursor: pointer;
 
-            &:hover {
-              text-decoration: underline;
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
         }

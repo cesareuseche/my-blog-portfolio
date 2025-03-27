@@ -14,6 +14,7 @@ export default function Header() {
         <div className={styles.menu}>
           <nav className={styles.nav}>
             <Link href="/about">About</Link>
+            <Link href="/contact">Contact</Link>
           </nav>
 
           <span className={styles.separator}>—</span>

@@ -5,6 +5,8 @@ import 'swiper/css/navigation'
 import IconGithub from "../icon-github";
 import IconLinkedIn from "../icon-linkedin";
 import styles from "./style.module.scss";
+import Link from 'next/link';
+import Button from '../button';
 
 const Footer = () => {
   const tickerWords = ["BLOG", "TECH", "LIFE"];
@@ -60,7 +62,7 @@ const Footer = () => {
           </h2>
           <div className={styles.subscribe}>
             <input type="email" placeholder="Email" />
-            <button>SIGN UP</button>
+            <Button title="Subscribe" variant="secondary" type="submit" />
           </div>
         </div>
 
@@ -70,8 +72,21 @@ const Footer = () => {
           </p>
           <div className={styles.links}>
             <ul>
-              <li>About</li>
-              <li>Blog</li>
+              <li>
+                <Link href="/">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/about">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
