@@ -17,10 +17,14 @@
   }
 
   .logo {
-    @include typo.medium;
     color: sg.color(black);
+    @include typo.regular;
     text-decoration: none;
     font-weight: bold;
+
+    @include mq.min(tabletLandscape) {
+      @include typo.medium;
+    }
   }
 
   .menu {
