@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
+import IconContact from "../icon-contact";
+import Button from "../button";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -76,16 +78,6 @@ export default function ContactForm() {
                     onChange={handleChange}
                   />
                 </div>
-                <div className={styles.input}>
-                  <label>Phone Number</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Enter Your Phone Number"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
-                </div>
               </div>
 
               <div className={styles.input}>
@@ -98,7 +90,13 @@ export default function ContactForm() {
                 ></textarea>
               </div>
 
-              <button type="submit" className={styles.submit}>SUBMIT</button>
+              <Button
+                title="Submit"
+                variant="primary"
+                type="submit"
+                >
+                <IconContact />
+              </Button>
             </form>
           </div>
         </div>

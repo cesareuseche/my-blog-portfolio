@@ -1,42 +1,42 @@
-# Use the official Node.js image as a base
-FROM node:18-alpine AS builder
+# --- Base Image ---
+  FROM node:20.18.0-bookworm AS base
 
-# Set the working directory
-WORKDIR /app
+  # Set up environment variables
+  ENV NODE_ENV=development \
+      SHELL=/bin/bash \
+      TMP_DIR=/mnt/tmp \
+      WORKDIR=/app
 
-# Copy package.json and pnpm-lock.yaml
-COPY package.json pnpm-lock.yaml ./
+  WORKDIR ${WORKDIR}
 
-# Install dependencies using pnpm
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+  # Install system dependencies
+  RUN apt-get update && apt-get install -y tini && rm -rf /var/lib/apt/lists/*
 
-# Copy the rest of the application
-COPY . .
+  # Install pnpm globally
+  RUN npm install -g pnpm@9.14.1
 
-# Build the Next.js app
-RUN pnpm run build
+  # Set up pnpm cache
+  ENV npm_config_cache="${TMP_DIR}/npm-cache" \
+      npm_config_store_dir="${TMP_DIR}/pnpm-store"
 
-# Production image, use the same Node.js image
-FROM node:18-alpine
+  # Copy dependencies first (to leverage Docker caching)
+  COPY package.json pnpm-lock.yaml ./
+  RUN pnpm install --frozen-lockfile
 
-# Set working directory
-WORKDIR /app
+  # Copy the entire project
+  COPY . .
 
-# Install pnpm
-RUN npm install -g pnpm
+  # --- Development Stage ---
+  FROM base AS dev
+  CMD ["pnpm", "dev"]
 
-# Set environment variables
-ENV NODE_ENV production
+  # --- Production Stage ---
+  FROM base AS prod
+  ENV NODE_ENV=production
+  RUN pnpm run build
+  CMD ["pnpm", "start"]
 
-# Copy package.json and the Next.js build output
-COPY --from=builder /app/package.json /app/
-COPY --from=builder /app/node_modules /app/node_modules
-COPY --from=builder /app/.next /app/.next
-COPY --from=builder /app/public /app/public
-COPY --from=builder /app/next.config.js /app/next.config.js
+  # Use tini for process management
+  ENTRYPOINT ["/usr/bin/tini", "-sg", "--"]
 
-# Expose port 3000
-EXPOSE 3000
-
-# Start Next.js production server
-CMD ["node_modules/.bin/next", "start"]
+  EXPOSE 3000

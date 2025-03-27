@@ -1,0 +1,62 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: u.rem-calc(8);
+  padding: u.rem-calc(12) u.rem-calc(20);
+  @include typo.small;
+  font-weight: bold;
+  background: sg.color(black);
+  color: sg.color(white);
+  border: 1px solid sg.color(black);
+  cursor: pointer;
+  transition: 0.3s;
+  height: u.rem-calc(46);
+
+  @include mq.min(tabletLandscape) {
+    @include typo.regular;
+  }
+
+  &:hover {
+    background: sg.color(white);
+    color: sg.color(black);
+    border: 1px solid sg.color(black);
+  }
+
+  svg {
+    width: u.rem-calc(16);
+    height: u.rem-calc(16);
+  }
+}
+
+.secondary {
+  padding: u.rem-calc(12) u.rem-calc(20);
+  @include typo.small;
+  font-weight: bold;
+  background: sg.color(white);
+  color: sg.color(black);
+  border: 1px solid sg.color(black);
+  cursor: pointer;
+  transition: 0.3s;
+  height: u.rem-calc(46);
+
+  @include mq.min(tabletLandscape) {
+    @include typo.regular;
+  }
+
+  &:hover {
+    background: sg.color(black);
+    border: 1px solid sg.color(white);
+    color: sg.color(white);
+  }
+
+  svg {
+    width: u.rem-calc(16);
+    height: u.rem-calc(16);
+  }
+}

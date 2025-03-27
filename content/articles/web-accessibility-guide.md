@@ -2,7 +2,7 @@
 title: "The Importance of Web Accessibility"
 date: "March 25th 2025"
 description: "Making websites accessible improves usability, SEO, and ensures inclusivity for all users, including those with disabilities."
-image: "/assets/images/accessibility.jpg"
+image: "/assets/images/accessibility.webp"
 tag: "Frond End 💻"
 id: 2
 author: "Cesar Useche"
