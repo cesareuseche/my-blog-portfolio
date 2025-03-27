@@ -41,7 +41,7 @@ In the root directory of your Next.js project, create a `Dockerfile` with the fo
 # --- Base Image ---
 FROM node:20.18.0-bookworm AS base
 
-# Set up environment variables
+# --- Set up environment variables ---
 ENV NODE_ENV=development \
     SHELL=/bin/bash \
     TMP_DIR=/mnt/tmp \
@@ -49,21 +49,20 @@ ENV NODE_ENV=development \
 
 WORKDIR ${WORKDIR}
 
-# Install system dependencies
+# --- Install system dependencies ---
 RUN apt-get update && apt-get install -y tini && rm -rf /var/lib/apt/lists/*
 
-# Install pnpm globally
+# --- Install pnpm globally ---
 RUN npm install -g pnpm@9.14.1
 
-# Set up pnpm cache
-ENV npm_config_cache="${TMP_DIR}/npm-cache" \
-    npm_config_store_dir="${TMP_DIR}/pnpm-store"
+# --- Set up pnpm cache ---
+ENV npm_config_cache="${TMP_DIR}/npm-cache" \ npm_config_store_dir="${TMP_DIR}/pnpm-store"
 
 # Copy dependencies first (to leverage Docker caching)
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-# Copy the entire project
+# --- Copy the entire project ---
 COPY . .
 
 # --- Development Stage ---
@@ -106,7 +105,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev  # Default to development
+      target: dev
     ports:
       - "3000:3000"
     volumes:
@@ -130,19 +129,19 @@ networks:
 
 ### Explanation of why I have this type of Setup
 
-1. **Multi-Stage Build:**
+- **Multi-Stage Build:**
    - The `base` stage installs dependencies and sets up the environment.
    - The `dev` stage runs `pnpm dev` for development.
    - The `prod` stage builds the app and runs it in production mode with `pnpm start`.
 
-2. **Using Tini:**
+- **Using Tini:**
    - `tini` is a minimal `init` system that helps manage zombie processes inside Docker containers.
    - It prevents issues with improperly handled signals when stopping the container.
 
-3. **Optimized Caching:**
+- **Optimized Caching:**
    - Dependencies (`package.json` and `pnpm-lock.yaml`) are copied first to leverage Docker’s layer caching mechanism, reducing build time.
 
-4. **Docker Compose:**
+-  **Docker Compose:**
    - The `docker-compose.yml` file simplifies running the container by defining volumes, networks, and environment variables.
    - It uses `volumes` to mount the project directory, ensuring changes are reflected in real-time.
 
