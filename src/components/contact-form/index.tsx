@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import styles from "./style.module.scss";
 import IconContact from "../icon-contact";
-import SmileyLottie from "../smiley-lottie";
 import Button from "../button";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useState } from "react";
@@ -72,7 +71,6 @@ export default function ContactForm() {
             <div className={styles.success}>
               <div className={styles.smiley}>
                 <h2>Thank you!</h2>
-                <SmileyLottie />
               </div>
               <p>Your message has been successfully sent. I will get back to you soon.</p>
             </div>
