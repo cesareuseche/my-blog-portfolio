@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import Header from "../header";
 import Footer from "../footer";
+import Chatbot from "@/components/chatbot-ui";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -23,8 +24,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <>
       <Header />
-      <main className="main-container">{children}</main>
+        <main className="main-container">{children}</main>
       <Footer />
+      <Chatbot />
     </>
   );
 }

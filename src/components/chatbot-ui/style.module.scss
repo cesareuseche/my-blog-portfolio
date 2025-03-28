@@ -1,0 +1,129 @@
+@use '../../styles/styleguide/unit' as u;
+
+.chatbot {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 9;
+
+  &__button {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    height: 60px;
+    width: 60px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+  }
+
+  &__modal {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 420px;
+    height: 100vh;
+    background: white;
+    padding: 16px;
+    border-left: 1px solid #ddd;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition:
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    z-index: 10;
+    will-change: transform, opacity;
+
+    &.open {
+      animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    &.closing {
+      animation: slideOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+  }
+
+  &__close {
+    cursor: pointer;
+    color: #1C1C1C;
+    background-color: white;
+    border: none;
+  }
+
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+
+  &__input__container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+  }
+
+  &__send {
+    background-color: #000000;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    height: fit-content;
+
+    &:hover {
+      background-color: #333;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
