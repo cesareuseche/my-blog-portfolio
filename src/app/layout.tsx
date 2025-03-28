@@ -1,29 +1,18 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
-import gsap from "gsap";
-import Header from "@/components/header";
+// app/layout.tsx
+import type { Metadata } from "next";
+import ClientLayout from "./layout/client-layout";
 import "../styles/global.scss";
-import Footer from "@/components/footer";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+export const metadata: Metadata = {
+  title: "Cesar's Blog",
+  description: "Your website description",
+};
 
-  useEffect(() => {
-    gsap.fromTo(
-      "main",
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
-    );
-  }, [pathname]);
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main className="main-container">{children}</main>
-        <Footer />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

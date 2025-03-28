@@ -1,5 +1,5 @@
 import Link from "next/link";
-import IconArrowBack from "../icon-arrow-back";
+import IconArrowBack from "../icons/icon-arrow-back";
 import styles from "./style.module.scss";
 
 type Props = {
