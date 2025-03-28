@@ -17,6 +17,8 @@
   cursor: pointer;
   transition: 0.3s;
   height: u.rem-calc(46);
+  width: 100%;
+  text-decoration: none;
 
   @include mq.min(tabletLandscape) {
     @include typo.regular;
@@ -32,6 +34,13 @@
     width: u.rem-calc(16);
     height: u.rem-calc(16);
   }
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: u.rem-calc(8);
+  }
 }
 
 .secondary {
@@ -44,6 +53,8 @@
   cursor: pointer;
   transition: 0.3s;
   height: u.rem-calc(46);
+  width: 100%;
+  text-decoration: none;
 
   @include mq.min(tabletLandscape) {
     @include typo.regular;
@@ -58,5 +69,12 @@
   svg {
     width: u.rem-calc(16);
     height: u.rem-calc(16);
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: u.rem-calc(8);
   }
 }

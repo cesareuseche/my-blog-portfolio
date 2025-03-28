@@ -150,6 +150,15 @@
       opacity: 0;
     }
   }
+
+  &__btn {
+    display: none;
+
+    @include mq.min(tabletLandscape) {
+      display: flex;
+      width: 100%;
+    }
+  }
 }
 
 @keyframes bounce {

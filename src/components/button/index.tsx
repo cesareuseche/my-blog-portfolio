@@ -5,7 +5,7 @@ import styles from './style.module.scss'
 
 type Props = {
   title?: string;
-  url?: string;
+  href?: string;
   variant: 'primary' | 'secondary'
   className?: string | ' '
   onClick?: (
@@ -15,7 +15,7 @@ type Props = {
   type?: 'button' | 'submit' | 'reset'
 }
 
-const Button: FC<Props> = ({ title, url, variant, className, onClick, children, type }) => {
+const Button: FC<Props> = ({ title, href, variant, className, onClick, children, type }) => {
 
   const buttonClasses = clsx(
     styles.button,
@@ -23,15 +23,18 @@ const Button: FC<Props> = ({ title, url, variant, className, onClick, children, 
     className,
   )
 
-  return url ? (
-    <Link href={url} passHref legacyBehavior className={buttonClasses}>
-      {title} {children}
+  return href ? (
+    <Link href={href} passHref legacyBehavior>
+      <a className={buttonClasses} onClick={onClick}>
+        <span>{title} {children}</span>
+      </a>
     </Link>
   ) : (
     <button className={buttonClasses} onClick={onClick} type={type}>
       {title} {children}
     </button>
   );
+
 };
 
 export default Button;
