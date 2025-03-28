@@ -104,6 +104,13 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+
+      span {
+        @include typo.small;
+        color: sg.color(error);
+        padding-top: sg.$xxxsmall;
+        font-weight: 500;
+      }
     }
 
     label {
@@ -117,7 +124,7 @@
       border: none;
       border-bottom: 2px solid sg.color(lightGray);
       @include typo.xsmall;
-      padding: u.rem-calc(12) 0;
+      padding: sg.$xxxsmall 0;
       color: sg.color(black);
       background: transparent;
       outline: none;
@@ -126,6 +133,43 @@
     textarea {
       height: sg.$xlarge;
       resize: none;
+    }
+  }
+
+  .success {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    overflow: hidden;
+    padding: sg.$xsmall;
+
+    @include mq.min(tabletLandscape) {
+      padding: sg.$regular 0;
+    }
+
+    @include mq.min(laptopSmall) {
+      justify-content: center;
+      padding-left: sg.$large;
+      height: 100vh;
+    }
+
+    p {
+      @include typo.regular;
+      color: sg.color(black);
+      font-weight: 300;
+      line-height: u.rem-calc(28);
+      margin: 0;
+    }
+
+    .smiley {
+      display: flex;
+      align-items: center;
+
+      canvas {
+        width: u.rem-calc(51) !important;
+        height: u.rem-calc(51) !important;
+      }
     }
   }
 
