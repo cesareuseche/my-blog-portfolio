@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import styles from "./style.module.scss";
-import IconContact from "../icon-contact";
+import IconContact from "../icons/icon-contact";
 import Button from "../button";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useState } from "react";

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./style.module.scss";
-import IconGithub from "../icon-github";
-import IconLinkedIn from "../icon-linkedin";
+import IconGithub from "../../../components/icons/icon-github";
+import IconLinkedIn from "../../../components/icons/icon-linkedin";
 
 export default function Header() {
   return (

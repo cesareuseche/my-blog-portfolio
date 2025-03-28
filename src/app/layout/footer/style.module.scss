@@ -1,7 +1,7 @@
-@use '../../styles/styleguide/unit' as u;
-@use '../../styles/styleguide' as sg;
-@use '../../styles/styleguide/media' as mq;
-@use '../../styles/styleguide/typography' as typo;
+@use '../../../styles/styleguide/unit' as u;
+@use '../../../styles/styleguide' as sg;
+@use '../../../styles/styleguide/media' as mq;
+@use '../../../styles/styleguide/typography' as typo;
 
 .footer {
   background: sg.color(black);

@@ -2,8 +2,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
-import IconGithub from "../icon-github";
-import IconLinkedIn from "../icon-linkedin";
+import IconGithub from "../icons/icon-github";
+import IconLinkedIn from "../icons/icon-linkedin";
 
 type Props = {
   image: string;
