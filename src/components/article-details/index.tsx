@@ -4,6 +4,8 @@ import Image from "next/image";
 import styles from "./style.module.scss";
 import IconGithub from "../icons/icon-github";
 import IconLinkedIn from "../icons/icon-linkedin";
+import Button from "../button";
+import IconContact from "../icons/icon-contact";
 
 type Props = {
   image: string;
@@ -57,6 +59,11 @@ export default function ArticleDetails({ image, date, author, duration }: Props)
               <IconLinkedIn />
             </a>
           </div>
+        </div>
+        <div className={styles.article__details__btn}>
+          <Button variant="primary" title="Contact Me" href="/contact">
+            <IconContact />
+          </Button>
         </div>
       </div>
     </div>
