@@ -66,7 +66,7 @@
     justify-content: flex-start;
     height: 100%;
     overflow: hidden;
-    padding: sg.$xsmall;
+    padding: sg.$xsmall 0;
 
     @include mq.min(tabletLandscape) {
       padding: sg.$regular 0;
@@ -97,7 +97,12 @@
 
     .row {
       display: flex;
+      flex-direction: column;
       gap: sg.$xxsmall;
+
+      @include mq.min(laptopSmall) {
+        flex-direction: row;
+      }
     }
 
     .input {

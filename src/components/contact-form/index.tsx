@@ -76,6 +76,7 @@ export default function ContactForm() {
             </div>
           ) : (
             <div className={styles.content}>
+              <h1>Get In Touch</h1>
               <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                 <div className={styles.row}>
                   <div className={styles.input}>
