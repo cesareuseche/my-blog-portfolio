@@ -1,0 +1,335 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.chatbot {
+  position: fixed;
+  bottom: u.rem-calc(16);
+  right: u.rem-calc(16);
+  z-index: 9;
+
+  &__button {
+    position: relative;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 0 1px #171717, inset 0 0 0 1px #ffffff24, 0px 16px 32px -8px rgba(0, 0, 0, 0.24);
+    color: sg.color(white);
+    height: u.rem-calc(60);
+    width: u.rem-calc(60);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: u.rem-calc(10);
+    overflow: hidden;
+    white-space: nowrap;
+    transition: width 0.4s ease-in-out, border-radius 0.4s ease-in-out, padding 0.4s ease-in-out;
+
+    svg {
+      position: absolute;
+      left: 11.5%;
+      width: u.rem-calc(45);
+      height: u.rem-calc(45);
+      flex-shrink: 0;
+      transition: left 0.4s ease-in-out;
+    }
+
+    .chatbot__text {
+      display: none;
+      opacity: 0;
+      font-size: u.rem-calc(16);
+      white-space: nowrap;
+      transform: translateX(-10px);
+      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    }
+
+    // Expand button when chatbot is open
+    &.open {
+      background-color: rgba(0, 0, 0, 0.884);
+      width: u.rem-calc(220);
+      border-radius: u.rem-calc(30);
+      justify-content: flex-start;
+      padding: 0 u.rem-calc(20);
+
+      svg {
+        position: static;
+      }
+
+      .chatbot__text {
+        display: flex;
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    // Prevent hover expansion on mobile
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.884);
+        width: u.rem-calc(220);
+        border-radius: u.rem-calc(30);
+        justify-content: flex-start;
+        padding: 0 u.rem-calc(20);
+
+        svg {
+          position: static;
+        }
+
+        .chatbot__text {
+          display: flex;
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+  }
+
+  &__modal {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 95%;
+    height: 100vh;
+    background: white;
+    padding: 16px;
+    border-left: 1px solid #ddd;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition:
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    z-index: 10;
+    will-change: transform, opacity;
+
+    @include mq.min(tabletLandscape) {
+      width: 35vw;
+    }
+
+    &.open {
+      animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    &.closing {
+      animation: slideOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+
+    h2 {
+      @include typo.medium;
+      margin: 0;
+    }
+  }
+
+  &__close {
+    cursor: pointer;
+    color: #1C1C1C;
+    background-color: white;
+    border: none;
+  }
+
+  &__messages {
+    background-color: #f1f1f185;
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid black;
+    padding: u.rem-calc(12);
+    margin-bottom: u.rem-calc(12);
+
+    p {
+      @include typo.small;
+      margin: 0;
+    }
+
+    a {
+      @include typo.small;
+      color: sg.color(gold);
+      margin: u.rem-calc(4) 0;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .left {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: u.rem-calc(4);
+      padding-bottom: u.rem-calc(12);
+
+      svg {
+        width: u.rem-calc(25);
+        height: u.rem-calc(25);
+      }
+    }
+
+    .right {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: u.rem-calc(4);
+      padding-bottom: u.rem-calc(12);
+
+      svg {
+        width: u.rem-calc(25);
+        height: u.rem-calc(25);
+      }
+    }
+
+    .bot {
+      position: relative;
+      border-radius: 10px;
+      border: 1px solid #DDD;
+      background: sg.color(white);
+      box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
+      max-width: 90%;
+      word-wrap: break-word;
+      padding: u.rem-calc(8) u.rem-calc(12) u.rem-calc(8) u.rem-calc(18);
+      z-index: 2;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background-color: sg.color(darkGray);
+        box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
+        z-index: 1;
+        border-radius: u.rem-calc(10) 0 0 u.rem-calc(10);
+      }
+    }
+
+    .user {
+      position: relative;
+      border-radius: 10px;
+      border: 1px solid #DDD;
+      background: sg.color(white);
+      box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
+      max-width: 90%;
+      word-wrap: break-word;
+      align-self: flex-end;
+      padding: u.rem-calc(8) u.rem-calc(18) u.rem-calc(8) u.rem-calc(12);
+      z-index: 2;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: u.rem-calc(6);
+        height: 100%;
+        background-color: sg.color(black);
+        box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
+        z-index: 1;
+        border-radius: 0 u.rem-calc(10) u.rem-calc(10) 0;
+      }
+    }
+  }
+
+  &__input__container {
+    position: relative;
+  }
+
+  &__input {
+    @include typo.small;
+    width: 100%;
+    padding: u.rem-calc(12) u.rem-calc(45) u.rem-calc(12) u.rem-calc(12);
+    border: 1px solid sg.color(black);
+    resize: none;
+    transition: all 0.3s ease;
+    height: u.rem-calc(70);
+
+    &::placeholder {
+      @include typo.small;
+    }
+
+    &:focus {
+      outline: none;
+      border-width: u.rem-calc(1.5);
+      border-color: sg.color(black);
+      transform: translateY(-1px);
+    }
+
+    &:focus::placeholder {
+      opacity: 0.5;
+      transform: translateX(5px);
+      transition: all 0.3s ease;
+    }
+  }
+
+  &__send {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: black;
+    height: 92%;
+    border: none;
+    padding: 0 u.rem-calc(12);
+    cursor: pointer;
+
+    svg {
+      width: u.rem-calc(20);
+      height: u.rem-calc(20);
+      transition: all 0.25s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        fill: sg.color(black);
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}

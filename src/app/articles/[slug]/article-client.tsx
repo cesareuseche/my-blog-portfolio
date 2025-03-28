@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -18,14 +17,6 @@ type Props = {
 export default function ArticleClient({ title, content, tag }: Props) {
   const articleRef = useRef<HTMLDivElement>(null);
   const [copiedBlocks, setCopiedBlocks] = useState<{ [key: number]: boolean }>({});
-
-  useEffect(() => {
-    gsap.fromTo(
-      articleRef.current,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
-    );
-  }, []);
 
   const handleCopy = (text: string, index: number) => {
     navigator.clipboard.writeText(text).then(() => {

@@ -1,66 +1,121 @@
-import { useState, useEffect, useRef } from "react";
+'use client'
+import { useState, useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Send, X } from "lucide-react";
-import gsap from "gsap";
+import styles from "./style.module.scss";
+import IconChatbot from "../icons/icon-chatbot";
+import IconAiChat from "../icons/icon-ai-chat";
+import IconUserChat from "../icons/icon-user-chat";
+import IconSend from "../icons/icon-send";
 
 export default function Chatbot() {
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [messages, setMessages] = useState([{ sender: "bot", text: "Hello! How can I help you?" }]);
   const [input, setInput] = useState("");
-  const chatRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (chatRef.current) {
-      gsap.fromTo(chatRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 });
-    }
-  }, [chatRef]);
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsOpen(false);
+      setIsClosing(false);
+    }, 600);
+  };
 
-  const sendMessage = async () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
-    const userMessage = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
+
+    const newMessage = { sender: "user", text: input };
+    setMessages((prev) => [...prev, newMessage]);
     setInput("");
+    setLoading(true);
 
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: input }),
-    });
-    const data = await response.json();
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input })
+      });
 
-    setMessages((prev) => [...prev, { role: "bot", content: data.reply }]);
+      const data = await res.json();
+      if (data.reply) {
+        setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+      } else {
+        setMessages((prev) => [...prev, { sender: "bot", text: "Sorry, I couldn't understand that." }]);
+      }
+    } catch {
+      setMessages((prev) => [...prev, { sender: "bot", text: "Error connecting to AI service." }]);
+    }
+
+    setLoading(false);
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <div className="fixed bottom-4 right-4">
-      <Dialog.Root>
+    <div className={styles.chatbot}>
+      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
         <Dialog.Trigger asChild>
-          <button>Chat</button>
+          <button
+            className={`${styles.chatbot__button} ${isOpen ? styles.open : ""}`}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <span className={styles.chatbot__text}>Ask my AI chatbot</span>
+            <IconChatbot />
+          </button>
         </Dialog.Trigger>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 bg-black/50" />
-          <Dialog.Content
-            ref={chatRef}
-            className="fixed bottom-4 right-4 w-80 bg-white p-4 shadow-lg rounded-lg flex flex-col"
-          >
-            <div className="flex justify-between items-center mb-2">
-              <span className="font-semibold">Chatbot</span>
+          <Dialog.Overlay className={styles.chatbot__overlay} />
+          <Dialog.Content className={`${styles.chatbot__modal} ${isOpen ? styles.open : ""} ${isClosing ? styles.closing : ""}`}>
+            <div className={styles.chatbot__header}>
+              <Dialog.Title>Chatbot</Dialog.Title>
               <Dialog.Close asChild>
-                <button><X size={16} /></button>
+                <button className={styles.chatbot__close} onClick={handleClose}>
+                  x
+                </button>
               </Dialog.Close>
             </div>
-            <div className="h-60 overflow-y-auto border p-2 rounded">
+
+            <div className={styles.chatbot__messages}>
               {messages.map((msg, index) => (
-                <div key={index} className={`p-2 ${msg.role === "user" ? "text-right" : "text-left"}`}>
-                  <span className={msg.role === "user" ? "bg-blue-200" : "bg-gray-200"}>
-                    {msg.content}
-                  </span>
+                <div className={msg.sender === "bot" ? styles.left : styles.right} key={index}>
+                  {msg.sender === "bot" ? (
+                    <IconAiChat />
+                  ):
+                    <IconUserChat />
+                  }
+                  <div key={index} className={msg.sender === "bot" ? styles.bot : styles.user}>
+                    {msg.text.split("\n").map((line, i) =>
+                      line.includes("- [") ? (
+                        <a key={i} href={line.match(/\((.*?)\)/)?.[1]} target="_blank" rel="noopener noreferrer">
+                          {line.match(/\[(.*?)\]/)?.[1]}
+                        </a>
+                      ) : (
+                        <p key={i}>{line}</p>
+                      )
+                    )}
+                  </div>
                 </div>
               ))}
+              {loading &&
+              <div className={styles.bot}>
+                <p>
+                  Thinking...
+                </p>
+              </div>}
+              <div ref={messagesEndRef} />
             </div>
-            <div className="flex items-center mt-2">
-              <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask something..." />
-              <button onClick={sendMessage} className="ml-2">
-                <Send size={16} />
+
+            <div className={styles.chatbot__input__container}>
+              <textarea
+                className={styles.chatbot__input}
+                placeholder="Ask something..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
+              />
+              <button className={styles.chatbot__send} onClick={handleSend} disabled={loading}>
+                <IconSend />
               </button>
             </div>
           </Dialog.Content>
