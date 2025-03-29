@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
+  env: {
+    TOGETHER_AI_API_KEY: process.env.TOGETHER_AI_API_KEY,
+  },
   webpack: (config) => {
     config.watchOptions = {
       poll: 1000, // Check for changes every second
