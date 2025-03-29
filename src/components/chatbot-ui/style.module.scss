@@ -5,18 +5,27 @@
 
 .chatbot {
   position: fixed;
-  bottom: 16px;
-  right: 16px;
+  bottom: u.rem-calc(16);
+  right: u.rem-calc(16);
   z-index: 9;
 
   &__button {
+    position: relative;
     background: rgba(0, 0, 0, 0.8);
-    color: white;
-    height: 60px;
-    width: 60px;
+    color: sg.color(white);
+    height: u.rem-calc(60);
+    width: u.rem-calc(60);
     border: none;
     border-radius: 50%;
     cursor: pointer;
+
+    svg {
+      width: u.rem-calc(45);
+      height: u.rem-calc(45);
+      position: absolute;
+      top: u.rem-calc(7);
+      left: u.rem-calc(7);
+    }
   }
 
   &__overlay {
@@ -83,8 +92,8 @@
     flex: 1;
     overflow-y: auto;
     border: 1px solid black;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: u.rem-calc(8);
+    margin-bottom: u.rem-calc(12);
 
     p {
       @include typo.small;
@@ -102,23 +111,39 @@
     .left {
       display: flex;
       justify-content: flex-start;
+      align-items: center;
+      gap: u.rem-calc(4);
+      padding-bottom: u.rem-calc(12);
+
+      svg {
+        width: u.rem-calc(25);
+        height: u.rem-calc(25);
+      }
     }
 
     .right {
       display: flex;
-      justify-content: flex-end;
+      justify-content: flex-start;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: u.rem-calc(4);
+      padding-bottom: u.rem-calc(12);
+
+      svg {
+        width: u.rem-calc(25);
+        height: u.rem-calc(25);
+      }
     }
 
     .bot {
       position: relative;
       border-radius: 10px;
       border: 1px solid #DDD;
-      background: #FFF;
+      background: sg.color(white);
       box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
-      max-width: fit-content;
+      max-width: 90%;
       word-wrap: break-word;
-      padding: u.rem-calc(8) u.rem-calc(12);
-      margin-bottom: u.rem-calc(12);
+      padding: u.rem-calc(8) u.rem-calc(12) u.rem-calc(8) u.rem-calc(18);
       z-index: 2;
 
       &::before {
@@ -139,13 +164,12 @@
       position: relative;
       border-radius: 10px;
       border: 1px solid #DDD;
-      background: #FFF;
+      background: sg.color(white);
       box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
-      max-width: fit-content;
+      max-width: 90%;
       word-wrap: break-word;
       align-self: flex-end;
-      padding: u.rem-calc(8) u.rem-calc(12);
-      margin-bottom: u.rem-calc(12);
+      padding: u.rem-calc(8) u.rem-calc(18) u.rem-calc(8) u.rem-calc(12);
       z-index: 2;
 
       &::before {
@@ -153,7 +177,7 @@
         position: absolute;
         top: 0;
         right: 0;
-        width: 6px;
+        width: u.rem-calc(6);
         height: 100%;
         background-color: sg.color(black);
         box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
@@ -168,6 +192,7 @@
   }
 
   &__input {
+    @include typo.small;
     flex: 1;
     padding: 8px;
     border: 1px solid black;

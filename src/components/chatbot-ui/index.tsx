@@ -1,7 +1,9 @@
 import { useState, useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import styles from "./style.module.scss";
-import IconChatbot from "../icons/chatbot-icon";
+import IconChatbot from "../icons/icon-chatbot";
+import IconAiChat from "../icons/icon-ai-chat";
+import IconUserChat from "../icons/icon-user-chat";
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,6 +73,11 @@ export default function Chatbot() {
             <div className={styles.chatbot__messages}>
               {messages.map((msg, index) => (
                 <div className={msg.sender === "bot" ? styles.left : styles.right} key={index}>
+                  {msg.sender === "bot" ? (
+                    <IconAiChat />
+                  ):
+                    <IconUserChat />
+                  }
                   <div key={index} className={msg.sender === "bot" ? styles.bot : styles.user}>
                     {msg.text.split("\n").map((line, i) =>
                       line.includes("- [") ? (

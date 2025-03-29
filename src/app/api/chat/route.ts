@@ -69,23 +69,51 @@ function findRelatedArticles(query: string) {
     return articles; // Return all articles for very broad queries
   }
 
+  // First try the fuzzy search with Fuse.js
   const results = fuse.search(cleanedQuery);
 
+  // Be a bit more lenient with the threshold to catch more potential matches
   const matchedArticles = results
-    .filter((result) => result.score !== undefined && result.score < 0.7) // Allow looser matches
+    .filter((result) => result.score !== undefined && result.score < 0.6)
     .map((result) => result.item);
 
   if (matchedArticles.length > 0) {
     return matchedArticles;
   }
 
-  // If no direct match, check tags/categories manually
-  return articles.filter(
-    (article) =>
-      article.tag.includes(cleanedQuery) ||
-      article.category.includes(cleanedQuery) ||
-      article.title.toLowerCase().includes(cleanedQuery)
-  );
+  // If no matches from Fuse.js, try a more targeted keyword approach
+  const queryTerms = cleanedQuery.split(/\s+/).filter(term => term.length > 2);
+
+  if (queryTerms.length === 0) {
+    return []; // No valid search terms
+  }
+
+  // Calculate a relevance score for each article
+  const scoredArticles = articles.map(article => {
+    const articleText = `${article.title.toLowerCase()} ${article.description.toLowerCase()} ${article.tag.toLowerCase()} ${article.category.toLowerCase()}`;
+    let matchCount = 0;
+
+    queryTerms.forEach(term => {
+      if (articleText.includes(term)) {
+        matchCount++;
+      }
+    });
+
+    // Calculate percentage of terms matched
+    const relevanceScore = matchCount / queryTerms.length;
+
+    return {
+      article,
+      relevanceScore
+    };
+  });
+
+  // Only return articles with at least 30% of the query terms matched
+  return scoredArticles
+    .filter(item => item.relevanceScore >= 0.3)
+    .sort((a, b) => b.relevanceScore - a.relevanceScore)
+    .map(item => item.article)
+    .slice(0, 3); // Limit to top 3 most relevant results
 }
 
 export async function POST(req: Request) {
