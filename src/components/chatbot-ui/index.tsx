@@ -40,7 +40,7 @@ export default function Chatbot() {
       } else {
         setMessages((prev) => [...prev, { sender: "bot", text: "Sorry, I couldn't understand that." }]);
       }
-    } catch (error) {
+    } catch {
       setMessages((prev) => [...prev, { sender: "bot", text: "Error connecting to AI service." }]);
     }
 
@@ -70,7 +70,7 @@ export default function Chatbot() {
 
             <div className={styles.chatbot__messages}>
               {messages.map((msg, index) => (
-                <div className={msg.sender === "bot" ? styles.left : styles.right}>
+                <div className={msg.sender === "bot" ? styles.left : styles.right} key={index}>
                   <div key={index} className={msg.sender === "bot" ? styles.bot : styles.user}>
                     {msg.text.split("\n").map((line, i) =>
                       line.includes("- [") ? (

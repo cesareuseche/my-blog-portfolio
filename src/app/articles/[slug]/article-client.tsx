@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import gsap from "gsap";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
