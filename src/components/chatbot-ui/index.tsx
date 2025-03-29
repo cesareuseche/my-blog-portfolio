@@ -84,7 +84,12 @@ export default function Chatbot() {
                   </div>
                 </div>
               ))}
-              {loading && <div className={styles.bot}>Typing...</div>}
+              {loading &&
+              <div className={styles.bot}>
+                <p>
+                  Thinking...
+                </p>
+              </div>}
               <div ref={messagesEndRef} />
             </div>
 

@@ -64,14 +64,12 @@ const generateFallbackResponse = (query: string) => {
 // Function to find related articles
 function findRelatedArticles(query: string) {
   const cleanedQuery = cleanQuery(query);
-  console.log("Search Query (Cleaned):", cleanedQuery);
 
   if (cleanedQuery === "") {
     return articles; // Return all articles for very broad queries
   }
 
   const results = fuse.search(cleanedQuery);
-  console.log("Raw Results:", results);
 
   const matchedArticles = results
     .filter((result) => result.score !== undefined && result.score < 0.7) // Allow looser matches

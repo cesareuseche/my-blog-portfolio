@@ -86,6 +86,19 @@
     padding: 8px;
     margin-bottom: 10px;
 
+    p {
+      @include typo.small;
+      margin: 0;
+    }
+
+    a {
+      @include typo.small;
+      color: sg.color(gold);
+      margin: u.rem-calc(4) 0;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
     .left {
       display: flex;
       justify-content: flex-start;
@@ -120,19 +133,6 @@
         z-index: 1;
         border-radius: u.rem-calc(10) 0 0 u.rem-calc(10);
       }
-
-      p {
-        @include typo.small;
-        margin: 0;
-      }
-
-      a {
-        @include typo.small;
-        color: sg.color(gold);
-        margin: u.rem-calc(4) 0;
-        text-decoration: underline;
-        font-weight: 500;
-      }
     }
 
     .user {
@@ -159,20 +159,6 @@
         box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
         z-index: 1;
         border-radius: 0 u.rem-calc(10) u.rem-calc(10) 0;
-      }
-
-      p {
-        @include typo.small;
-        line-height: normal;
-        margin: 0;
-      }
-
-      a {
-        @include typo.small;
-        color: sg.color(gold);
-        margin: u.rem-calc(4) 0;
-        text-decoration: underline;
-        font-weight: 500;
       }
     }
   }
