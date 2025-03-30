@@ -195,6 +195,7 @@
       @include typo.small;
       color: sg.color(gold);
       text-decoration: u.rem-calc(2) underline;
+      text-underline-offset: u.rem-calc(3);
       font-weight: 500;
       position: relative;
       transition: color 0.3s ease-in-out;
