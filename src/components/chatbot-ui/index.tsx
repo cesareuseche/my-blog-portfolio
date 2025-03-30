@@ -1,4 +1,5 @@
 'use client'
+
 import { useState, useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import styles from "./style.module.scss";
@@ -6,6 +7,8 @@ import IconChatbot from "../icons/icon-chatbot";
 import IconAiChat from "../icons/icon-ai-chat";
 import IconUserChat from "../icons/icon-user-chat";
 import IconSend from "../icons/icon-send";
+import LottieAnimation from "../icons/icon-animation-ai";
+import IconClose from "../icons/icon-close";
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,10 +71,15 @@ export default function Chatbot() {
           <Dialog.Overlay className={styles.chatbot__overlay} />
           <Dialog.Content className={`${styles.chatbot__modal} ${isOpen ? styles.open : ""} ${isClosing ? styles.closing : ""}`}>
             <div className={styles.chatbot__header}>
-              <Dialog.Title>Chatbot</Dialog.Title>
+              <div className={styles.chatbot__title}>
+                <Dialog.Title>
+                  <LottieAnimation />
+                  Chatbot
+                </Dialog.Title>
+              </div>
               <Dialog.Close asChild>
                 <button className={styles.chatbot__close} onClick={handleClose}>
-                  x
+                  <IconClose />
                 </button>
               </Dialog.Close>
             </div>

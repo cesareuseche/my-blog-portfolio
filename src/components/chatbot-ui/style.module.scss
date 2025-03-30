@@ -24,7 +24,7 @@
     gap: u.rem-calc(10);
     overflow: hidden;
     white-space: nowrap;
-    transition: width 0.4s ease-in-out, border-radius 0.4s ease-in-out, padding 0.4s ease-in-out;
+    transition: width 0.3s ease-in-out, border-radius 0.3s ease-in-out, padding 0.3s ease-in-out;
 
     svg {
       position: absolute;
@@ -41,10 +41,9 @@
       font-size: u.rem-calc(16);
       white-space: nowrap;
       transform: translateX(-10px);
-      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     }
 
-    // Expand button when chatbot is open
     &.open {
       background-color: rgba(0, 0, 0, 0.884);
       width: u.rem-calc(220);
@@ -63,7 +62,6 @@
       }
     }
 
-    // Prevent hover expansion on mobile
     @media (hover: hover) {
       &:hover {
         background-color: rgba(0, 0, 0, 0.884);
@@ -100,9 +98,9 @@
     width: 95%;
     height: 100vh;
     background: white;
-    padding: 16px;
+    padding: u.rem-calc(16);
     border-left: 1px solid #ddd;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: -4px 0 u.rem-calc(20) rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     transform: translateX(100%);
@@ -129,20 +127,56 @@
   &__header {
     display: flex;
     justify-content: space-between;
-    font-weight: bold;
+    padding-bottom: u.rem-calc(8);
+  }
+
+  &__title {
+    display: flex;
 
     h2 {
+      display: flex;
+      align-items: center;
+      gap: u.rem-calc(8);
       @include typo.medium;
       margin: 0;
+    }
+
+    div {
+      height: u.rem-calc(30);
+    }
+
+    svg {
+      width: u.rem-calc(30) !important;
     }
   }
 
   &__close {
-    cursor: pointer;
-    color: #1C1C1C;
-    background-color: white;
+    background: sg.color(white);
     border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+    svg {
+      width: u.rem-calc(20);
+      height: u.rem-calc(20);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+
+      svg {
+        transform: rotate(90deg);
+      }
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
+
 
   &__messages {
     background-color: #f1f1f185;
@@ -194,7 +228,7 @@
 
     .bot {
       position: relative;
-      border-radius: 10px;
+      border-radius: u.rem-calc(6);
       border: 1px solid #DDD;
       background: sg.color(white);
       box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
@@ -219,7 +253,7 @@
 
     .user {
       position: relative;
-      border-radius: 10px;
+      border-radius: u.rem-calc(6);
       border: 1px solid #DDD;
       background: sg.color(white);
       box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
