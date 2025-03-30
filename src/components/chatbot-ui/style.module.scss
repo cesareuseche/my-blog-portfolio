@@ -283,7 +283,7 @@
   }
 
   &__input {
-    @include typo.small;
+    @include typo.regular;
     width: 100%;
     padding: u.rem-calc(12) u.rem-calc(45) u.rem-calc(12) u.rem-calc(12);
     border: 1px solid sg.color(black);
@@ -291,8 +291,16 @@
     transition: all 0.3s ease;
     height: u.rem-calc(70);
 
+    @include mq.min(tabletLandscape) {
+      @include typo.regular;
+    }
+
     &::placeholder {
-      @include typo.small;
+      @include typo.regular;
+
+      @include mq.min(tabletLandscape) {
+        @include typo.regular;
+      }
     }
 
     &:focus {
