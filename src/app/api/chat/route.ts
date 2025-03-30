@@ -19,7 +19,6 @@ const loadArticles = () => {
         title: data.title || file.replace(".md", ""),
         description: data.description || content.substring(0, 150) + "...",
         tag: (data.tag || "").toLowerCase(),
-        category: (data.category || "").toLowerCase(),
         content: content.toLowerCase(),
         url: `/articles/${file.replace(".md", "")}`,
       };
@@ -29,13 +28,12 @@ const loadArticles = () => {
 const articles = loadArticles();
 const fuse = new Fuse(articles, {
   keys: [
-    { name: "title", weight: 0.6 },
-    { name: "description", weight: 0.4 },
-    { name: "tag", weight: 0.3 },
-    { name: "category", weight: 0.3 },
-    { name: "content", weight: 0.2 },
+    { name: "title", weight: 0.8 },
+    { name: "description", weight: 0.5 },
+    { name: "tag", weight: 0.7 },
+    { name: "content", weight: 0.1 },
   ],
-  threshold: 0.7, // Looser match for better results
+  threshold: 0.6,
   minMatchCharLength: 2,
   includeScore: true,
 });
@@ -44,76 +42,94 @@ const fuse = new Fuse(articles, {
 const cleanQuery = (query: string) => {
   return query
     .toLowerCase()
-    .replace(/\b(what|is|how|do|i|a|the|of|in|on|to|for|with|about|any|articles|have|know)\b/g, "")
+    .replace(/\b(what|is|how|do|i|a|the|of|in|on|to|for|with|about|any|articles|have|know|can|you|show)\b/g, "")
     .trim();
 };
 
 // Function to generate a fallback response
 const generateFallbackResponse = (query: string) => {
-  if (query.includes("docker")) {
-    return "Docker is a platform for building, sharing, and running applications in containers. It helps developers streamline development and deployment.";
-  } else if (query.includes("api")) {
-    return "An API (Application Programming Interface) allows different software applications to communicate with each other. APIs are commonly used to fetch data, integrate services, and enable automation.";
-  } else if (query.includes("react")) {
-    return "React is a JavaScript library for building user interfaces, primarily for single-page applications. It allows developers to create reusable UI components.";
-  } else {
-    return "That's an interesting topic! Unfortunately, I don't have an article on that yet, but you might find something related in my blog.";
-  }
+  const topics: Record<string, string> = {
+    docker: "Docker is a platform for building, sharing, and running applications in containers. It helps developers streamline development and deployment.",
+    api: "An API (Application Programming Interface) allows different software applications to communicate with each other. APIs are commonly used to fetch data, integrate services, and enable automation.",
+    react: "React is a JavaScript library for building user interfaces, primarily for single-page applications. It allows developers to create reusable UI components.",
+    nextjs: "React is a JavaScript library for building user interfaces, primarily for single-page applications. It allows developers to create reusable UI components.",
+  };
+
+  const matchedTopic = Object.keys(topics).find(topic => query.toLowerCase().includes(topic));
+  return matchedTopic ? topics[matchedTopic] :
+    "That's an interesting topic! Unfortunately, I don't have an article on that yet, but you might find something related in my blog.";
 };
+
+// Function to check if the query is asking for all articles about a topic
+function isRequestingArticlesByTopic(query: string) {
+  // Extract topic from direct requests for articles
+  const articlePatterns = [
+    /show\s+(?:me\s+)?(?:all\s+)?(?:the\s+)?articles\s+(?:about|on|related\s+to)\s+(\w+)/i,
+    /articles\s+(?:about|on|related\s+to)\s+(\w+)/i,
+    /(\w+)\s+articles/i
+  ];
+
+  // Extract topic from learning/tutorial questions
+  const learningPatterns = [
+    /how\s+(?:can|do)\s+(?:i|we|you)?\s+learn\s+(\w+)/i,
+    /how\s+to\s+(?:learn|use|start\s+with)\s+(\w+)/i,
+    /(?:teach|show)\s+me\s+(\w+)/i,
+    /(?:beginner|getting\s+started|tutorial|learn|guide)\s+(?:for|with|on)?\s+(\w+)/i
+  ];
+
+  // Check article patterns first
+  for (const pattern of articlePatterns) {
+    const match = query.match(pattern);
+    if (match && match[1]) {
+      return match[1].toLowerCase();
+    }
+  }
+
+  // Then check learning patterns
+  for (const pattern of learningPatterns) {
+    const match = query.match(pattern);
+    if (match && match[1]) {
+      return match[1].toLowerCase();
+    }
+  }
+
+  // If no direct pattern matches, try to extract topic from the query
+  // Check if query contains specific technologies or topics
+  const commonTopics = [
+    "python", "javascript", "react", "node", "docker", "kubernetes",
+    "aws", "nextjs", "typescript", "graphql", "mongodb", "sql", "frontend", "backend",
+    "web accessibility", "accessibility"
+  ];
+
+  for (const topic of commonTopics) {
+    if (query.toLowerCase().includes(topic)) {
+      return topic;
+    }
+  }
+
+  return null;
+}
 
 // Function to find related articles
 function findRelatedArticles(query: string) {
+  const topicRequest = isRequestingArticlesByTopic(query);
+
+  if (topicRequest) {
+    const priorityOrder: Array<keyof typeof articles[0]> = ["title", "tag", "description"];
+
+    for (const key of priorityOrder) {
+      const matches = articles.filter(article => article[key].toLowerCase().includes(topicRequest));
+      if (matches.length > 0) return matches;
+    }
+  }
+
+  // 🚨 Only use Fuse.js if no direct matches are found
   const cleanedQuery = cleanQuery(query);
+  if (!cleanedQuery) return [];
 
-  if (cleanedQuery === "") {
-    return articles; // Return all articles for very broad queries
-  }
-
-  // First try the fuzzy search with Fuse.js
-  const results = fuse.search(cleanedQuery);
-
-  // Be a bit more lenient with the threshold to catch more potential matches
-  const matchedArticles = results
-    .filter((result) => result.score !== undefined && result.score < 0.6)
-    .map((result) => result.item);
-
-  if (matchedArticles.length > 0) {
-    return matchedArticles;
-  }
-
-  // If no matches from Fuse.js, try a more targeted keyword approach
-  const queryTerms = cleanedQuery.split(/\s+/).filter(term => term.length > 2);
-
-  if (queryTerms.length === 0) {
-    return []; // No valid search terms
-  }
-
-  // Calculate a relevance score for each article
-  const scoredArticles = articles.map(article => {
-    const articleText = `${article.title.toLowerCase()} ${article.description.toLowerCase()} ${article.tag.toLowerCase()} ${article.category.toLowerCase()}`;
-    let matchCount = 0;
-
-    queryTerms.forEach(term => {
-      if (articleText.includes(term)) {
-        matchCount++;
-      }
-    });
-
-    // Calculate percentage of terms matched
-    const relevanceScore = matchCount / queryTerms.length;
-
-    return {
-      article,
-      relevanceScore
-    };
-  });
-
-  // Only return articles with at least 30% of the query terms matched
-  return scoredArticles
-    .filter(item => item.relevanceScore >= 0.3)
-    .sort((a, b) => b.relevanceScore - a.relevanceScore)
-    .map(item => item.article)
-    .slice(0, 3); // Limit to top 3 most relevant results
+  return fuse.search(cleanedQuery)
+    .filter(result => result.score !== undefined && result.score < 0.6)
+    .map(result => result.item);
 }
 
 export async function POST(req: Request) {

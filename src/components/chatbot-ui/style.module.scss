@@ -188,15 +188,40 @@
 
     p {
       @include typo.small;
-      margin: 0;
+      margin: u.rem-calc(8) 0;
     }
 
     a {
       @include typo.small;
       color: sg.color(gold);
-      margin: u.rem-calc(4) 0;
-      text-decoration: underline;
+      text-decoration: u.rem-calc(2) underline;
+      text-underline-offset: u.rem-calc(4);
       font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        text-decoration: none;
+        color: sg.color(darkBlue);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: u.rem-calc(-2);
+        width: 100%;
+        height: u.rem-calc(2);
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      &:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
     }
 
     .left {
@@ -234,7 +259,7 @@
       box-shadow: 0px 0.191px 0.573px 0px rgba(0, 0, 0, 0.11), 0px 1.018px 2.291px 0px rgba(0, 0, 0, 0.13);
       max-width: 90%;
       word-wrap: break-word;
-      padding: u.rem-calc(8) u.rem-calc(12) u.rem-calc(8) u.rem-calc(18);
+      padding: 0 u.rem-calc(12) 0 u.rem-calc(18);
       z-index: 2;
 
       &::before {
@@ -260,7 +285,7 @@
       max-width: 90%;
       word-wrap: break-word;
       align-self: flex-end;
-      padding: u.rem-calc(8) u.rem-calc(18) u.rem-calc(8) u.rem-calc(12);
+      padding: 0 u.rem-calc(18) 0 u.rem-calc(12);
       z-index: 2;
 
       &::before {
