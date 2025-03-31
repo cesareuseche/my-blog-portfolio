@@ -6,13 +6,39 @@ image: "/assets/images/python-illus.webp"
 tag: "python 🐍"
 id: 1
 author: "Cesar Useche"
-duration: "~3 min"
+duration: "~6 min"
 category: "TECH+++"
 ---
 
 As a Computer Science master's student currently studying Python, and with 5 years of experience as a software engineer, I have spent most of my career working as a front-end developer, building innovative and amazing UIs. However, I have a deep passion for AI and languages like Python, which has led me to explore backend development and API design. FastAPI is a modern, fast (high-performance) web framework for building APIs with Python 3.7+ based on standard Python type hints. It provides automatic OpenAPI documentation and high performance thanks to Starlette and Pydantic.
 
-In this guide, we'll walk through building a simple API using FastAPI, focusing on best practices and real-world applications.
+In this guide, we'll explain what it is an API, how do they work, what kind of API methods we have available and we'll walk you through building a simple API using FastAPI, focusing on best practices and real-world applications.
+
+## Understanding APIs
+An API (Application Programming Interface) is the messenger that lets your front-end applications (like web or mobile apps) communicate with back-end servers. Think of it as a waiter: you (the client) send an order (request), and the waiter (API) delivers your food (data) from the kitchen (server).
+
+### Key Components:
+- **Client:** The front-end (browser or app) that makes the request.
+
+- **Server:** The back-end that processes requests and returns responses.
+
+- **Request & Response:** The exchange that includes HTTP methods (GET, POST, DELETE, PATCH, etc.), URLs, headers, and data payloads.
+
+![API diagram](/assets/images/api-ilustration.png "API Diagram")
+
+## Introducing FastAPI
+FastAPI is a modern, Python-based web framework built on top of Starlette and Pydantic. It uses Python’s type hints to automatically validate data and generate interactive documentation. Its asynchronous capabilities mean it can handle thousands of requests per second, making it ideal for both small projects and large-scale applications.
+
+### Why Choose FastAPI?
+- **Speed:** Built for low-latency processing.
+
+- **Simplicity:** Clean, intuitive syntax.
+
+- **Automatic Documentation:** Out-of-the-box Swagger UI and ReDoc.
+
+- **Asynchronous Programming:** Effortlessly handles concurrent requests.
+
+- **Type Safety:** Uses Python type hints to catch errors early.
 
 ## Prerequisites
 Before starting, ensure you have the following:
@@ -52,29 +78,70 @@ uvicorn main:app --reload
 
 This will start the server at `http://127.0.0.1:8000/`. The `--reload` flag enables auto-reloading when code changes, making development more efficient.
 
-## Step 4: Add More Routes with Data Validation
-FastAPI uses Pydantic for data validation and serialization. Let’s define a model and add routes for CRUD operations:
+## Step 4: Structuring Your FastAPI Project
 
-```python
+As your FastAPI application grows, it's best to separate concerns by organizing your code into different files. Here’s a recommended project structure:
+
+``` sh
+/my_fastapi_project
+│── main.py            # Entry point (app instance & server start)
+│── /routes
+│   ├── items.py       # Routes for item-related endpoints
+│── /models
+│   ├── item.py        # Pydantic models
+│── /services
+│   ├── item_service.py # Business logic
+│── requirements.txt   # Dependencies
+│── Dockerfile         # Deployment setup
+```
+
+## Example of a Modular FastAPI Application:
+
+```main.py``` (This is your entry point)
+
+``` py
+from fastapi import FastAPI
+from routes import items
+
+app = FastAPI()
+app.include_router(items.router)  # Include routes from the 'items' module
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to FastAPI!"}
+```
+
+```routes/items.py``` (Routes for Item Handling)
+
+``` py
+from fastapi import APIRouter
+from models.item import Item
 from typing import Optional
+
+router = APIRouter()
+
+@router.post("/items/")
+def create_item(item: Item):
+    return {"item": item}
+
+@router.get("/items/{item_id}")
+def read_item(item_id: int, q: Optional[str] = None):
+    return {"item_id": item_id, "query": q}
+```
+
+```models/item.py``` (Data Model)
+``` py
 from pydantic import BaseModel
+from typing import Optional
 
 class Item(BaseModel):
     name: str
     description: Optional[str] = None
     price: float
     tax: Optional[float] = None
-
-@app.post("/items/")
-def create_item(item: Item):
-    return {"item": item}
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "query": q}
 ```
 
-Here, `Item` is a Pydantic model that ensures data integrity by enforcing types.
+This structure follows the best practices of how to set up your API project, making sure your API is modular, maintainable, and scalable as it grows.
 
 ## Step 5: Explore Automatic Documentation
 FastAPI automatically generates API documentation, saving development time. Visit:

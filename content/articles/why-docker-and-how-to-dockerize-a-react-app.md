@@ -37,7 +37,7 @@ cd my-next-app
 
 In the root directory of your Next.js project, create a `Dockerfile` with the following content:
 
-```Dockerfile
+``` sh
 # --- Base Image ---
 FROM node:20.18.0-bookworm AS base
 

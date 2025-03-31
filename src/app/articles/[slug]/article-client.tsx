@@ -30,7 +30,7 @@ export default function ArticleClient({ title, content, tag }: Props) {
   let codeBlockCounter = 0;
 
   return (
-    <main ref={articleRef} className={styles.article__content}>
+    <section ref={articleRef} className={styles.article__content}>
       <div className={styles.article__header}>
         <div className={styles.article__number}>
           <span>Article</span>
@@ -87,6 +87,6 @@ export default function ArticleClient({ title, content, tag }: Props) {
       >
         {content}
       </ReactMarkdown>
-    </main>
+    </section>
   );
 }
