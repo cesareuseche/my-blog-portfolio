@@ -67,7 +67,6 @@ export default function ContactForm() {
               alt="Contact Us"
               width={800}
               height={600}
-              layout="responsive"
               onLoad={() => setIsLoading(false)}
               loading="eager"
             />

@@ -3,10 +3,10 @@ import IconArrowBack from "../icons/icon-arrow-back";
 import styles from "./style.module.scss";
 
 type Props = {
-  category: string;
+  category?: string;
 }
 
-export default function ArticleAction({ category }: Props) {
+export default function Action({ category }: Props) {
   return (
     <div className={styles.actions}>
       <Link href="/">

@@ -1,4 +1,4 @@
-import ArticleAction from "@/components/article-action";
+import Action from "../../components/action";
 import ArticleDetails from "@/components/article-details";
 import RelatedArticles from "@/components/related-articles";
 import ArticleClient from "./[slug]/article-client";
@@ -20,7 +20,7 @@ type Props = {
 export default function Article(props: Props) {
   return (
     <main role="main" className={styles.article}>
-      <ArticleAction category={props.category} />
+      <Action category={props.category} />
 
       <div className={styles.container}>
         <div className={styles.grid}>
