@@ -10,6 +10,8 @@ import { useState } from "react";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   type FormData = {
     firstName: string;
     lastName: string;
@@ -54,16 +56,20 @@ export default function ContactForm() {
   };
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.grid}>
           <div className={styles.image}>
+            {isLoading && <div className={styles.shimmer}></div>}
             <Image
               src="/assets/images/contact-page.webp"
+              className={`${styles.img} ${isLoading ? styles.hidden : ""}`}
               alt="Contact Us"
               width={800}
               height={600}
               layout="responsive"
+              onLoad={() => setIsLoading(false)}
+              loading="eager"
             />
           </div>
 
@@ -140,6 +146,6 @@ export default function ContactForm() {
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

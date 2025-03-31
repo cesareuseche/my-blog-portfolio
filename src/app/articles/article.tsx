@@ -19,7 +19,7 @@ type Props = {
 
 export default function Article(props: Props) {
   return (
-    <div className={styles.article}>
+    <main role="main" className={styles.article}>
       <ArticleAction category={props.category} />
 
       <div className={styles.container}>
@@ -33,6 +33,6 @@ export default function Article(props: Props) {
         </div>
       </div>
       <RelatedArticles />
-    </div>
+    </main>
   );
 }
