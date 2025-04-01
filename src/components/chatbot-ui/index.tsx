@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import styles from "./style.module.scss";
 import IconChatbot from "../icons/icon-chatbot";
@@ -12,9 +12,12 @@ import IconClose from "../icons/icon-close";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isButtonOpen, setIsButtonOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [messages, setMessages] = useState([{ sender: "bot", text: "Hello! How can I help you?" }]);
   const [input, setInput] = useState("");
@@ -55,16 +58,38 @@ export default function Chatbot() {
     }
 
     setLoading(false);
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsButtonOpen(window.innerWidth <= 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  gsap.registerPlugin(ScrollToPlugin);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      gsap.to(messagesEndRef.current.parentElement, {
+        duration: 2,
+        scrollTo: { y: messagesEndRef.current.offsetTop },
+        ease: "power2.out",
+      });
+    }
+  }, [messages]);
 
   return (
     <div className={styles.chatbot}>
       <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
         <Dialog.Trigger asChild>
           <button
-            className={`${styles.chatbot__button} ${isOpen ? styles.open : ""}`}
-            onClick={() => setIsOpen(!isOpen)}
+            className={`${styles.chatbot__button} ${isButtonOpen ? styles.open : ""}`}
+            onClick={() => setIsOpen(true)}
           >
             <span className={styles.chatbot__text}>Ask my AI chatbot</span>
             <IconChatbot />

@@ -81,6 +81,25 @@
         }
       }
     }
+
+    @include mq.min(tabletLandscape) {
+      .chatbot__button {
+        width: u.rem-calc(220);
+        border-radius: u.rem-calc(30);
+        justify-content: flex-start;
+        padding: 0 u.rem-calc(20);
+
+        svg {
+          position: static;
+        }
+
+        .chatbot__text {
+          display: flex;
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    }
   }
 
   &__overlay {
