@@ -84,4 +84,4 @@ Web accessibility is not just a legal requirement—it’s a commitment to inclu
 
 By implementing these accessibility principles, you ensure that your website is usable for all customers, while also benefiting from improved SEO, broader audience reach, and compliance with industry standards. Prioritizing accessibility makes the web a better place for all users, ensuring equal access to information and services.
 
-Happy coding! ♿️
+Let's improve the accessibility of your website! ♿️

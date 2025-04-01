@@ -14,6 +14,10 @@
     max-height: u.rem-calc(579);
   }
 
+  @include mq.min(largex) {
+    max-height: u.rem-calc(660);
+  }
+
   @include mq.min(laptop) {
     max-height: 100%;
   }
@@ -135,7 +139,7 @@
     flex-direction: column;
     gap: u.rem-calc(8);
 
-    @include mq.min(tabletLandscape) {
+    @include mq.min(laptopSmall) {
       flex-direction: row;
     }
 
