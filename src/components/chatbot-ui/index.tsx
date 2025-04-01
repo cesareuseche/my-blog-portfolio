@@ -9,6 +9,9 @@ import IconUserChat from "../icons/icon-user-chat";
 import IconSend from "../icons/icon-send";
 import LottieAnimation from "../icons/icon-animation-ai";
 import IconClose from "../icons/icon-close";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,24 +96,44 @@ export default function Chatbot() {
                     <IconUserChat />
                   }
                   <div key={index} className={msg.sender === "bot" ? styles.bot : styles.user}>
-                    {msg.text.split("\n").map((line, i) =>
-                      line.includes("- [") ? (
-                        <a key={i} href={line.match(/\((.*?)\)/)?.[1]} target="_blank" rel="noopener noreferrer">
-                          {line.match(/\[(.*?)\]/)?.[1]}
-                        </a>
-                      ) : (
-                        <p key={i}>{line}</p>
-                      )
-                    )}
+                    <ReactMarkdown
+                      components={{
+                        code({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) {
+                          const match = /language-(\w+)/.exec(className || "");
+                          const codeText = String(children).replace(/\n$/, "");
+
+                          return !inline && match ? (
+                            <SyntaxHighlighter
+                              style={materialDark}
+                              language={match[1]}
+                              wrapLongLines={true}
+                              showLineNumbers={true}
+                              customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+                              PreTag="div"
+                              {...props}
+                            >
+                              {codeText}
+                            </SyntaxHighlighter>
+                          ) : (
+                            <code {...props}>{children}</code>
+                          );
+                        }
+                      }}
+                    >
+                      {msg.text}
+                    </ReactMarkdown>
                   </div>
                 </div>
               ))}
-              {loading &&
-              <div className={styles.bot}>
-                <p>
-                  Thinking...
-                </p>
-              </div>}
+              {loading && (
+                <div className={styles.loader__container}>
+                  <div className={styles.loader}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
 
