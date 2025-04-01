@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: '/assets/images/contact-page.webp',
+        url: '/assets/images/contact-form.webp',
         width: 800,
         height: 600,
         alt: 'Contact Me'

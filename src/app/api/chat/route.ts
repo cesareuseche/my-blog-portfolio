@@ -46,18 +46,52 @@ const cleanQuery = (query: string) => {
     .trim();
 };
 
-// Function to generate a fallback response
-const generateFallbackResponse = (query: string) => {
-  const topics: Record<string, string> = {
-    docker: "Docker is a platform for building, sharing, and running applications in containers. It helps developers streamline development and deployment.",
-    api: "An API (Application Programming Interface) allows different software applications to communicate with each other. APIs are commonly used to fetch data, integrate services, and enable automation.",
-    react: "React is a JavaScript library for building user interfaces, primarily for single-page applications. It allows developers to create reusable UI components.",
-    nextjs: "React is a JavaScript library for building user interfaces, primarily for single-page applications. It allows developers to create reusable UI components.",
-  };
+const topics: Record<string, string> = {
+  docker: "Docker is a platform for building, sharing, and running applications in containers. It helps developers streamline development and deployment.",
+  api: "An API (Application Programming Interface) allows different software applications to communicate with each other. APIs are commonly used to fetch data, integrate services, and enable automation.",
+  react: "React is a JavaScript library for building user interfaces, primarily for single-page applications. It allows developers to create reusable UI components.",
+  nextjs: "Next.js is a React framework that enables server-side rendering, static site generation, and API routes. It provides optimized performance, SEO benefits, and built-in features like image optimization and middleware.",
+};
 
-  const matchedTopic = Object.keys(topics).find(topic => query.toLowerCase().includes(topic));
-  return matchedTopic ? topics[matchedTopic] :
-    "That's an interesting topic! Unfortunately, I don't have an article on that yet, but you might find something related in my blog.";
+const generateFallbackResponse = async (query: string) => {
+  const apiKey = process.env.TOGETHER_API_KEY;
+
+  if (!apiKey) {
+    console.error("Together AI API key is missing!");
+    return "I'm unable to fetch an AI response right now. Try again later!";
+  }
+
+  for (const key in topics) {
+    if (query.includes(key)) {
+      return topics[key];
+    }
+  }
+
+  try {
+    const response = await fetch("https://api.together.ai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        prompt: `Provide a very concise response (max 2 sentences). Format URLs as <a href='URL'>text</a> and wrap code snippets inside \`\`\` code \`\`\`.`,
+        messages: [{ role: "user", content: query }],
+        model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+        temperature: 0.3,
+        max_tokens: 200,
+        top_p: 0.5,
+      }),
+    });
+
+    const data = await response.json();
+
+    const aiResponse = data.choices?.[0]?.message?.content?.trim() || "\n I'm not sure about that, but feel free to explore my blog!";
+    return `${aiResponse} \n\nIf you need more information, check out my blog I might have something related! If you have a specific topic in mind, please contact me!`;
+  } catch (error) {
+    console.error("Together AI error:", error);
+    return "That's an interesting topic! Unfortunately, I don't have an article on that yet, but you might find something related in my blog.";
+  }
 };
 
 // Function to check if the query is asking for all articles about a topic
@@ -156,10 +190,11 @@ export async function POST(req: Request) {
       });
     }
 
-    // If no match, provide a fallback response
-    const fallbackResponse = generateFallbackResponse(lowerMessage);
+    // If no match, provide a fallback response (Ensure we await it!)
+    const fallbackResponse = await generateFallbackResponse(lowerMessage); // <-- Fix: Added await
+
     return NextResponse.json({
-      reply: `${fallbackResponse} Feel free to explore my blog for more content!`,
+      reply: `${fallbackResponse} \n Feel free to explore my blog for more content!`,
     });
   } catch (error) {
     console.error("Chatbot error:", error);

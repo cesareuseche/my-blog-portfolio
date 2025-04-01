@@ -62,13 +62,13 @@ export default function ContactForm() {
           <div className={styles.image}>
             {isLoading && <div className={styles.shimmer}></div>}
             <Image
-              src="/assets/images/contact-page.webp"
+              src="/assets/images/contact-form.webp"
               className={`${styles.img} ${isLoading ? styles.hidden : ""}`}
               alt="Contact Us"
               width={800}
               height={600}
               onLoad={() => setIsLoading(false)}
-              loading="eager"
+              loading="lazy"
             />
           </div>
 
