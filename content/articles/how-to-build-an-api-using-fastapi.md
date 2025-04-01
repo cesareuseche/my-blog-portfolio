@@ -168,5 +168,5 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ## Conclusion
 FastAPI simplifies API development with automatic validation, serialization, and documentation. This guide covered setting up FastAPI, creating routes, running the server, and deploying the API. As you advance, consider integrating FastAPI with databases like PostgreSQL or MongoDB for full-stack applications.
 
-Happy coding! 🐍
+Let's start building APIs! 🐍
 
