@@ -90,6 +90,8 @@ export default function Chatbot() {
           <button
             className={`${styles.chatbot__button} ${isButtonOpen ? styles.open : ""}`}
             onClick={() => setIsOpen(true)}
+            aria-labelledby="chatbot button"
+            aria-label="Open chatbot"
           >
             <span className={styles.chatbot__text}>Ask my AI chatbot</span>
             <IconChatbot />

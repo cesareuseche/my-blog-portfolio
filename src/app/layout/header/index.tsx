@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styles from "./style.module.scss";
-import IconGithub from "../../../components/icons/icon-github";
-import IconLinkedIn from "../../../components/icons/icon-linkedin";
+import SocialMedia from "@/components/social-media";
 
 export default function Header() {
   return (
@@ -19,14 +18,7 @@ export default function Header() {
 
           <span className={styles.separator}>—</span>
 
-          <div className={styles.icons}>
-            <a href="https://github.com/cesareuseche" target="_blank" rel="noopener noreferrer">
-              <IconGithub />
-            </a>
-            <a href="https://www.linkedin.com/in/cesar-useche-profile/" target="_blank" rel="noopener noreferrer">
-              <IconLinkedIn />
-            </a>
-          </div>
+          <SocialMedia className={styles.icons} />
         </div>
 
       </div>

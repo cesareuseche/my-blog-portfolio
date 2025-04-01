@@ -21,7 +21,7 @@ const BlogCard = ({ image, title, description, date, tag, slug, author, duration
 
   return (
     <article className={styles.card}>
-      <Link href={`/articles/${slug}`}></Link>
+      <Link href={`/articles/${slug}`} aria-label={`Link Article: ${title}`}></Link>
 
       <div className={styles.details}>
         <p className={styles.date}>{date}</p>

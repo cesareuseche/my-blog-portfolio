@@ -1,0 +1,12 @@
+@use '../../styles/styleguide/unit' as u;
+@use '../../styles/styleguide' as sg;
+@use '../../styles/styleguide/media' as mq;
+@use '../../styles/styleguide/typography' as typo;
+
+.container {
+  padding: 0 sg.$xsmall sg.$small sg.$xsmall;
+
+  @include mq.min(tabletLandscape) {
+    padding: u.rem-calc(42) sg.$large sg.$xlarge sg.$large;
+  }
+}

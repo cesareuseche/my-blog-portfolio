@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/contact-form";
+import Action from "@/components/action";
+import styles from "./style.module.scss";
 
 export const metadata: Metadata = {
   title: "Contact Me",
@@ -34,7 +36,8 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main role="main">
+    <main role="main" className={styles.container}>
+      <Action category="Contact" />
       <ContactForm />
     </main>
   )

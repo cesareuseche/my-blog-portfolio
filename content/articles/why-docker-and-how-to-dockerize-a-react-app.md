@@ -168,7 +168,13 @@ Your Next.js app should now be accessible at `http://localhost:3000`.
 Run the following command to start your application:
 
 ```sh
-docker-compose up -d
+
+# Uses BuildKit for faster, optimized builds
+
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+
+docker compose up --build
 ```
 
 ### 8. Create Helper Scripts for Shorter Commands
@@ -178,13 +184,13 @@ To simplify Docker commands, create helper scripts:
 #### `up` (Make it executable: `chmod +x up`)
 ```sh
 #!/bin/bash
-docker-compose up
+docker compose up
 ```
 
 #### `down` (Make it executable: `chmod +x down`)
 ```sh
 #!/bin/bash
-docker-compose down
+docker compose down
 ```
 
 #### `build` (Make it executable: `chmod +x build`)

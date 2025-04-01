@@ -2,11 +2,10 @@ import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import IconGithub from "../../../components/icons/icon-github";
-import IconLinkedIn from "../../../components/icons/icon-linkedin";
 import styles from "./style.module.scss";
 import Link from 'next/link';
 import Button from '../../../components/button';
+import SocialMedia from '@/components/social-media';
 
 const Footer = () => {
   const tickerWords = ["BLOG", "TECH", "LIFE"];
@@ -93,14 +92,7 @@ const Footer = () => {
 
         <div className={styles.social}>
           <p>@ Copywright</p>
-          <div className={styles.icons}>
-            <a href="https://github.com/cesareuseche" target="_blank" rel="noopener noreferrer">
-              <IconGithub />
-            </a>
-            <a href="https://www.linkedin.com/in/cesar-useche-profile/" target="_blank" rel="noopener noreferrer">
-              <IconLinkedIn />
-            </a>
-          </div>
+          <SocialMedia className={styles.icons} />
         </div>
       </div>
     </footer>

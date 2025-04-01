@@ -2,10 +2,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
-import IconGithub from "../icons/icon-github";
-import IconLinkedIn from "../icons/icon-linkedin";
 import Button from "../button";
 import IconContact from "../icons/icon-contact";
+import SocialMedia from "../social-media";
 
 type Props = {
   image: string;
@@ -51,14 +50,7 @@ export default function ArticleDetails({ image, date, author, duration }: Props)
         </p>
         <div className={styles.article__details__social}>
           <p>Connect</p>
-          <div>
-            <a href="https://github.com/cesareuseche" target="_blank" rel="noopener noreferrer">
-              <IconGithub />
-            </a>
-            <a href="https://www.linkedin.com/in/cesar-useche-profile/" target="_blank" rel="noopener noreferrer">
-              <IconLinkedIn />
-            </a>
-          </div>
+          <SocialMedia />
         </div>
         <div className={styles.article__details__btn}>
           <Button variant="primary" title="Contact Me" href="/contact">
