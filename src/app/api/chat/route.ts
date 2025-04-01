@@ -75,19 +75,19 @@ const generateFallbackResponse = async (query: string) => {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        prompt: `Provide a very concise response (max 2 sentences). Format URLs as <a href='URL'>text</a> and wrap code snippets inside \`\`\` code \`\`\`.`,
+        prompt: `Provide a concise but complete response (2-3 sentences max). Ensure the response ends with a full sentence. Format URLs as <a href='URL'>text</a> and wrap code snippets inside \`\`\` code \`\`\`.`,
         messages: [{ role: "user", content: query }],
         model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
         temperature: 0.3,
-        max_tokens: 200,
+        max_tokens: 250,
         top_p: 0.5,
       }),
     });
 
     const data = await response.json();
 
-    const aiResponse = data.choices?.[0]?.message?.content?.trim() || "\n I'm not sure about that, but feel free to explore my blog!";
-    return `${aiResponse} \n\nIf you need more information, check out my blog I might have something related! If you have a specific topic in mind, please contact me!`;
+    const aiResponse = data.choices?.[0]?.message?.content?.trim() ||  "I couldn't find a precise answer, but you might find something useful in my blog!";
+    return `${aiResponse}\n\nIf you need more details, check out my blog! I might have something related. If you have a specific topic in mind, please contact me!`;
   } catch (error) {
     console.error("Together AI error:", error);
     return "That's an interesting topic! Unfortunately, I don't have an article on that yet, but you might find something related in my blog.";
