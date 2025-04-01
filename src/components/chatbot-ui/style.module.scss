@@ -183,6 +183,7 @@
     background-color: #f1f1f185;
     flex: 1;
     overflow-y: auto;
+    scroll-behavior: smooth;
     border: 1px solid black;
     padding: u.rem-calc(12);
     margin-bottom: u.rem-calc(12);
