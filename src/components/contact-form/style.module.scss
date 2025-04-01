@@ -5,19 +5,6 @@
 
 .container {
   position: relative;
-  padding: 0 sg.$xsmall;
-
-  @include mq.min(tabletLandscape) {
-    padding: sg.$regular sg.$large 0 sg.$large;
-  }
-
-  @include mq.min(laptopSmall) {
-    padding: sg.$regular;
-  }
-
-  @include mq.min(laptop) {
-    padding: sg.$regular sg.$large;
-  }
 
   .wrapper {
     max-width: 100%;
@@ -54,6 +41,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
 
     .shimmer {
       position: absolute;

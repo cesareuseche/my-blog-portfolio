@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import IconGithub from "../../components/icons/icon-github";
-import IconLinkedIn from "../../components/icons/icon-linkedin";
 import styles from "./style.module.scss";
+import SocialMedia from "../social-media";
 
 export default function ProfileCard() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,14 +28,7 @@ export default function ProfileCard() {
             </div>
             <div className={styles.follow__section}>
               <span className={styles.follow__text}>FOLLOW</span>
-              <div className={styles.icons}>
-                <a href="https://github.com/cesareuseche" target="_blank" rel="noopener noreferrer">
-                  <IconGithub />
-                </a>
-                <a href="https://www.linkedin.com/in/cesar-useche-profile/" target="_blank" rel="noopener noreferrer">
-                  <IconLinkedIn />
-                </a>
-              </div>
+              <SocialMedia className={styles.icons} />
             </div>
           </div>
 
