@@ -126,6 +126,7 @@
       @include typo.regular;
       font-style: italic !important;
       font-weight: 500 !important;
+      line-height: 160% !important;
 
       @include mq.min(tabletLandscape) {
         @include typo.medium;
