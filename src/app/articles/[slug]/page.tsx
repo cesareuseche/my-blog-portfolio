@@ -14,13 +14,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!article) {
     return {
-      title: "Article Not Found | My Blog",
+      title: "Article Not Found | Blog+++",
       description: "This article does not exist.",
     };
   }
 
   return {
-    title: `${article.title} | My Blog`,
+    title: `${article.title} | Blog+++`,
     description: article.description,
     openGraph: {
       title: article.title,

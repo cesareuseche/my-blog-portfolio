@@ -4,7 +4,7 @@ import ProfileCard from "../../components/profile-card";
 import styles from "./style.module.scss";
 
 export const metadata: Metadata = {
-  title: "About Me",
+  title: "About Me | Blog+++",
   description: "Learn more about me, my background, and my journey in the tech world.",
   keywords: "software engineer, web developer, tech enthusiast",
   authors: [{ name: "Cesar Useche" }],
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Me",
     description: "Learn more about me, my background, and my journey in the tech world.",
-    url: "https://tech-life-blog.com/about",
-    siteName: "Tech & Life Blog",
+    url: "https://blogplusplus.com/about",
+    siteName: "Tech & Life | Blog+++",
     locale: "en_US",
     type: "website",
     images: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         url: '/assets/images/blog-thumbnail.webp',
         width: 800,
         height: 600,
-        alt: 'About Me'
+        alt: 'About Me | Blog+++'
       }
     ]
   },

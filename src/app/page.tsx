@@ -5,7 +5,7 @@ import HomepageTitle from '@/components/hp-title';
 import styles from '../styles/home.module.scss';
 
 export const metadata: Metadata = {
-  title: "Tech & Life Blog",
+  title: "Tech & Life | Blog+++",
   description: "Explore insights on software engineering, web development, and life beyond code. A blog for tech enthusiasts and creatives alike.",
   keywords: "software engineering, web development, tech blog, programming, coding tutorials, developer life",
   authors: [{ name: "Cesar Useche" }],
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tech & Life Blog",
     description: "Explore insights on software engineering, web development, and life beyond code. A blog for tech enthusiasts and creatives alike.",
-    url: "https://tech-life-blog.com",
-    siteName: "Tech & Life Blog",
+    url: "https://blogplusplus.com",
+    siteName: "Blog+++",
     locale: "en_US",
     type: "website",
     images: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         url: '/assets/images/blog-thumbnail.webp',
         width: 800,
         height: 600,
-        alt: 'Tech & Life Blog'
+        alt: 'Tech & Life | Blog+++'
       }
     ]
   },

@@ -4,7 +4,7 @@ import Action from "@/components/action";
 import styles from "./style.module.scss";
 
 export const metadata: Metadata = {
-  title: "Contact Me",
+  title: "Contact Me | Blog+++",
   description: "Get in touch with me for collaborations, inquiries, or just to say hi!",
   keywords: "contact, inquiries, collaborations",
   authors: [{ name: "Cesar Useche" }],
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact Me",
     description: "Get in touch with me for collaborations, inquiries, or just to say hi!",
-    url: "https://tech-life-blog.com/contact",
-    siteName: "Tech & Life Blog",
+    url: "https://blogplusplus.com/contact",
+    siteName: "Tech & Life | Blog+++",
     locale: "en_US",
     type: "website",
     images: [
