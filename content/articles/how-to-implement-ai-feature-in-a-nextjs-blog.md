@@ -208,7 +208,7 @@ export function searchArticles(query: string): Article[] {
 
 For enhancing user interaction on your blog, implementing an AI-powered chatbot can offer personalized responses to users. [Together AI](https://www.together.ai/ 'Together AI') offers free access to various AI models, which can be leveraged to provide chatbot functionality without the cost associated with APIs like OpenAI's GPT. Here's why you might choose Together AI:
 
-- **Free Access to Powerful Models:** You can access large, powerful models like Llama-3.3-70B-Instruct-Turbo, which competes well with other premium models.
+- **Free Access to Powerful Models:** You can access large, powerful models for free or for very affordable prices in comparison to others like OpenAI, which competes well with other premium models.
 
 - **Cost-Effective Scaling:** Ideal for projects where scalability and cost are a concern. You don’t have to worry about usage caps or pricing increases as with other platforms.
 
