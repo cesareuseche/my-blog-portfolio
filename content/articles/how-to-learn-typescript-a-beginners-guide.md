@@ -2,7 +2,7 @@
 title: "How to Learn TypeScript: A Beginner's Guide"
 date: "March 1st 2025"
 description: "Learn TypeScript from scratch! This guide covers core concepts, setup, types, functions, and best practices for beginners."
-image: "/assets/images/ts-guide.webp"
+image: "/assets/images/ts-article.png"
 tag: "Typescript 👾"
 id: 5
 author: "Cesar Useche"
