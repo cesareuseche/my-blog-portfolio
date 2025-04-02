@@ -53,12 +53,16 @@ const topics: Record<string, string> = {
   nextjs: "Next.js is a React framework that enables server-side rendering, static site generation, and API routes. It provides optimized performance, SEO benefits, and built-in features like image optimization and middleware.",
 };
 
-const generateFallbackResponse = async (query: string) => {
+const generateFallbackResponse = async (query: string, history?: { role: string; content: string }[]) => {
   const apiKey = process.env.TOGETHER_API_KEY;
 
   if (!apiKey) {
     console.error("Together AI API key is missing!");
     return "I'm unable to fetch an AI response right now. Try again later!";
+  }
+
+  if (!history) {
+    history = [];
   }
 
   for (const key in topics) {
@@ -76,7 +80,11 @@ const generateFallbackResponse = async (query: string) => {
       },
       body: JSON.stringify({
         prompt: `Provide a concise but complete response (2-3 sentences max). Ensure the response ends with a full sentence. Format URLs as <a href='URL'>text</a> and wrap code snippets inside \`\`\` code \`\`\`.`,
-        messages: [{ role: "user", content: query }],
+        messages: [
+          { role: "system", content: "You are a helpful assistant." },
+          ...history.slice(-5),
+          { role: "user", content: query },
+        ],
         model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
         temperature: 0.3,
         max_tokens: 250,
@@ -85,8 +93,10 @@ const generateFallbackResponse = async (query: string) => {
     });
 
     const data = await response.json();
+    const aiResponse =
+      data.choices?.[0]?.message?.content?.trim() ||
+      "I couldn't find a precise answer, but you might find something useful in my blog!";
 
-    const aiResponse = data.choices?.[0]?.message?.content?.trim() ||  "I couldn't find a precise answer, but you might find something useful in my blog!";
     return `${aiResponse}\n\nIf you need more details, check out my blog! I might have something related. If you have a specific topic in mind, please contact me!`;
   } catch (error) {
     console.error("Together AI error:", error);
@@ -166,10 +176,24 @@ function findRelatedArticles(query: string) {
     .map(result => result.item);
 }
 
+const userSessions: Record<string, { history: { role: string; content: string }[] }> = {};
+
 export async function POST(req: Request) {
   try {
-    const { message } = await req.json();
+    const { message, sessionId } = await req.json();
+
+    if (!sessionId) {
+      return NextResponse.json({ reply: "Session ID is required for continuity." });
+    }
+
+    if (!userSessions[sessionId]) {
+      userSessions[sessionId] = { history: [] };
+    }
+
     const lowerMessage = message.toLowerCase();
+
+    // Store user input
+    userSessions[sessionId].history.push({ role: "user", content: lowerMessage });
 
     // Contact page check
     if (lowerMessage.includes("contact") || lowerMessage.includes("email")) {
@@ -190,8 +214,11 @@ export async function POST(req: Request) {
       });
     }
 
-    // If no match, provide a fallback response (Ensure we await it!)
-    const fallbackResponse = await generateFallbackResponse(lowerMessage); // <-- Fix: Added await
+    // Pass conversation history for better responses
+    const fallbackResponse = await generateFallbackResponse(lowerMessage, userSessions[sessionId].history);
+
+    // Store AI response
+    userSessions[sessionId].history.push({ role: "assistant", content: fallbackResponse });
 
     return NextResponse.json({
       reply: `${fallbackResponse} \n Feel free to explore my blog for more content!`,
@@ -201,3 +228,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ reply: "I'm having trouble responding right now. Try again later." });
   }
 }
+

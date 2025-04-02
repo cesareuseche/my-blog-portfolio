@@ -17,6 +17,7 @@
     "fuse.js": "^7.1.0",
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.7",
+    "js-cookie": "^3.0.5",
     "lottie-react": "^2.4.1",
     "lottie-web": "^5.12.2",
     "next": "^15.2.3",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -14,6 +14,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import Cookies from "js-cookie";
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,8 +33,34 @@ export default function Chatbot() {
     }, 600);
   };
 
+  useEffect(() => {
+    let sessionId = Cookies.get("chat_session");
+
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      Cookies.set("chat_session", sessionId, { expires: 1 });
+    }
+
+    const savedMessages = Cookies.get("chat_history");
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (messages.length > 1) {
+      Cookies.set("chat_history", JSON.stringify(messages), { expires: 1 });
+    }
+  }, [messages]);
+
   const handleSend = async () => {
     if (!input.trim()) return;
+
+    const sessionId = Cookies.get("chat_session");
+    if (!sessionId) {
+      console.error("Session ID not found");
+      return;
+    }
 
     const newMessage = { sender: "user", text: input };
     setMessages((prev) => [...prev, newMessage]);
@@ -44,7 +71,7 @@ export default function Chatbot() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input })
+        body: JSON.stringify({ message: input, sessionId })
       });
 
       const data = await res.json();
