@@ -46,20 +46,10 @@
         }
       }
 
-      .subscribe {
-        display: flex;
-        input {
-          flex: 1;
-          padding: u.rem-calc(12);
-          @include typo.small;
-          border: none;
-          outline: none;
-          margin-right: u.rem-calc(10);
-          height: u.rem-calc(46);
-
-          @include mq.min(tabletLandscape) {
-            @include typo.regular;
-          }
+      a {
+        width: 100%;
+        @include mq.min(tabletLandscape) {
+          width: u.rem-calc(330);
         }
       }
     }

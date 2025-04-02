@@ -6,6 +6,7 @@ import styles from "./style.module.scss";
 import Link from 'next/link';
 import Button from '../../../components/button';
 import SocialMedia from '@/components/social-media';
+import IconContact from '@/components/icons/icon-contact';
 
 const Footer = () => {
   const tickerWords = ["BLOG", "TECH", "LIFE"];
@@ -59,15 +60,18 @@ const Footer = () => {
           <h2>
             STAY UPDATED WITH TRENDS
           </h2>
-          <div className={styles.subscribe}>
-            <input type="email" placeholder="Email" />
-            <Button title="Subscribe" variant="secondary" type="submit" />
-          </div>
+          <Button
+            variant='secondary'
+            title="Connect with me"
+            href="/contact"
+          >
+            <IconContact />
+          </ Button>
         </div>
 
         <div className={styles.content}>
           <p className={styles.brand}>
-            CESAR BLOG
+            BLOG+++
           </p>
           <div className={styles.links}>
             <ul>
@@ -91,7 +95,7 @@ const Footer = () => {
         </div>
 
         <div className={styles.social}>
-          <p>@ Copywright</p>
+          <p>Build by Cesar 👨🏾‍💻</p>
           <SocialMedia className={styles.icons} />
         </div>
       </div>
