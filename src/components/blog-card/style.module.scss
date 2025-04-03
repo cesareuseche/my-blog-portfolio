@@ -8,6 +8,7 @@
   background: sg.color(white);
   padding: sg.$small;
   text-align: left;
+  cursor: pointer;
 
   @include mq.min(tabletLandscape) {
     padding: sg.$regular;
@@ -36,6 +37,7 @@
     height: 100%;
     position: absolute;
     inset: 0;
+    cursor: pointer;
   }
 
   .details {
@@ -83,15 +85,6 @@
       animation: shimmer 1.5s infinite linear;
     }
 
-    @keyframes shimmer {
-      0% {
-        background-position: -200% 0;
-      }
-      100% {
-        background-position: 200% 0;
-      }
-    }
-
     .image {
       width: 100%;
       height: u.rem-calc(228);
@@ -131,6 +124,14 @@
     color: sg.color(black);
     font-weight: 300;
     line-height: u.rem-calc(28);
+    height: 100%;
+
+    @include mq.min(tabletLandscape) {
+      height: u.rem-calc(86);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
   }
 
   .meta {
@@ -139,7 +140,7 @@
     flex-direction: column;
     gap: u.rem-calc(8);
 
-    @include mq.min(laptopSmall) {
+    @include mq.min(largex) {
       flex-direction: row;
     }
 
@@ -154,5 +155,14 @@
         font-weight: 700;
       }
     }
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }

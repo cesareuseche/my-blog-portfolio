@@ -142,7 +142,7 @@
       height: u.rem-calc(286);
     }
 
-    @include mq.min(laptopSmall) {
+    @include mq.min(largex) {
       height: u.rem-calc(380);
     }
 

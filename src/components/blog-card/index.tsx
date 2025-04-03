@@ -43,8 +43,12 @@ const BlogCard = ({ image, title, description, date, tag, slug, author, duration
       </div>
 
       <div className={styles.content}>
-        <h2 className={styles.title}>{title}</h2>
-        <p className={styles.description}>{description}</p>
+        <h2 className={styles.title}>
+          {title}
+        </h2>
+        <p className={styles.description}>
+          {description}
+        </p>
         <div className={styles.meta}>
           <span className={styles.text}>
             <strong>Author</strong>

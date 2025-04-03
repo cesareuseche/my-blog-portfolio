@@ -9,7 +9,7 @@
   .wrapper {
     max-width: 100%;
 
-    @include mq.min(laptopSmall) {
+    @include mq.min(largex) {
       max-width: u.rem-calc(1280);
       margin: auto;
     }
@@ -87,7 +87,7 @@
       padding: sg.$regular;
     }
 
-    @include mq.min(laptopSmall) {
+    @include mq.min(largex) {
       justify-content: center;
       padding-left: sg.$large;
       height: 100vh;
@@ -127,7 +127,7 @@
       flex-direction: column;
       gap: sg.$xxsmall;
 
-      @include mq.min(laptopSmall) {
+      @include mq.min(largex) {
         flex-direction: row;
       }
     }
@@ -180,7 +180,7 @@
       padding: sg.$regular 0;
     }
 
-    @include mq.min(laptopSmall) {
+    @include mq.min(largex) {
       justify-content: center;
       padding-left: sg.$large;
       height: 100vh;

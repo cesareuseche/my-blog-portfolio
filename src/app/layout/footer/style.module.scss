@@ -31,16 +31,17 @@
       align-items: center;
       justify-content: space-between;
       flex-direction: column;
-      text-align: left;
+      text-align: center;
 
       @include mq.min(tabletLandscape) {
         flex-direction: row;
+        text-align: center;
       }
 
       h2 {
         @include typo.large;
 
-        @include mq.min(laptopSmall) {
+        @include mq.min(largex) {
           @include typo.xxlarge;
           width: 50%;
         }
