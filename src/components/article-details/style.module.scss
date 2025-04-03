@@ -129,14 +129,10 @@
 
   .image {
     width: 100%;
-    height: u.rem-calc(360);
+    height: 100%;
     object-fit: cover;
     object-position: center;
     transition: opacity 0.5s ease-in-out;
-
-    @include mq.min(tabletPortrait) {
-      height: u.rem-calc(500);
-    }
 
     @include mq.min(tabletLandscape) {
       height: u.rem-calc(286);

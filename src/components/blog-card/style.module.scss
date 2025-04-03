@@ -87,10 +87,14 @@
 
     .image {
       width: 100%;
-      height: u.rem-calc(228);
+      height: 100%;
       display: block;
       object-fit: cover;
       transition: opacity 0.5s ease-in-out;
+
+      @include mq.min(tabletLandscape) {
+        height: u.rem-calc(228);
+      }
 
       @include mq.min(laptop) {
         height: u.rem-calc(441);
