@@ -4,23 +4,28 @@ import SocialMedia from "@/components/social-media";
 
 export default function Header() {
   return (
-    <header className={styles.header}>
+    <header className={styles.header} role="banner">
       <div className={styles.container}>
-        <Link href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo} aria-label="Blog Home">
           BLOG+++
         </Link>
 
         <div className={styles.menu}>
-          <nav className={styles.nav}>
-            <Link href="/about">About</Link>
-            <Link href="/contact">Contact</Link>
+          <nav aria-label="Main Navigation">
+            <ul className={styles.nav}>
+              <li>
+                <Link href="/about">About</Link>
+              </li>
+              <li>
+                <Link href="/contact">Contact</Link>
+              </li>
+            </ul>
           </nav>
 
-          <span className={styles.separator}>—</span>
+          <span className={styles.separator} aria-hidden="true">—</span>
 
-          <SocialMedia className={styles.icons} />
+          <SocialMedia className={styles.icons} aria-label="Social media links" />
         </div>
-
       </div>
       <hr className={styles.divider} />
     </header>

@@ -199,7 +199,7 @@ export default function Chatbot() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
               />
-              <button className={styles.chatbot__send} onClick={handleSend} disabled={loading}>
+              <button className={styles.chatbot__send} onClick={handleSend} disabled={loading} aria-label="Send message">
                 <IconSend />
               </button>
             </div>

@@ -29,7 +29,7 @@ const BlogCard = ({ image, title, description, date, tag, slug, author, duration
       </div>
 
       <div className={styles.image__container}>
-        {isLoading && <div className={styles.shimmer}></div>}
+        {isLoading && <div className={styles.shimmer} aria-hidden="true"></div>}
 
         <Image
           src={image}

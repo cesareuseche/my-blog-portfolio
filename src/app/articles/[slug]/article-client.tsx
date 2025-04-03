@@ -57,6 +57,7 @@ export default function ArticleClient({ title, content, tag }: Props) {
                     className={styles.copy__button}
                     onClick={() => handleCopy(codeText, index)}
                     type="button"
+                    aria-label="Copy code"
                   >
                     {copiedBlocks[index] ? "Copied" : (<><IconCopy /> Copy</>)}
                   </button>

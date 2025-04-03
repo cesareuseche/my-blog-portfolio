@@ -13,9 +13,10 @@ type Props = {
   ) => void
   children?: ReactNode
   type?: 'button' | 'submit' | 'reset'
+  ariaLabel?: string
 }
 
-const Button: FC<Props> = ({ title, href, variant, className, onClick, children, type }) => {
+const Button: FC<Props> = ({ title, href, variant, className, onClick, children, type, ariaLabel }) => {
 
   const buttonClasses = clsx(
     styles.button,
@@ -30,7 +31,7 @@ const Button: FC<Props> = ({ title, href, variant, className, onClick, children,
       </a>
     </Link>
   ) : (
-    <button className={buttonClasses} onClick={onClick} type={type}>
+    <button className={buttonClasses} onClick={onClick} type={type} aria-label={ariaLabel}>
       {title} {children}
     </button>
   );

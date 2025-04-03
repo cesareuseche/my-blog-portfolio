@@ -3,17 +3,15 @@ import styles from './style.module.scss';
 import BlogCard from "@/components/blog-card";
 
 export default function BlogCardGrid() {
-
   const articles = getAllArticles().sort((a, b) => {
     const parseDate = (dateStr: string) => {
       return new Date(dateStr.replace(/(\d+)(st|nd|rd|th)/, "$1"));
     };
-
     return parseDate(b.date).getTime() - parseDate(a.date).getTime();
   });
 
   return (
-    <main className={styles.container}>
+    <section className={styles.container} aria-labelledby="blog-section">
       {articles.map((article) => (
         <div key={article.id} className={styles.article}>
           <BlogCard
@@ -29,6 +27,6 @@ export default function BlogCardGrid() {
           />
         </div>
       ))}
-    </main>
+    </section>
   )
 }

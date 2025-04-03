@@ -17,7 +17,7 @@ export default function ContactForm() {
     lastName: string;
     email: string;
     message: string;
-    'h-captcha-response': string;
+    "h-captcha-response": string;
   };
 
   const {
@@ -81,35 +81,29 @@ export default function ContactForm() {
             </div>
           ) : (
             <div className={styles.content}>
-              <h1>Get In Touch</h1>
-              <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+              <h1 id="contact-form-title">Get In Touch</h1>
+              <form onSubmit={handleSubmit(onSubmit)} className={styles.form} role="form" aria-labelledby="contact-form-title">
                 <div className={styles.row}>
                   <div className={styles.input}>
-                    <label>First Name</label>
-                    <input
-                      type="text"
-                      placeholder="Enter Your First Name"
-                      {...register("firstName", { required: "First name is required" })}
-                    />
-                    {errors.firstName && <span className={styles.error}>{errors.firstName.message}</span>}
+                    <label htmlFor="firstName">First Name</label>
+                    <input id="firstName" type="text" placeholder="Enter Your First Name" {...register("firstName", { required: "First name is required" })} />
+                    {errors.firstName && <span id="firstName-error" className={styles.error}>{errors.firstName.message}</span>}
                   </div>
                   <div className={styles.input}>
-                    <label>Last Name</label>
-                    <input
-                      type="text"
-                      placeholder="Enter Your Last Name"
-                      {...register("lastName", { required: "Last name is required" })}
-                    />
-                    {errors.lastName && <span className={styles.error}>{errors.lastName.message}</span>}
+                    <label htmlFor="lastName">Last Name</label>
+                    <input id="lastName" type="text" placeholder="Enter Your Last Name" {...register("lastName", { required: "Last name is required" })} />
+                    {errors.lastName && <span id="lastName-error" className={styles.error}>{errors.lastName.message}</span>}
                   </div>
                 </div>
 
                 <div className={styles.row}>
                   <div className={styles.input}>
-                    <label>Email</label>
+                    <label htmlFor="email">Email</label>
                     <input
+                      id="email"
                       type="email"
                       placeholder="Enter Your Email"
+                      aria-describedby={errors.email ? "email-error" : undefined}
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
@@ -118,26 +112,27 @@ export default function ContactForm() {
                         },
                       })}
                     />
-                    {errors.email && <span className={styles.error}>{errors.email.message}</span>}
+                    {errors.email && <span id="email-error" className={styles.error}>{errors.email.message}</span>}
                   </div>
                 </div>
 
                 <div className={styles.input}>
-                  <label>Message</label>
-                  <textarea
-                    placeholder="Type your message here..."
-                    {...register("message", { required: "Message is required" })}
-                  ></textarea>
-                  {errors.message && <span className={styles.error}>{errors.message?.message?.toString()}</span>}
+                  <label htmlFor="message">Message</label>
+                  <textarea id="message" placeholder="Type your message here..." {...register("message", { required: "Message is required" })}></textarea>
+                  {errors.message && <span id="message-error" className={styles.error}>{errors.message.message}</span>}
                 </div>
 
                 <HCaptcha
                   sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
                   reCaptchaCompat={false}
                   onVerify={onHCaptchaChange}
+                  aria-describedby="captcha-description"
                 />
+                <p id="captcha-description" className={styles.visually__hidden}>
+                  This captcha is required to submit the form.
+                </p>
 
-                <Button title="Submit" variant="primary" type="submit">
+                <Button title="Submit" variant="primary" type="submit" aria-label="Submit Contact Form">
                   <IconContact />
                 </Button>
               </form>
