@@ -27,7 +27,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr);
 
-    @include mq.min(laptopSmall) {
+    @include mq.min(largex) {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       height: 100vh;
       overflow: hidden;
@@ -84,7 +84,7 @@
     padding: sg.$xsmall 0;
 
     @include mq.min(tabletLandscape) {
-      padding: sg.$regular 0;
+      padding: sg.$regular;
     }
 
     @include mq.min(laptopSmall) {
