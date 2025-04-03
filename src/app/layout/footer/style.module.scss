@@ -35,7 +35,7 @@
 
       @include mq.min(tabletLandscape) {
         flex-direction: row;
-        text-align: center;
+        text-align: left;
       }
 
       h2 {
