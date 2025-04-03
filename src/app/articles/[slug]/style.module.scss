@@ -7,7 +7,7 @@
   position: relative;
   padding: 0 sg.$xsmall sg.$small sg.$xsmall;
 
-  @include mq.min(tabletLandscape) {
+  @include mq.min(laptopSmall) {
     padding: u.rem-calc(42) sg.$large sg.$xlarge sg.$large;
   }
 
@@ -15,7 +15,7 @@
     max-width: 100%;
 
     @include mq.min(tabletLandscape) {
-      max-width: u.rem-calc(1050);
+      max-width: u.rem-calc(1280);
       margin: auto;
     }
 
@@ -73,8 +73,19 @@
       @include typo.large;
       margin-top: sg.$xxxsmall;
       margin-bottom: sg.$small;
+      padding: 0;
 
       @include mq.min(tabletLandscape) {
+        padding-right: sg.$regular;
+        width: 100%;
+      }
+
+      @include mq.min(laptopSmall) {
+        @include typo.xlarge;
+        padding: 0
+      }
+
+      @include mq.min(largexx) {
         @include typo.xxlarge;
       }
     }

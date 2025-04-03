@@ -41,7 +41,7 @@
       h2 {
         @include typo.large;
 
-        @include mq.min(largex) {
+        @include mq.min(laptopSmall) {
           @include typo.xxlarge;
           width: 50%;
         }

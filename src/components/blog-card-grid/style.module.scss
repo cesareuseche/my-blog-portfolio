@@ -15,7 +15,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @include mq.min(laptopSmall) {
+  @include mq.min(tabletLandscape) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 

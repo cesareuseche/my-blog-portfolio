@@ -11,12 +11,12 @@
   cursor: pointer;
 
   @include mq.min(tabletLandscape) {
-    padding: sg.$regular;
+    padding: sg.$small;
     max-height: u.rem-calc(579);
   }
 
-  @include mq.min(largex) {
-    max-height: u.rem-calc(660);
+  @include mq.min(laptopSmall) {
+    padding: sg.$regular;
   }
 
   @include mq.min(laptop) {
@@ -128,8 +128,11 @@
 
     @include mq.min(tabletLandscape) {
       height: u.rem-calc(86);
-      overflow: hidden;
       text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; // Adjust this number to control visible lines
+      -webkit-box-orient: vertical;
+      overflow: hidden;
       max-width: 100%;
     }
   }
@@ -140,7 +143,7 @@
     flex-direction: column;
     gap: u.rem-calc(8);
 
-    @include mq.min(tabletLandscape) {
+    @include mq.min(laptopSmall) {
       flex-direction: row;
     }
 

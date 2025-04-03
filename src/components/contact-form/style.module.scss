@@ -9,7 +9,7 @@
   .wrapper {
     max-width: 100%;
 
-    @include mq.min(largex) {
+    @include mq.min(laptopSmall) {
       max-width: u.rem-calc(1280);
       margin: auto;
     }
@@ -27,7 +27,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr);
 
-    @include mq.min(largex) {
+    @include mq.min(tabletLandscape) {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       height: 100vh;
       overflow: hidden;
@@ -84,10 +84,10 @@
     padding: sg.$xsmall 0;
 
     @include mq.min(tabletLandscape) {
-      padding: sg.$regular;
+      padding: sg.$regular 0 sg.$regular sg.$regular;
     }
 
-    @include mq.min(largex) {
+    @include mq.min(laptopSmall) {
       justify-content: center;
       padding-left: sg.$large;
       height: 100vh;
@@ -97,7 +97,7 @@
       @include typo.large;
       margin: 0;
 
-      @include mq.min(tabletLandscape) {
+      @include mq.min(laptopSmall) {
         @include typo.xlarge;
       }
     }
@@ -127,7 +127,7 @@
       flex-direction: column;
       gap: sg.$xxsmall;
 
-      @include mq.min(largex) {
+      @include mq.min(laptopSmall) {
         flex-direction: row;
       }
     }
@@ -180,7 +180,7 @@
       padding: sg.$regular 0;
     }
 
-    @include mq.min(largex) {
+    @include mq.min(laptopSmall) {
       justify-content: center;
       padding-left: sg.$large;
       height: 100vh;

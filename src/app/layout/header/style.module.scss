@@ -6,7 +6,7 @@
 .header {
   padding: sg.$xsmall;
 
-  @include mq.min(tabletLandscape) {
+  @include mq.min(laptopSmall) {
     padding: sg.$regular sg.$large 0 sg.$large;
   }
 

@@ -5,7 +5,7 @@
 .container {
   padding: sg.$small sg.$xsmall;
 
-  @include mq.min(tabletLandscape) {
+  @include mq.min(laptopSmall) {
     padding: sg.$regular sg.$large sg.$xlarge sg.$large;
   }
 }
