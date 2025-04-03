@@ -140,7 +140,7 @@
     flex-direction: column;
     gap: u.rem-calc(8);
 
-    @include mq.min(largex) {
+    @include mq.min(tabletLandscape) {
       flex-direction: row;
     }
 
