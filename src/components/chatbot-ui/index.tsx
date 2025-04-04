@@ -7,6 +7,7 @@ import IconChatbot from "../icons/icon-chatbot";
 import IconAiChat from "../icons/icon-ai-chat";
 import IconUserChat from "../icons/icon-user-chat";
 import IconSend from "../icons/icon-send";
+import ChatBotLoader from "../chatbot-loader";
 import LottieAnimation from "../icons/icon-animation-ai";
 import IconClose from "../icons/icon-close";
 import ReactMarkdown from "react-markdown";
@@ -25,6 +26,8 @@ export default function Chatbot() {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [isResetting, setIsResetting] = useState(false);
+  const resetRef = useRef<HTMLDivElement>(null);
 
   const handleClose = () => {
     setIsClosing(true);
@@ -53,6 +56,36 @@ export default function Chatbot() {
       Cookies.set("chat_history", JSON.stringify(messages), { expires: 1 });
     }
   }, [messages]);
+
+  const bounceCheckmark = () => {
+    const check = document.querySelector(`.${styles.checkmark}`);
+    if (!check) return;
+
+    gsap.fromTo(
+      check,
+      { scale: 0, opacity: 0 },
+      {
+        scale: 1.2,
+        opacity: 1,
+        duration: 0.5,
+        ease: "bounce.out",
+      }
+    );
+  };
+
+  const handleChatReset = () => {
+    setIsResetting(true);
+    bounceCheckmark();
+
+    setTimeout(() => {
+      setMessages([{ sender: "bot", text: "Hello! How can I help you?" }]);
+      setInput("");
+      Cookies.remove("chat_history");
+      Cookies.remove("chat_session");
+      Cookies.set("chat_session", crypto.randomUUID(), { expires: 1 });
+      setIsResetting(false);
+    }, 1000);
+  };
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -153,6 +186,20 @@ export default function Chatbot() {
             </div>
 
             <div className={styles.chatbot__messages}>
+
+              <div className={styles.chatbot__reset}>
+                <button
+                  type="button"
+                  onClick={handleChatReset}
+                  className={`${styles.reset} ${isResetting ? styles.resetting : ""}`}
+                >
+                  <span className={styles.chatbot__reset__text}>
+                    {isResetting ? "Chat reset" : "Reset chat"}
+                  </span>
+                  {isResetting && <span className={styles.checkmark}>✅</span>}
+                </button>
+                <div ref={resetRef} className={styles.confetti__container}></div>
+              </div>
               <div className={styles.chatbot__messages__container}>
                 {messages.map((msg, index) => (
                   <div className={msg.sender === "bot" ? styles.left : styles.right} key={index}>
@@ -192,13 +239,7 @@ export default function Chatbot() {
                   </div>
                 ))}
                 {loading && (
-                  <div className={styles.loader__container}>
-                    <div className={styles.loader}>
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                  </div>
+                  <ChatBotLoader />
                 )}
               </div>
 

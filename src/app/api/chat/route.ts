@@ -46,13 +46,6 @@ const cleanQuery = (query: string) => {
     .trim();
 };
 
-const topics: Record<string, string> = {
-  docker: "Docker is a platform for building, sharing, and running applications in containers. It helps developers streamline development and deployment.",
-  api: "An API (Application Programming Interface) allows different software applications to communicate with each other. APIs are commonly used to fetch data, integrate services, and enable automation.",
-  react: "React is a JavaScript library for building user interfaces, primarily for single-page applications. It allows developers to create reusable UI components.",
-  nextjs: "Next.js is a React framework that enables server-side rendering, static site generation, and API routes. It provides optimized performance, SEO benefits, and built-in features like image optimization and middleware.",
-};
-
 const generateFallbackResponse = async (query: string, history?: { role: string; content: string }[]) => {
   const apiKey = process.env.TOGETHER_API_KEY;
 
@@ -63,12 +56,6 @@ const generateFallbackResponse = async (query: string, history?: { role: string;
 
   if (!history) {
     history = [];
-  }
-
-  for (const key in topics) {
-    if (query.includes(key)) {
-      return topics[key];
-    }
   }
 
   try {
