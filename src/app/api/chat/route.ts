@@ -154,6 +154,68 @@ function isRequestingArticlesByTopic(query: string) {
   return null;
 }
 
+async function isRequestingArticleSummary(query: string) {
+  const summaryPatterns = [
+    /summarize\s+(?:the\s+)?(?:article\s+)?(?:about|on|related\s+to)?\s*(.+)/i,
+    /give\s+me\s+(?:a\s+)?summary\s+(?:of\s+)?(?:the\s+)?(?:article\s+)?(?:about|on|related\s+to)?\s*(.+)/i
+  ];
+
+  for (const pattern of summaryPatterns) {
+    const match = query.match(pattern);
+    if (match && match[1]) {
+      const topic = match[1].toLowerCase().trim();
+
+      // Fuzzy search using Fuse.js for best title match
+      const titleResults = fuse.search(topic).filter(r => r.score !== undefined && r.score < 0.3);
+      const article = titleResults[0]?.item;
+
+      if (article) {
+        const apiKey = process.env.TOGETHER_API_KEY;
+        if (!apiKey) {
+          console.error("Together AI API key is missing!");
+          return null;
+        }
+
+        try {
+          const response = await fetch("https://api.together.ai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+              prompt: `Summarize the following content: ${article.content}`,
+              messages: [
+                { role: "system", content: "You are a helpful assistant." },
+                { role: "user", content: `Summarize the article titled "${article.title}"` },
+              ],
+              model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+              temperature: 0.3,
+              max_tokens: 250,
+              top_p: 0.5,
+            }),
+          });
+
+          const data = await response.json();
+          const summary = data.choices?.[0]?.message?.content?.trim();
+          if (summary) {
+            return {
+              title: article.title,
+              description: article.description,
+              url: article.url,
+              summary,
+            };
+          }
+        } catch (error) {
+          console.error("Together AI error:", error);
+        }
+      }
+    }
+  }
+
+  return null;
+}
+
 // Function to find related articles
 function findRelatedArticles(query: string) {
   const topicRequest = isRequestingArticlesByTopic(query);
@@ -199,6 +261,15 @@ export async function POST(req: Request) {
     if (lowerMessage.includes("contact") || lowerMessage.includes("email")) {
       return NextResponse.json({
         reply: `You can reach me here: - [Contact Page](${CONTACT_PAGE_URL})`,
+      });
+    }
+
+    // Check for article summary request use together AI
+    const articleSummary = await isRequestingArticleSummary(lowerMessage);
+    if (articleSummary) {
+      const { title, description, url, summary } = articleSummary;
+      return NextResponse.json({
+        reply: `Here's a summary of the article "${title}":\n\n${summary}\n\nFor more details, check out the full article: [${title}](${url})\n\nDescription: ${description}`,
       });
     }
 
