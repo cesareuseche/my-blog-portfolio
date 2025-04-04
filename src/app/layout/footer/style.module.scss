@@ -40,6 +40,11 @@
 
       h2 {
         @include typo.large;
+        width: 100%;
+
+        @include mq.min(tabletLandscape) {
+          width: 40%;
+        }
 
         @include mq.min(laptopSmall) {
           @include typo.xxlarge;
