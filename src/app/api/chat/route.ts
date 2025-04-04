@@ -267,7 +267,7 @@ export async function POST(req: Request) {
     // Check for article summary request use together AI
     const articleSummary = await isRequestingArticleSummary(lowerMessage);
     if (articleSummary) {
-      const { title, description, url, summary } = articleSummary;
+      const { title, url, summary } = articleSummary;
       return NextResponse.json({
         reply: `Here's a summary of the article "${title}":\n\n${summary}\n\nFor more details, check out the full article: [${title}](${url})`,
       });
