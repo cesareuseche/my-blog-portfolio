@@ -15,7 +15,7 @@
     max-width: 100%;
 
     @include mq.min(tabletLandscape) {
-      max-width: u.rem-calc(1280);
+      max-width: u.rem-calc(1050);
       margin: auto;
     }
 
