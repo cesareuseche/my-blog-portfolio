@@ -24,6 +24,7 @@ export default function Chatbot() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleClose = () => {
     setIsClosing(true);
@@ -100,6 +101,16 @@ export default function Chatbot() {
 
   gsap.registerPlugin(ScrollToPlugin);
 
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value);
+
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+    }
+  };
+
   useEffect(() => {
     if (messagesEndRef.current) {
       gsap.to(messagesEndRef.current.parentElement, {
@@ -142,66 +153,69 @@ export default function Chatbot() {
             </div>
 
             <div className={styles.chatbot__messages}>
-              {messages.map((msg, index) => (
-                <div className={msg.sender === "bot" ? styles.left : styles.right} key={index}>
-                  {msg.sender === "bot" ? (
-                    <IconAiChat />
-                  ):
-                    <IconUserChat />
-                  }
-                  <div key={index} className={msg.sender === "bot" ? styles.bot : styles.user}>
-                    <ReactMarkdown
-                      components={{
-                        code({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) {
-                          const match = /language-(\w+)/.exec(className || "");
-                          const codeText = String(children).replace(/\n$/, "");
+              <div className={styles.chatbot__messages__container}>
+                {messages.map((msg, index) => (
+                  <div className={msg.sender === "bot" ? styles.left : styles.right} key={index}>
+                    {msg.sender === "bot" ? (
+                      <IconAiChat />
+                    ):
+                      <IconUserChat />
+                    }
+                    <div key={index} className={msg.sender === "bot" ? styles.bot : styles.user}>
+                      <ReactMarkdown
+                        components={{
+                          code({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) {
+                            const match = /language-(\w+)/.exec(className || "");
+                            const codeText = String(children).replace(/\n$/, "");
 
-                          return !inline && match ? (
-                            <SyntaxHighlighter
-                              style={materialDark}
-                              language={match[1]}
-                              wrapLongLines={true}
-                              showLineNumbers={true}
-                              customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
-                              PreTag="div"
-                              {...props}
-                            >
-                              {codeText}
-                            </SyntaxHighlighter>
-                          ) : (
-                            <code {...props}>{children}</code>
-                          );
-                        }
-                      }}
-                    >
-                      {msg.text}
-                    </ReactMarkdown>
+                            return !inline && match ? (
+                              <SyntaxHighlighter
+                                style={materialDark}
+                                language={match[1]}
+                                wrapLongLines={true}
+                                showLineNumbers={true}
+                                customStyle={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+                                PreTag="div"
+                                {...props}
+                              >
+                                {codeText}
+                              </SyntaxHighlighter>
+                            ) : (
+                              <code {...props}>{children}</code>
+                            );
+                          }
+                        }}
+                      >
+                        {msg.text}
+                      </ReactMarkdown>
+                    </div>
                   </div>
-                </div>
-              ))}
-              {loading && (
-                <div className={styles.loader__container}>
-                  <div className={styles.loader}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                ))}
+                {loading && (
+                  <div className={styles.loader__container}>
+                    <div className={styles.loader}>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
                   </div>
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
+                )}
+              </div>
 
-            <div className={styles.chatbot__input__container}>
-              <textarea
-                className={styles.chatbot__input}
-                placeholder="Ask something..."
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
-              />
-              <button className={styles.chatbot__send} onClick={handleSend} disabled={loading} aria-label="Send message">
-                <IconSend />
-              </button>
+              <div className={styles.chatbot__input__container}>
+                <textarea
+                  ref={textareaRef}
+                  className={styles.chatbot__input}
+                  placeholder="Ask something..."
+                  value={input}
+                  onChange={handleChange}
+                  onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
+                />
+                <button className={styles.chatbot__send} onClick={handleSend} disabled={loading} aria-label="Send message">
+                  <IconSend />
+                </button>
+              </div>
+              <div ref={messagesEndRef}></div>
             </div>
           </Dialog.Content>
         </Dialog.Portal>

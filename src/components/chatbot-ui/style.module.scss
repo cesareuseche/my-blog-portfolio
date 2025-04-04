@@ -204,8 +204,11 @@
     overflow-y: auto;
     scroll-behavior: smooth;
     border: 1px solid black;
-    padding: u.rem-calc(12);
-    margin-bottom: u.rem-calc(12);
+
+    &__container {
+      padding: u.rem-calc(12);
+      margin-bottom: u.rem-calc(12);
+    }
 
     p {
       @include typo.small;
@@ -215,11 +218,14 @@
     a {
       @include typo.small;
       color: sg.color(gold);
-      text-decoration: u.rem-calc(2) underline;
-      text-underline-offset: u.rem-calc(3);
+      text-decoration: u.rem-calc(1) underline;
       font-weight: 500;
       position: relative;
       transition: color 0.3s ease-in-out;
+
+      @include mq.min(tabletLandscape) {
+        text-underline-offset: u.rem-calc(3);
+      }
 
       &:hover {
         text-decoration: none;
@@ -363,7 +369,15 @@
   }
 
   &__input__container {
-    position: relative;
+    position: sticky;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    color: white;
+    padding: u.rem-calc(12);
+    z-index: 2;
   }
 
   &__input {
@@ -374,6 +388,9 @@
     resize: none;
     transition: all 0.3s ease;
     height: u.rem-calc(70);
+    max-height: u.rem-calc(140);
+    resize: none;
+    overflow: hidden;
 
     @include mq.min(tabletLandscape) {
       @include typo.regular;
@@ -403,7 +420,7 @@
 
   &__send {
     position: absolute;
-    right: 0;
+    right: u.rem-calc(12);
     top: 0;
     display: flex;
     align-items: center;
