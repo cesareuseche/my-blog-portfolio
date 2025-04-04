@@ -269,7 +269,7 @@ export async function POST(req: Request) {
     if (articleSummary) {
       const { title, description, url, summary } = articleSummary;
       return NextResponse.json({
-        reply: `Here's a summary of the article "${title}":\n\n${summary}\n\nFor more details, check out the full article: [${title}](${url})\n\nDescription: ${description}`,
+        reply: `Here's a summary of the article "${title}":\n\n${summary}\n\nFor more details, check out the full article: [${title}](${url})`,
       });
     }
 
