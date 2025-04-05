@@ -90,7 +90,6 @@
     @include mq.min(laptopSmall) {
       justify-content: center;
       padding-left: sg.$large;
-      height: 100vh;
     }
 
     h1 {
