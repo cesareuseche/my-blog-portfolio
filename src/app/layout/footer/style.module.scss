@@ -39,10 +39,12 @@
       }
 
       h2 {
-        @include typo.large;
+        @include typo.medium-large;
+        font-weight: bold;
         width: 100%;
 
         @include mq.min(tabletLandscape) {
+          @include typo.large;
           width: 40%;
         }
 

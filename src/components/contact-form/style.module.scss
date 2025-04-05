@@ -80,7 +80,6 @@
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
-    overflow: hidden;
     padding: sg.$xsmall 0;
 
     @include mq.min(tabletLandscape) {

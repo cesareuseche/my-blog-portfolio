@@ -176,6 +176,8 @@
     cursor: pointer;
     padding: 0;
     transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    width: u.rem-calc(40);
+    height: u.rem-calc(40);
 
     svg {
       width: u.rem-calc(20);
@@ -368,13 +370,56 @@
     }
   }
 
-  &__reset {
-    position: fixed;
-    right: u.rem-calc(16);
-    z-index: 3;
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .reset {
-      cursor: pointer;
+      position: relative;
+      height: 100%;
+      padding: 0;
+
+      button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: u.rem-calc(40);
+        height: u.rem-calc(40);
+
+        svg {
+          width: u.rem-calc(20);
+          height: u.rem-calc(20);
+          transition: all 0.3s ease;
+        }
+
+        .resetIcon {
+          transition: opacity 0.3s ease;
+          opacity: 1;
+        }
+
+        .checkmark {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(0);
+          opacity: 0;
+          transition: transform 0.4s ease, opacity 0.4s ease;
+          font-size: u.rem-calc(14);
+        }
+
+        &.resetting {
+          .resetIcon {
+            opacity: 0;
+          }
+
+          .checkmark {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.3);
+          }
+        }
+      }
     }
   }
 
@@ -433,7 +478,7 @@
 
   &__send {
     position: absolute;
-    right: u.rem-calc(12);
+    right: u.rem-calc(17);
     top: 0;
     display: flex;
     align-items: center;
