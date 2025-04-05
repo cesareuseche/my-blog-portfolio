@@ -14,4 +14,6 @@ const IconReset = forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((prop
   </svg>
 ));
 
+IconReset.displayName = "IconReset";
+
 export default IconReset;
