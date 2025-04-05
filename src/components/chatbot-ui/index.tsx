@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import * as Tooltip from "@radix-ui/react-tooltip";
 import styles from "./style.module.scss";
 import IconChatbot from "../icons/icon-chatbot";
 import IconAiChat from "../icons/icon-ai-chat";
@@ -200,22 +199,16 @@ export default function Chatbot() {
 
               <div className={styles.chatbot__actions}>
                 <div className={styles.reset}>
-                  <Tooltip.Provider delayDuration={200}>
-                    <Tooltip.Root>
-                      <Tooltip.Trigger asChild>
-                      <button
-                        type="button"
-                        onClick={handleChatReset}
-                        className={`${styles.reset} ${isResetting ? styles.resetting : ""}`}
-                        title="Reset chat"
-                        aria-label="Reset chat"
-                      >
-                        <IconReset ref={resetIconRef} className={styles.resetIcon} />
-                        <span className={styles.checkmark}>✅</span>
-                      </button>
-                      </Tooltip.Trigger>
-                    </Tooltip.Root>
-                  </Tooltip.Provider>
+                  <button
+                    type="button"
+                    onClick={handleChatReset}
+                    className={`${styles.reset} ${isResetting ? styles.resetting : ""}`}
+                    title="Reset chat"
+                    aria-label="Reset chat"
+                  >
+                    <IconReset ref={resetIconRef} className={styles.resetIcon} />
+                    <span className={styles.checkmark}>✅</span>
+                  </button>
                 </div>
                 <Dialog.Close asChild>
                   <button className={styles.chatbot__close} onClick={handleClose}>
