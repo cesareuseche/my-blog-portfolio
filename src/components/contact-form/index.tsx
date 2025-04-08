@@ -68,7 +68,7 @@ export default function ContactForm() {
               width={800}
               height={600}
               onLoad={() => setIsLoading(false)}
-              loading="lazy"
+              priority
             />
           </div>
 
