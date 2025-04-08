@@ -95,7 +95,7 @@ const Footer = () => {
         </div>
 
         <div className={styles.social}>
-          <p>Build by Cesar 👨🏾‍💻</p>
+          <p>Built by Cesar 👨🏾‍💻</p>
           <SocialMedia className={styles.icons} />
         </div>
       </div>
