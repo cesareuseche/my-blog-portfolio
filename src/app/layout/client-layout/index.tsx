@@ -31,7 +31,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <Header />
         <main className="main-container">{children}</main>
       <Footer />
-      <Chatbot />
+      {pathname !== "/contact/" && (
+        <Chatbot />
+      )}
     </>
   );
 }
