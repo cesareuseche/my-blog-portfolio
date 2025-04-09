@@ -6,7 +6,7 @@ image: "/assets/images/accessibility-white.webp"
 tag: "FrondEnd 💻"
 id: 2
 author: "Cesar Useche"
-duration: "~5 min"
+duration: "~7 min"
 category: "TECH+++"
 ---
 ## Why Accessibility Matters
@@ -16,9 +16,13 @@ As a software engineer working in front end, I’ve seen firsthand how accessibi
 
 ### **Key Reasons to Prioritize Accessibility:**
 - **Inclusivity**: Everyone deserves equal access to information and services online.
+
 - **Legal Compliance**: Many countries have laws requiring digital accessibility.
+
 - **Better SEO**: Accessible websites often rank higher on search engines.
+
 - **Improved User Experience**: Accessibility features enhance usability for all visitors.
+
 - **Higher Conversion Rates**: In e-commerce, an accessible site ensures that no potential customers are excluded due to poor design choices.
 
 ---
@@ -304,7 +308,7 @@ Testing is crucial to ensuring your website is accessible.
 - **Ongoing training:** Keep your team updated on evolving guidelines and screen-reader capabilities.
 
 ## **Final Thoughts**
-Web accessibility is not just a legal requirement—it’s a commitment to inclusivity, usability, and better user experience. As someone who currently works as a software engineer, I know how crucial accessibility is in creating a front-end experience that is smooth, efficient, and inclusive.
+Web accessibility is not just a legal requirement, it’s a commitment to inclusivity, usability, and better user experience. As someone who currently works as a software engineer, I know how crucial accessibility is in creating a front-end experience that is smooth, efficient, and inclusive.
 
 By implementing these accessibility principles, you ensure that your website is usable for all customers, while also benefiting from improved SEO, broader audience reach, and compliance with industry standards. Prioritizing accessibility makes the web a better place for all users, ensuring equal access to information and services.
 
