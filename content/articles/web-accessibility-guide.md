@@ -68,7 +68,7 @@ Use:
 
 - **Use appropriate tags**: `<header>`, `<footer>`, `<main>`, `<article>`, `<section>`,`<nav>`, `<ul>`, `<li>`.
 
-- **Avoid overusing `<div>` and `<span>`** unless they are needed for styling purposes.
+- **Avoid overusing** `<div>` and `<span>` unless they are needed for styling purposes.
 
 ### **2. Provide Keyboard Navigation**
 
@@ -92,7 +92,7 @@ Keyboard navigation is essential for users who cannot use a mouse, such as those
 Ensure all interactive elements are focusable:
 
 ```html
-<button onclick="alert('Hello!')">Click me</button>
+<button tabindex="0">Click me</button>
 ```
 For non-button interactive elements, ensure they are accessible:
 
@@ -274,7 +274,36 @@ Testing is crucial to ensuring your website is accessible.
 
 - **Screen reader testing**: Test with tools like NVDA or VoiceOver to ensure your site works with screen readers.
 
-## **Conclusion**
+## Additional Key Considerations
+
+### Mobile Accessibility
+- **Touch targets:** Ensure interactive elements (buttons, links, etc.) are large enough and spaced out so they’re easy to tap on touchscreens.
+
+- **Gestures:** Don’t rely solely on multi-finger gestures or swipes that can be difficult for users with motor impairments. Provide alternative ways to perform the same actions.
+
+### Cognitive Accessibility
+- **Clear, simple language:** Jargon or overly complex sentences can be barriers for users with cognitive or learning disabilities.
+
+- **Logical structure:** Break down content into headings, subheadings, and short paragraphs.
+
+- **Predictable interactions:** Keep navigation and interactive elements consistent to reduce cognitive load.
+
+### Performance and Accessibility
+- **Clean, efficient code:** Improves loading times and reduces lag for screen readers.
+
+- **Minimize heavy scripts:** Overly complex or large JavaScript bundles can slow down the browsing experience and hamper assistive technologies.
+
+### Real-World User Testing
+- **Engage actual users:** Automated tests can miss certain usability barriers. Having people with different disabilities test your site can reveal issues you wouldn’t otherwise notice.
+
+- **Focus management:** Ensure modal dialogs, pop-ups, or dynamically inserted content manage focus correctly so users don’t get “trapped” or lost.
+
+### Organization and Policies
+- **Internal accessibility policy:** Document accessibility standards (like a checklist or style guide) within your organization so all new features follow best practices.
+
+- **Ongoing training:** Keep your team updated on evolving guidelines and screen-reader capabilities.
+
+## **Final Thoughts**
 Web accessibility is not just a legal requirement—it’s a commitment to inclusivity, usability, and better user experience. As someone who currently works as a software engineer, I know how crucial accessibility is in creating a front-end experience that is smooth, efficient, and inclusive.
 
 By implementing these accessibility principles, you ensure that your website is usable for all customers, while also benefiting from improved SEO, broader audience reach, and compliance with industry standards. Prioritizing accessibility makes the web a better place for all users, ensuring equal access to information and services.

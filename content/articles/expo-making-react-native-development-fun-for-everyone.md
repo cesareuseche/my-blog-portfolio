@@ -38,7 +38,7 @@ If you're interested in exploring further, I highly recommend this excellent vid
 ### Other Resources
 Expo has great documentation where you are going to find everything that you need to get started and much more, I really recommend going through their documentation, you can find [here](http://docs.expo.dev/tutorial/introduction/).
 
-## Conclusion
+## Final Thoughts
 Expo makes mobile app development approachable, productive, and enjoyable, even for developers without extensive professional React Native experience. Through building my Focus Timer app, I've seen firsthand how Expo empowers developers to create feature-rich, responsive, and cross-platform apps with ease. It's the perfect choice for anyone eager to dive into mobile app development with React Native.
 
 Start building mobile apps with Expo 📱!

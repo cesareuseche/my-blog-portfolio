@@ -323,7 +323,8 @@ export default function Chatbot() {
 
 Finally you can render this component inside your layout component that way it renders in every page
 
-## Conclusion
+## Final Thoughts
+
 Integrating AI-powered features like chatbots, search, and content recommendations into a Next.js blog can significantly enhance user engagement and provide a smarter user experience. By leveraging tools like Fuse.js for search and Together AI for chatbot functionality, you can offer cutting-edge, cost-effective features to your users.
 
 Next.js provides the perfect framework for building dynamic, AI-powered web applications. With Together AI, you can make use of free models, making it an ideal choice for scaling without the cost concerns that come with other premium AI models. By following the steps outlined in this guide, you can take your blog to the next level with advanced AI-powered features.
