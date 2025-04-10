@@ -7,12 +7,12 @@
   border-top: 1px solid sg.color(black);
 
   h2 {
-    @include typo.large;
+    @include typo.medium-large;
     padding: sg.$regular 0 sg.$large 0;
     margin: 0;
 
     @include mq.min(tabletLandscape) {
-      @include typo.xlarge;
+      @include typo.large;
       padding: sg.$regular 0 sg.$xlarge 0;
     }
   }
