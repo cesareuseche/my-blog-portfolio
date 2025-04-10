@@ -25,17 +25,6 @@ As a software engineer working in front end, I’ve seen firsthand how accessibi
 
 - **Higher Conversion Rates**: In e-commerce, an accessible site ensures that no potential customers are excluded due to poor design choices.
 
----
-
-## **Crash Course: Learn Web Accessibility**
-If you're new to web accessibility or want a structured introduction, I highly recommend this:
-
-[![Web Accessibility Crash Course](https://img.youtube.com/vi/e2nkq3h1P68/0.jpg)](https://www.youtube.com/watch?v=e2nkq3h1P68)
-
-This video is a great starting point, covering the **fundamentals of web accessibility** in an easy-to-understand way.
-
----
-
 ## Principles of Web Accessibility
 The W3C Web Accessibility Initiative (WAI) defines four fundamental principles of web accessibility, often referred to as the POUR principles:
 
@@ -47,7 +36,22 @@ The W3C Web Accessibility Initiative (WAI) defines four fundamental principles o
 
 - **Robust:** Content must be robust enough to work across a wide variety of user agents, including assistive technologies.
 
-You can read more about these principles on the W3C Web Accessibility Principles page.
+You can read more about these principles on the [W3C Web Accessibility Principles page](https://www.w3.org/WAI/fundamentals/accessibility-principles/).
+
+If you’d prefer to learn by watching, the following crash course is a great companion to everything above.
+
+---
+
+## **Crash Course: Learn Web Accessibility**
+If you're new to web accessibility or want a structured introduction, I highly recommend this:
+
+[![Web Accessibility Crash Course](https://img.youtube.com/vi/e2nkq3h1P68/0.jpg)](https://www.youtube.com/watch?v=e2nkq3h1P68)
+
+This video is a great starting point, covering the **fundamentals of web accessibility** in an easy-to-understand way.
+
+---
+
+Now that you’ve got the big-picture principles in mind, let’s walk through **concrete techniques** you can start applying today.
 
 ### **1. Use Semantic HTML**
 Semantic HTML is fundamental for accessibility as it helps screen readers interpret and navigate content effectively.
@@ -266,17 +270,17 @@ Testing is crucial to ensuring your website is accessible.
 
 #### **Tools**:
 
-- **Lighthouse**: Built into Chrome DevTools, it can audit accessibility issues.
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/accessibility/scoring "Lighthouse"): Built into Chrome DevTools, it can audit accessibility issues.
 
-- **axe DevTools**: A browser extension that provides accessibility testing.
+- [axe DevTools](https://chromewebstore.google.com/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd?pli=1 "axe Devtools"): A browser extension that provides accessibility testing.
 
-- **WAVE**: A tool for evaluating web accessibility.
+- [WAVE](https://wave.webaim.org/ "Wave"): A tool for evaluating web accessibility.
 
 #### **Manual Testing**:
 
 - **Keyboard-only navigation**: Ensure that you can navigate the site without a mouse.
 
-- **Screen reader testing**: Test with tools like NVDA or VoiceOver to ensure your site works with screen readers.
+- **Screen reader testing**: Test with tools like [NVDA](https://webaim.org/articles/nvda/ "NVDA") or [VoiceOver](https://accessibility.huit.harvard.edu/voiceover "VoiceOver Harvard") to ensure your site works with screen readers.
 
 ## Additional Key Considerations
 
