@@ -11,7 +11,7 @@ export default function SocialMedia({ className }: Props) {
       <a href="https://github.com/cesareuseche" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
         <IconGithub />
       </a>
-      <a href="https://www.linkedin.com/in/cesar-useche-profile/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+      <a href="https://linkedin.com/in/cesar-useche-profile/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
         <IconLinkedIn />
       </a>
     </div>

@@ -34,6 +34,7 @@ const BlogCard = ({ image, title, description, date, tag, slug, author, duration
         <Image
           src={image}
           alt={title}
+          title={title}
           width={614}
           height={409}
           className={`${styles.image} ${isLoading ? styles.hidden : ''}`}

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "About Me",
     description: "Learn more about me, my background, and my journey in the tech world.",
     url: "https://blogplusplus.com/about",
-    siteName: "Tech & Life | Blog+++",
+    siteName: "Tech, Code & Life | Blog+++",
     locale: "en_US",
     type: "website",
     images: [
