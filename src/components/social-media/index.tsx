@@ -8,7 +8,7 @@ type Props = {
 export default function SocialMedia({ className }: Props) {
   return (
     <div className={className}>
-      <a href="https://github.com/cesareuseche" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+      <a href="https://github.com/cesareuseche" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub Profile">
         <IconGithub />
       </a>
       <a href="https://linkedin.com/in/cesar-useche-profile/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
