@@ -26,6 +26,12 @@
       padding-bottom: sg.$xlarge;
 
       @include mq.min(tabletLandscape) {
+        grid-template-columns: minmax(0, .2fr) minmax(0, .8fr);
+        gap: u.rem-calc(76);
+        padding-bottom: sg.$xxlarge;
+      }
+
+      @include mq.min(laptopSmall) {
         grid-template-columns: minmax(0, .3fr) minmax(0, .7fr);
         gap: u.rem-calc(96);
         padding-bottom: sg.$xxlarge;
