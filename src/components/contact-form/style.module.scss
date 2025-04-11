@@ -29,8 +29,6 @@
 
     @include mq.min(tabletLandscape) {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      height: 100vh;
-      overflow: hidden;
     }
   }
 
