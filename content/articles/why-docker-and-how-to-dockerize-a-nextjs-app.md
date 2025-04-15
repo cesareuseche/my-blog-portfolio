@@ -6,7 +6,7 @@ image: "/assets/images/docker-illus.webp"
 tag: "Docker 🐋"
 id: 3
 author: "Cesar Useche"
-duration: "~8 min"
+duration: "~5 min"
 category: "TECH+++"
 ---
 
