@@ -182,10 +182,10 @@ docker compose down
 #### `build`
 ```sh
 #!/bin/bash
-docker-compose build
+docker compose build
 ```
 
-Run with:
+Now you can run your docker commands like the following:
 ```sh
 ./up
 ./down
