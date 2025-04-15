@@ -17,9 +17,13 @@ When you work as a software engineer, having a reliable development environment 
 Here’s why Docker is essential:
 
 1. **Consistency Across Environments**: Docker ensures your application behaves the same way across different systems, eliminating the "it works on my machine" issue.
+
 2. **Simplified Dependency Management**: Docker encapsulates dependencies, avoiding manual setup.
+
 3. **Efficient Resource Utilization**: Docker containers are lightweight and share the host OS kernel, unlike traditional virtual machines.
+
 4. **Scalability and Deployment**: Docker enables horizontal scaling with tools like Docker Swarm and Kubernetes.
+
 5. **Portability**: Containers can seamlessly move between development, staging, and production environments.
 
 ## How to Dockerize a Next.js App
@@ -131,8 +135,11 @@ networks:
 ### Why This Setup?
 
 - **Multi-Stage Builds**: Separate stages for base, development, and production.
+
 - **Tini for Signal Handling**: Prevents zombie processes.
+
 - **Docker Cache Optimization**: Layer caching speeds up builds.
+
 - **Docker Compose**: Simplifies orchestration.
 
 ### 5. Build the Image
@@ -152,7 +159,6 @@ docker run -p 3000:3000 my-next-app
 ```sh
 
 # Uses BuildKit for faster, optimized builds
-
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
@@ -191,18 +197,27 @@ Run with:
 Here are some common issues and fixes:
 
 - **Container immediately exits**: Ensure `CMD` and `ENTRYPOINT` are correctly defined. Use `tty: true` and `stdin_open: true` in Compose for interactive shells.
+
 - **File changes not reflected**: Double-check volume mounting syntax and ensure you’re not accidentally overriding with `node_modules`.
+
 - **Permission errors**: Files created inside containers might be owned by root. Use user-specific UID/GID settings if needed.
+
 - **App not accessible**: Ensure port mapping (`-p 3000:3000`) is correct and app is listening on `0.0.0.0`.
+
 - **Memory issues**: Docker may throttle memory. Check Docker Desktop settings or adjust `mem_limit` in `docker-compose.yml`.
 
 ## Production Tips
 
 - **Use `NODE_ENV=production`**: This minimizes dependencies and ensures performance optimizations.
+
 - **Use multi-stage builds**: As shown above, separating build and run stages reduces image size.
+
 - **Don’t mount volumes**: In production, avoid `volumes:` to ensure a read-only, consistent image.
+
 - **Use a process manager**: If needed, consider using `pm2` or `tini` (as shown) to manage signals and child processes.
+
 - **Enable health checks**: Add a `healthcheck` directive to ensure your container is running correctly.
+
 - **Security**: Scan images for vulnerabilities with tools like `docker scan` or `Trivy`.
 
 ## Additional Resources

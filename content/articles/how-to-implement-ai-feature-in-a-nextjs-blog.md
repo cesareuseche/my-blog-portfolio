@@ -98,16 +98,40 @@ import { getAllArticles } from "../../../lib/articles";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
-export default function BlogPost({ params }) {
-  const articles = getAllArticles();
+interface Article {
+  slug: string;
+  title: string;
+  date: string;
+  content: string;
+}
+
+interface BlogPostProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default function BlogPost({ params }: BlogPostProps) {
+  const articles: Article[] = getAllArticles();
   const article = articles.find((a) => a.slug === params.slug);
+
   if (!article) return notFound();
 
+  const { title, date, content } = article;
+
   return (
-    <article>
-      <h1>{article.title}</h1>
-      <p>{article.date}</p>
-      <ReactMarkdown>{article.content}</ReactMarkdown>
+    <article role="article" aria-labelledby="article-title">
+      <header>
+        <h2 id="article-title">
+          {title}
+        </h2>
+        <time dateTime={date}>
+          {date}
+        </time>
+      </header>
+      <ReactMarkdown>
+        {content}
+      </ReactMarkdown>
     </article>
   );
 }
@@ -117,21 +141,30 @@ export default function BlogPost({ params }) {
 
 ``` tsx
 import Link from "next/link";
-import { getAllArticles } from "./lib/articles";
 
-export default function Home() {
-  const articles = getAllArticles();
+interface Article {
+  slug: string;
+  title: string;
+}
+
+interface HomeProps {
+  articles: Article[];
+}
+
+export default function Home({ articles }: HomeProps) {
   return (
-    <div>
-      <h1>My Blog</h1>
-      <ul>
-        {articles.map((article) => (
-          <li key={article.slug}>
-            <Link href={`/articles/${article.slug}`}>{article.title}</Link>
+    <main role="main" aria-labelledby="blog-heading">
+      <h1 id="blog-heading">My Blog</h1>
+      <ul aria-label="List of blog articles">
+        {articles.map(({ slug, title }) => (
+          <li key={slug}>
+            <Link href={`/articles/${slug}`} aria-label={`Read article: ${title}`}>
+              {title}
+            </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </main>
   );
 }
 ```
@@ -195,7 +228,7 @@ function getFuseInstance() {
 }
 
 export function searchArticles(query: string): Article[] {
-  if (!query || query.trim().length < 2) { // Basic validation
+  if (!query || query.trim().length < 2) {
     return [];
   }
   const fuse = getFuseInstance();
@@ -266,7 +299,7 @@ export default function Chatbot() {
     if (!message.trim()) return;
 
     const userMessage = message;
-    setMessage(""); // Reset message field
+    setMessage("");
 
     const res = await fetch("/api/chatbot", {
       method: "POST",
